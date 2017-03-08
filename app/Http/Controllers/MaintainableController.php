@@ -18,12 +18,12 @@ class MaintainableController extends Controller
     public function showAll()
     {
         $maintainables = Maintainable::paginate();
-        return view("info.maintainable.all", compact("maintainables"));
+        return view("info.Maintainable.all", compact("maintainables"));
     }
 
     public function show(Maintainable $maintainable)
     {
-        return view("info.maintainable.single", compact('maintainable'));
+        return view("info.Maintainable.single", compact('maintainable'));
     }
 
     public function update(Maintainable $maintainable)
