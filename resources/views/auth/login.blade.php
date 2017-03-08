@@ -6,7 +6,7 @@
                 <h3 class="panel-title">Login</h3>
             </div>
             <div class="panel-body">
-                <label for="username">Username</label><input id="username" type="text" name="name"><br>
+                <label for="username">Username</label><input id="username" type="text" name="username"><br>
                 <label for="password">Password</label><input id="password" type="password" name="password">
                 <div class="panel-footer">
                     {{csrf_field()}}
