@@ -37,10 +37,10 @@ class UserController extends Controller
         if(!Auth::guest())return redirect()->route("allMaintainables");
         if(request()->isMethod("get"))return view("auth.login");
         $this->validate(request(),[
-            "username" => "required",
+            "name" => "required",
             "password" => "required"
         ]);
-        if(Auth::attempt(request(["username","password"]))){
+        if(Auth::attempt(request(["name","password"]))){
             return redirect()->intended("/maintainable");
         }
         return back();
