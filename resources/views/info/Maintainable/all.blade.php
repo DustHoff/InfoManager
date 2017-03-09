@@ -10,7 +10,10 @@
             </button>
         </div>
         @foreach($maintainables as $maintainable)
-            @include("info.maintainable.item")
+            @component("info.Maintainable.item")
+            @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
+            <span class="label label-info">{{$maintainable->maintainable_type}}</span> {{$maintainable->name}}
+            @endcomponent
         @endforeach
     </div>
     {{$maintainables->links()}}
