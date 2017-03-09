@@ -34,7 +34,7 @@ return [
             |
             */
 
-            'auto_connect' => false,
+            'auto_connect' => env("ADLDAP_AUTO_CONNECT",false),
 
             /*
             |--------------------------------------------------------------------------

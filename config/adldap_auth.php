@@ -131,7 +131,7 @@ return [
         |
         */
 
-        'ldap' => 'userprincipalname',
+        'ldap' => 'sAMAccountName',
 
         /*
         |--------------------------------------------------------------------------
@@ -190,7 +190,7 @@ return [
     |
     */
 
-    'password_sync' => env('ADLDAP_PASSWORD_SYNC', true),
+    'password_sync' => env('ADLDAP_PASSWORD_SYNC', false),
 
     /*
     |--------------------------------------------------------------------------
