@@ -31,7 +31,7 @@
                 @endphp
                 {{ $comments->links() }}
                 @foreach($comments as $comment)
-                    @component("info.Maintenance.comment")
+                    @component("info.maintenance.comment")
                     @slot("user")
                     {{$comment->user->name}}
                     @endslot
