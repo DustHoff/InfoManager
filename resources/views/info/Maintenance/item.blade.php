@@ -5,6 +5,6 @@
         @endif
     </h4>
     <p class="list-group-item-text">
-        {{$maintenance->comments->first()->body}}
+        {{Illuminate\Mail\Markdown::parse($maintenance->comments->first()->body)}}
     </p>
 </a>
