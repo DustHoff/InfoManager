@@ -9,8 +9,8 @@
                                    data-toggle="tab">Components</a></li>
     </ul>
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="info">@include("info.host.info")</div>
+        <div role="tabpanel" class="tab-pane active" id="info">@include("info.Host.info")</div>
         <div role="tabpanel" class="tab-pane" id="schedule">@include("info.schedule")</div>
-        <div role="tabpanel" class="tab-pane" id="components">@include("info.host.components")</div>
+        <div role="tabpanel" class="tab-pane" id="components">@include("info.Host.components")</div>
     </div>
 @endsection
