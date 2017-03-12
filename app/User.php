@@ -4,6 +4,7 @@ namespace App;
 
 use Adldap\Laravel\Traits\UsesAdldap;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements Permissiable
 {
@@ -14,7 +15,7 @@ class User extends Authenticatable implements Permissiable
         'password', 'remember_token',
     ];
 
-    public function maintenance(){
+    public function maintenances(){
         return $this->hasMany('Maintenance');
     }
 
@@ -27,7 +28,7 @@ class User extends Authenticatable implements Permissiable
 
     public function hasPermission($permission)
     {
-        foreach ($this->groups() as $group){
+        foreach ($this->groups as $group){
             if ($group->hasPermission($permission))return true;
         }
         return false;

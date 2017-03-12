@@ -22,10 +22,10 @@ class CreatePermissionsTable extends Migration
         DB::table('permissions')->insert([
             [
                 "name" => "Schedule Maintenance",
-                "permission" => "MaintenanceRequest"
+                "permission" => \App\Http\Requests\MaintenanceRequest::class
             ], [
                 "name" => "create/edit Systems",
-                "permission" => "MaintainableRequest"
+                "permission" => \App\Http\Requests\MaintainableRequest::class
             ]
         ]);
     }
