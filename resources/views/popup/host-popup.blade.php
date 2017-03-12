@@ -17,8 +17,7 @@
                     <div class="col-sm-10">
                         <select id="stage" name="stage" class="form-control">
                             @foreach(\App\Host::STAGE as $stage)
-                                <option @if($maintainable->maintainable->stage==$stage) selected
-                                        @endif value="{{$stage}}">{{$stage}}</option>
+                                <option value="{{$stage}}">{{$stage}}</option>
                             @endforeach
                         </select>
                     </div>
