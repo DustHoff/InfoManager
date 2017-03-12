@@ -25,7 +25,7 @@
             <div class="control-label">Runs On</div>
         </div>
         <div class="col-sm-10">
-            <select name="host_id">
+            <select class="form-control" name="host_id">
                 <option value="">No VM</option>
                 @foreach(\App\Host::all() as $value)
                     @if($name != $value->maintainable->name)

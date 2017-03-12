@@ -16,11 +16,11 @@
             @slot("desc") {{$maintainable->desc}} @endslot
             @slot("type") {{$maintainable->maintainable_type}} @endslot
             @slot("host"){{$maintainable->maintainable->host_id}}@endslot
-            @endslot
             @slot("contacts")
             @foreach($maintainable->emails as $email)
                 <option value="{{$email->email}}">{{$email->email}}</option>
             @endforeach
+            @endslot
             @endcomponent
         </div>
         <div role="tabpanel" class="tab-pane" id="schedule">@include("info.Maintainable.schedule")</div>

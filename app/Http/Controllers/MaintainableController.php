@@ -33,7 +33,7 @@ class MaintainableController extends Controller
         if ($request->input('emails') != null) {
             $emails = array();
             foreach ($request->input('emails') as $email) {
-                if ($email != null) array_push($emails, Email::firstOrCreate(["email" => $email])->id);
+                if ($email != null) array_push($emails, Email::firstOrCreate(["email" => strtolower($email)])->id);
             }
             $maintainable->emails()->sync($emails);
         }
@@ -48,8 +48,15 @@ class MaintainableController extends Controller
      */
     public function store(MaintainableRequest $request, Model $model)
     {
-        $maintainable = Maintainable::create(["name" => $request->input("name")]);
+        $maintainable = Maintainable::create(["name" => $request->input("name"),"desc"=>$request->input("desc")]);
         $maintainable->maintainable()->associate($model);
+        if ($request->input('emails') != null) {
+            $emails = array();
+            foreach ($request->input('emails') as $email) {
+                if ($email != null) array_push($emails, Email::firstOrCreate(["email" => strtolower($email)])->id);
+            }
+            $maintainable->emails()->sync($emails);
+        }
         $maintainable->save();
         return redirect()->route("maintainable", compact("maintainable"));
     }
