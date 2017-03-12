@@ -44,7 +44,7 @@ class MaintainableController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(MaintainableRequest $request, Model $model){
-        $maintainable = Maintainable::create(request(["name","desc"]));
+        $maintainable = Maintainable::create(["name"=>$request->input("name")]);
         $maintainable->maintainable()->associate($model);
         $maintainable->save();
         return redirect()->route("maintainable", compact("maintainable"));
