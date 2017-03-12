@@ -26,6 +26,7 @@ Route::post("/application","ApplicationController@store")->name("storeApplicatio
 Route::post("/application/{application}","ApplicationController@addDependency")->name("addDependency");
 Route::get("/application/{application}/{dependency}","ApplicationController@removeDependency")->name("removeDependency");
 Route::post("/host","HostController@store")->name("storeHost");
+Route::post("/host/{host}","HostController@update")->name("updateHost");
 Route::get('/maintenance', 'MaintenanceController@showAll');
 Route::post("/maintenance","MaintenanceController@store")->name("storeMaintenance");
 Route::get('/maintenance/{maintenance}', 'MaintenanceController@show')->name("maintenance");

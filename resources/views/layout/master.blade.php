@@ -20,6 +20,7 @@
     <script src="/js/bootstrap-tagsinput.js"></script>
     <script src="/js/moment.js"></script>
     <script src="/js/bootstrap-datetimepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <link type="text/css" href="/css/app.css" rel="stylesheet">
     <link type="text/css" href="/css/bootstrap-tagsinput.css" rel="stylesheet">
 
