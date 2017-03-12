@@ -14,11 +14,15 @@
             <ul class="nav navbar-nav">
                 <li><a href="/maintainable">Systems</a></li>
                 <li><a href="/maintenance">Maintenances</a></li>
+                @if(\Illuminate\Support\Facades\Auth::user())
+                    @include("layout.user")
+                @endif
             </ul>
             <form class="navbar-form navbar-right" method="post" action="{{route("search")}}">
                 {{csrf_field()}}
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" aria-describedby="searchButton" placeholder="search ...">
+                    <input type="text" name="search" class="form-control" aria-describedby="searchButton"
+                           placeholder="search ...">
                     <span id="searchButton" class="input-group-btn">
                     <button class="btn glyphicon glyphicon-search"
                             type="submit"></button>

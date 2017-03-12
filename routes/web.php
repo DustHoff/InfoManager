@@ -17,7 +17,7 @@ Route::get("/",function (){
 Route::match(["get","post"],'/login', 'UserController@login')->name("login");
 Route::get("/logout","UserController@logout")->name("logout");
 Route::get("/user","UserController@showall")->name("allUsers");
-Route::get("/user/{user}","UserController@show")->name("user");
+Route::get("/user/{user}","UserController@show")->name("profile");
 Route::post("/user","UserController@store")->name("storeUser");
 Route::get('/maintainable','MaintainableController@showAll')->name("allMaintainables");;
 Route::get('/maintainable/{maintainable}','MaintainableController@show')->name("maintainable");
