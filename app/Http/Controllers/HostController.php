@@ -31,10 +31,14 @@ class HostController extends Controller
         return $this->maintainableController->update($request,$host->maintainable);
     }
 
-    public function store(MaintenanceRequest $request)
+    public function store(MaintainableRequest $request)
     {
 
-        $host = Host::create($request->input(["zabbix_id", "stage", "owner", "host_id"]));
+        $host = Host::create([
+            "zabbix_id"=>$request->input("zabbix_id"),
+            "stage"=>$request->input("stage"),
+            "owner"=>$request->input("owner"),
+            "host_id"=>$request->input("host_id")]);
         return $this->maintainableController->store($request, $host);
     }
 }

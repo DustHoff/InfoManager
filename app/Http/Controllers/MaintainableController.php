@@ -29,13 +29,16 @@ class MaintainableController extends Controller
     {
 
         $maintainable->name = $request->input("name");
-        $emails = array();
-        foreach ($request->input('emails') as $email) {
-            if($email!=null)array_push($emails, Email::firstOrCreate(["email" => $email])->id);
+        $maintainable->desc = $request->input("desc");
+        if ($request->input('emails') != null) {
+            $emails = array();
+            foreach ($request->input('emails') as $email) {
+                if ($email != null) array_push($emails, Email::firstOrCreate(["email" => $email])->id);
+            }
+            $maintainable->emails()->sync($emails);
         }
-        $maintainable->emails()->sync($emails);
         $maintainable->save();
-        return redirect()->route("maintainable",compact("maintainable"));
+        return redirect()->route("maintainable", compact("maintainable"));
     }
 
     /**
@@ -43,8 +46,9 @@ class MaintainableController extends Controller
      * @param Model $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(MaintainableRequest $request, Model $model){
-        $maintainable = Maintainable::create(["name"=>$request->input("name")]);
+    public function store(MaintainableRequest $request, Model $model)
+    {
+        $maintainable = Maintainable::create(["name" => $request->input("name")]);
         $maintainable->maintainable()->associate($model);
         $maintainable->save();
         return redirect()->route("maintainable", compact("maintainable"));

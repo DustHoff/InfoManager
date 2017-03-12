@@ -9,7 +9,20 @@
                                    data-toggle="tab">Application Dependencies</a></li>
     </ul>
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="info">@include("info.Application.info")</div>
+        <div role="tabpanel" class="tab-pane active" id="info">
+            @component("info.Maintainable.info")
+            @slot("url") {{route("updateApplication",["application" => $maintainable->maintainable])}} @endslot
+            @slot("name") {{$maintainable->name}} @endslot
+            @slot("desc") {{$maintainable->desc}} @endslot
+            @slot("type") {{$maintainable->maintainable_type}} @endslot
+            @slot("host"){{$maintainable->maintainable->host_id}}@endslot
+            @endslot
+            @slot("contacts")
+            @foreach($maintainable->emails as $email)
+                <option value="{{$email->email}}">{{$email->email}}</option>
+            @endforeach
+            @endcomponent
+        </div>
         <div role="tabpanel" class="tab-pane" id="schedule">@include("info.Maintainable.schedule")</div>
         <div role="tabpanel" class="tab-pane" id="components">@include("info.Application.components")</div>
     </div>

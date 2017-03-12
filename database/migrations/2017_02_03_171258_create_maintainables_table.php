@@ -16,6 +16,7 @@ class CreateMaintainablesTable extends Migration
         Schema::create('maintainables', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('name');
+            $table->longText('desc')->nullable();
             $table->char('maintainable_type',32)->nullable();
             $table->unsignedBigInteger('maintainable_id')->nullable();
             $table->timestamps();

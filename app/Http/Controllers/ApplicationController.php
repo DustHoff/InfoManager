@@ -3,29 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Http\Requests\MaintainableRequest;
 use App\Maintainable;
 
 class ApplicationController extends Controller
 {
-    public function __construct()
+    protected $maintainableController;
+    public function __construct(MaintainableController $maintainableController)
     {
+        $this->maintainableController = $maintainableController;
         $this->middleware("auth");
     }
 
-    public function store()
+    public function store(MaintainableRequest $request)
     {
-        $this->validate(request(), [
-            "name" => "required|unique:maintainables,name",
-            "host_id" => "required|integer|exists:hosts,id"]);
+        $application = Application::create(["host_id"=>$request->input("host_id")]);
 
-        $maintainable = Maintainable::create(request(["name"]));
-        $application = Application::create(request(["host_id"]));
-        $maintainable->maintainable()->associate($application);
-        $maintainable->save();
-
-        return redirect()->route("maintainable", compact("maintainable"));
+        return $this->maintainableController->store($request,$application);
     }
 
+    public function update(MaintainableRequest $request, Application $application){
+        $application->host_id=$request->input("host_id");
+        return $this->maintainableController->update($request,$application->maintainable);
+    }
     public function addDependency(Application $application)
     {
         $this->validate(request(), [

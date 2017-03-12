@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Maintainable extends Model implements MaintainableInterface
 {
     protected $table="maintainables";
-    protected $fillable = ["name","stage"];
+    protected $fillable = ["name","desc"];
 
     public function scopeSearch(Builder $query,$search){
         return $query->where("name","like","%".$search."%")->paginate();

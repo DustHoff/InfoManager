@@ -8,7 +8,7 @@
         <a href="{{route("maintainable",["maintainable"=>$application->maintainable])}}"
            class="list-group-item">{{$application->maintainable->name}}</a>
     @endforeach
-    @if($maintainable->maintainable->host_id == -1)
+    @if($maintainable->maintainable->host_id == null)
         <div class="list-group-item">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-host">add VM</button>
         </div>

@@ -27,10 +27,12 @@ class MaintainableRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'desc' => 'required',
             'maintainable_type' => 'required|in:Host,Application',
             'host_id' => 'nullable|exists:hosts,id',
             'emails.*' => 'nullable|email',
             'stage' => 'required_if:maintainable_type,Host',
+            'owner' => 'required_if:maintainable_type,Host',
             'zabbix_id' => 'required_if:maintainable_type,Host|integer',
         ];
     }
