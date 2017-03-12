@@ -3,30 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Host;
+use App\Http\Requests\MaintainableRequest;
 use App\Maintainable;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class HostController extends Controller
 {
-    public function __construct()
+    /**
+     * @var MaintainableController
+     */
+    protected $maintainableController;
+    public function __construct(MaintainableController $maintainableController)
     {
+        $this->maintainableController = $maintainableController;
         $this->middleware("auth");
     }
 
-    public function store(){
-        $this->validate(request(),[
-            "name" => "required|unique:maintainables,name",
-            "owner" => "required",
-            "zabbix_id" => "integer",
-            "stage" => "required|in:".implode(",",Host::STAGE),
-            "host_id" => "integer"
-        ]);
+    public function update(MaintainableRequest $request, Host $host)
+    {
+        $host->update([
+            "zabbix_id"=>$request->input("zabbix_id"),
+            "stage"=>$request->input("stage"),
+            "owner"=>$request->input("owner"),
+            "host_id"=>$request->input("host_id")
+            ]);
 
-        $maintainable = Maintainable::create(request(["name"]));
-        $host = Host::create(request(["zabbix_id","stage","owner","host_id"]));
-        $maintainable->maintainable()->associate($host);
-        $maintainable->save();
+        return $this->maintainableController->update($request,$host->maintainable);
+    }
 
-        return redirect()->route("maintainable", compact("maintainable"));
+    public function store(MaintenanceRequest $request)
+    {
+
+        $host = Host::create($request->input(["zabbix_id", "stage", "owner", "host_id"]));
+        return $this->maintainableController->store($request, $host);
     }
 }
