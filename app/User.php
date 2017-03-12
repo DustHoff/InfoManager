@@ -5,7 +5,7 @@ namespace App;
 use Adldap\Laravel\Traits\UsesAdldap;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Permissiable
 {
     protected $fillable = [
         'name', 'password',
@@ -14,12 +14,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
-
     public function maintenance(){
         return $this->hasMany('Maintenance');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|Group
+     */
+    public function groups(){
+        return $this->belongsToMany("Group","user_group");
+    }
+
+    public function hasPermission($permission)
+    {
+        foreach ($this->groups() as $group){
+            if ($group->hasPermission($permission))return true;
+        }
+        return false;
     }
 }

@@ -237,6 +237,8 @@ return [
         'Maintainable' => \App\Maintainable::class,
         'Maintenance' => \App\Maintenance::class,
         'User' => \App\User::class,
+        'Group' => \App\Group::class,
+        'Permission' => \App\Permission::class,
         'Email' => \App\Email::class,
         'Comment' => \App\Comment::class,
         'Adldap' => Adldap\Laravel\Facades\Adldap::class

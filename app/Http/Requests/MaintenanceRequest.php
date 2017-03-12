@@ -3,21 +3,12 @@
 namespace App\Http\Requests;
 
 use App\Maintenance;
+use App\Permissiable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class MaintenanceRequest extends FormRequest
+class MaintenanceRequest extends PermissiableRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        if(Auth::guest())return false;
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -28,7 +19,7 @@ class MaintenanceRequest extends FormRequest
     {
         return [
             'maintenance_start' => 'required|date|after_or_equal:today',
-            'maintenance_end' => 'required_if:type,'.Maintenance::TYPE[0].'|after:maintenance_start',
+            'maintenance_end' => 'required_if:type,' . Maintenance::TYPE[0] . '|after:maintenance_start',
             'type' => 'required|in:' . implode(",", Maintenance::TYPE),
             'maintainable_id' => 'required|exists:maintainables,id',
             "reason" => "required"];
