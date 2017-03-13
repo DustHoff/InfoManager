@@ -23,12 +23,12 @@ class MaintenanceController extends Controller
     public function showAll()
     {
         $maintenances = Maintenance::activeMaintenance();
-        return view("info.maintenance.all", compact('maintenances'));
+        return view("info.Maintenance.all", compact('maintenances'));
     }
 
     public function show(Maintenance $maintenance)
     {
-        return view('info.maintenance.single', compact('maintenance'));
+        return view('info.Maintenance.single', compact('maintenance'));
     }
 
     public function showMessage(Maintenance $maintenance)
