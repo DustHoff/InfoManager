@@ -2,7 +2,7 @@
 @section("content")
     <div class="list-group">
         @foreach($maintenances as $maintenance)
-             @include("info.maintenance.item")
+             @include("info.Maintenance.item")
         @endforeach
         @if($maintenances->isEmpty())
             <div class="list-group-item">No active Maintenaces/Incidents</div>
