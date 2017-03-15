@@ -4,7 +4,7 @@
         {{ csrf_field() }}
         @include("layout.error")
         <div class="row">
-            @component("info.maintenance.headerinfo")
+            @component("info.Maintenance.headerinfo")
             @slot("title")
             {{$maintenance->state}} {{ $maintenance->type }}
             @endslot
@@ -31,7 +31,7 @@
                 @endphp
                 {{ $comments->links() }}
                 @foreach($comments as $comment)
-                    @component("info.maintenance.comment")
+                    @component("info.Maintenance.comment")
                     @slot("user")
                     {{$comment->user->name}}
                     @endslot
