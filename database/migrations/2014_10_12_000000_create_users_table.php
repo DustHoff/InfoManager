@@ -17,12 +17,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string("name");
+            $table->string('username');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
-        DB::table('users')->insert(["name"=>"admin","password"=>Hash::make("admin")]);
+        DB::table('users')->insert(["name"=>"Administrator","username"=>"admin","password"=>Hash::make("admin")]);
     }
 
     /**

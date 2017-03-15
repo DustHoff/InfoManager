@@ -40,7 +40,10 @@ class UserController extends Controller
             "name" => "required",
             "password" => "required"
         ]);
-        if(Auth::attempt(request(["name","password"]))){
+        if(Auth::attempt([
+            "username" => request("name"),
+            "password"=> request("password")
+        ])){
             return redirect()->intended("/maintainable");
         }
         return back();
