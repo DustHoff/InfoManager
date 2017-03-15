@@ -51,7 +51,26 @@
             </div>
             @endcomponent
         </div>
-        <div role="tabpanel" class="tab-pane" id="schedule">@include("info.Maintainable.schedule")</div>
+        <div role="tabpanel" class="tab-pane" id="schedule">
+            @component("info.Maintenance.schedule")
+            @slot("infected")
+            <div class="list-group">
+                <div class="list-group-item">Infected Systems</div>
+                @foreach($maintainable->infect() as $infectable)
+                    @component("info.Maintainable.item")
+                    @slot("url") {{route("maintainable",["maintainable"=>$infectable])}} @endslot
+                    {{$infectable->name}}
+                    @endcomponent
+                @endforeach
+            </div>
+            <input type="hidden" id="maintainable_id" name="maintainable[]"
+                   value="{{$maintainable->id}}">
+            @endslot
+            @foreach($maintainable->maintenances as $maintenance)
+                @include("info.Maintenance.item")
+            @endforeach
+            @endcomponent
+        </div>
         <div role="tabpanel" class="tab-pane" id="components">@include("info.Host.components")</div>
     </div>
 @endsection

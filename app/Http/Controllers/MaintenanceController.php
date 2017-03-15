@@ -68,6 +68,10 @@ class MaintenanceController extends Controller
         return redirect()->route("maintenance", compact("maintenance"));
     }
 
+    public function batch(){
+        return view("info.batchschedule");
+    }
+
     public
     function transit(Maintenance $maintenance)
     {

@@ -1,10 +1,10 @@
-<div class="row">
-    <div class="col-lg-9">
-        <div class="list-group">
-            <div class="list-group-item">
-                <div class="list-group-item-heading">Schedule</div>
-                <div class="list-group-item-text">
-                    <form method="post" action="{{route("storeMaintenance")}}">
+<form method="post" action="{{route("storeMaintenance")}}">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="list-group-item-heading">Schedule</div>
+                    <div class="list-group-item-text">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-lg-3">
@@ -17,7 +17,8 @@
                                 </script>
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" id="maintenance_end" name="maintenance_end" placeholder="End">
+                                <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
+                                       placeholder="End">
                                 <script type="text/javascript">
                                     $("#maintenance_end").datetimepicker({
                                         format: "YYYY-MM-DD HH:mm:ss",
@@ -29,10 +30,9 @@
                                 </script>
                             </div>
                             <div class="col-lg-2">
-                                <input type="checkbox" id="infect" name="infect" value="on" checked><label
-                                        for="infect">Infect</label>
+                                <label><input type="checkbox" id="infect" class="checkbox" name="infect" value="on" checked>Infect</label>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <select id="type" name="type" class="form-control">
                                     @foreach(\App\Maintenance::TYPE as $type)
                                         <option value="{{$type}}">{{$type}}</option>
@@ -41,8 +41,6 @@
 
                             </div>
                             <div class="col-lg-2">
-                                <input type="hidden" id="maintainable_id" name="maintainable[]"
-                                       value="{{$maintainable->id}}">
                                 <input type="submit" class="btn btn-success" value="Schedule">
 
                             </div>
@@ -52,26 +50,13 @@
                                           rows="10"></textarea>
                         </div>
                         @include("layout.error")
-                    </form>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-
-                </div>
+                {{$slot or ''}}
             </div>
-            @foreach($maintainable->maintenances as $maintenance)
-                @include("info.Maintenance.item")
-            @endforeach
+        </div>
+        <div class="col-lg-3">
+            {{$infected or ''}}
         </div>
     </div>
-    <div class="col-lg-3">
-        <div class="list-group">
-            <div class="list-group-item">Infected Systems</div>
-            @foreach($maintainable->infect() as $infectable)
-                @component("info.Maintainable.item")
-                @slot("url") {{route("maintainable",["maintainable"=>$infectable])}} @endslot
-                {{$infectable->name}}
-                @endcomponent
-            @endforeach
-        </div>
-    </div>
-</div>
+</form>

@@ -14,6 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/maintainable">Systems</a></li>
                 <li><a href="/maintenance">Maintenances</a></li>
+                <li><a href="{{route("batchMaintenance")}}">Batch Schedule</a></li>
                 @if(\Illuminate\Support\Facades\Auth::user())
                     @include("layout.user")
                 @endif
