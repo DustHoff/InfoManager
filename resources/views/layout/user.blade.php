@@ -5,7 +5,7 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="userMenu">
         <li><a href="{{route("profile",["user"=>\Illuminate\Support\Facades\Auth::user()])}}">Pofile</a></li>
-        <li><a href="#">Administration</a></li>
+        <li><a href="{{route("admin")}}">Administration</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="{{route("logout")}}">Logout</a></li>
     </ul>

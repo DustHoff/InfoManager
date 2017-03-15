@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,13 @@ class UserController extends Controller
         $this->middleware("auth",["except"=> ["login"]]);
     }
 
-    public function showAll(){
+    public function admin(){
         $users=User::paginate();
+        $groups=Group::paginate();
+        return view("admin.master",compact("users","groups"));
+    }
+
+    public function showAll(){
 
         return view("info.user.all",compact("users"));
     }

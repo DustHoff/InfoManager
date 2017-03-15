@@ -16,9 +16,10 @@ Route::get("/",function (){
 });
 Route::match(["get","post"],'/login', 'UserController@login')->name("login");
 Route::get("/logout","UserController@logout")->name("logout");
-Route::get("/user","UserController@showall")->name("allUsers");
-Route::get("/user/{user}","UserController@show")->name("profile");
-Route::post("/user/{user}","UserController@update")->name("updateUser");
+Route::get("/admin","UserController@admin")->name("admin");
+Route::get("/admin/user","UserController@showall")->name("allUsers");
+Route::get("/admin/user/{user}","UserController@show")->name("profile");
+Route::post("/admin/user/{user}","UserController@update")->name("updateUser");
 Route::post("/user","UserController@store")->name("storeUser");
 Route::get('/maintainable','MaintainableController@showAll')->name("allMaintainables");;
 Route::get('/maintainable/{maintainable}','MaintainableController@show')->name("maintainable");
