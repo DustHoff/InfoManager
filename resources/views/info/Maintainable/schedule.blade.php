@@ -41,7 +41,7 @@
 
                             </div>
                             <div class="col-lg-2">
-                                <input type="hidden" id="maintainable_id" name="maintainable_id"
+                                <input type="hidden" id="maintainable_id" name="maintainable[]"
                                        value="{{$maintainable->id}}">
                                 <input type="submit" class="btn btn-success" value="Schedule">
 

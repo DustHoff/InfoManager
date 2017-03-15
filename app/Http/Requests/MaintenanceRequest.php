@@ -21,7 +21,7 @@ class MaintenanceRequest extends PermissiableRequest
             'maintenance_start' => 'required|date|after_or_equal:today',
             'maintenance_end' => 'required_if:type,' . Maintenance::TYPE[0] . '|after:maintenance_start',
             'type' => 'required|in:' . implode(",", Maintenance::TYPE),
-            'maintainable_id' => 'required|exists:maintainables,id',
+            'maintainable.*' => 'required|exists:maintainables,id',
             "reason" => "required"];
     }
 }

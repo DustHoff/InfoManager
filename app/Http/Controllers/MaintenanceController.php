@@ -38,7 +38,6 @@ class MaintenanceController extends Controller
 
     public function store(MaintenanceRequest $request)
     {
-        $maintainable = Maintainable::find($request->input('maintainable_id'));
         $maintenance = new Maintenance;
         $maintenance->type = $request->input("type");
         $maintenance->maintenance_start = $request->input("maintenance_start");
@@ -46,12 +45,16 @@ class MaintenanceController extends Controller
         $maintenance->user()->associate(Auth::user());
         $maintenance->save();
 
-        $maintenance->infected()->attach($maintainable);
-        if (request('infect')=='on') {
-            foreach ($maintainable->infect() as $dependency) {
-                $maintenance->infected()->attach($dependency);
+        foreach ($request->input("maintainable") as $maintainableId) {
+            $maintainable = Maintainable::find($maintainableId);
+            $maintenance->infected()->attach($maintainable);
+            if (request('infect') == 'on') {
+                foreach ($maintainable->infect() as $dependency) {
+                    $maintenance->infected()->attach($dependency);
+                }
             }
         }
+
         $comment = new Comment;
         $comment->body = $request->input("reason");
         $comment->maintenance()->associate($maintenance);
