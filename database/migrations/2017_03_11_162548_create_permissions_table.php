@@ -26,6 +26,9 @@ class CreatePermissionsTable extends Migration
             ], [
                 "name" => "create/edit Systems",
                 "permission" => \App\Http\Requests\MaintainableRequest::class
+            ], [
+                "name" => "create/edit Groups",
+                "permission" => \App\Http\Requests\GroupRequest::class
             ]
         ]);
     }

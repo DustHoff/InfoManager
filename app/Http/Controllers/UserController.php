@@ -15,18 +15,12 @@ class UserController extends Controller
         $this->middleware("auth",["except"=> ["login"]]);
     }
 
-    public function admin(){
-        $users=User::paginate();
-        $groups=Group::paginate();
-        return view("admin.master",compact("users","groups"));
+    public function index(){
+        return view("admin.master",["panel"=>"user"]);
     }
 
-    public function showAll(){
-
-        return view("info.user.all",compact("users"));
-    }
     public function show(User $user){
-        return view("info.user.single",compact("user"));
+        return view("admin.User.single",compact("user"));
     }
 
     public function store(){

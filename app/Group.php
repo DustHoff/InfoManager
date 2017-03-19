@@ -20,4 +20,8 @@ class Group extends Model implements Permissiable
         }
         return false;
     }
+
+    public function members(){
+        return $this->belongsToMany("User","user_group");
+    }
 }
