@@ -1,6 +1,6 @@
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        {{\Illuminate\Support\Facades\Auth::user()->name}}
+        {{\Illuminate\Support\Facades\Auth::user()->username}}
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="userMenu">
