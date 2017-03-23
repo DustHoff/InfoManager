@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,35 +24,31 @@ class UserController extends Controller
         return view("admin.User.single",compact("user"));
     }
 
-    public function store(){
-        $this->validate(request(),[
-            "name" => "required|unique:users,name",
-            "password" => "required|confirmed"
-        ]);
-        $user = User::create(["name"=>request("name"),"password"=>Hash::make(request("password"))]);
-
-        return redirect()->route("user",compact("user"));
+    public function store(UserRequest $request){
+        $user=$this->save($request);
+        return redirect()->route("profile",compact("user"));
     }
 
-    public function login(){
-        if(!Auth::guest())return redirect()->route("allMaintainables");
-        if(request()->isMethod("get"))return view("auth.login");
-        $this->validate(request(),[
-            "name" => "required",
-            "password" => "required"
-        ]);
-        if(Auth::attempt([
-            "username" => request("name"),
-            "password"=> request("password")
-        ])){
-            return redirect()->intended("/maintainable");
+    public function update(UserRequest $request, User $user){
+        if($request->input("action")=="save"){
+            $user = $this->save($request,$user);
+            return redirect()->route("profile",compact("user"));
         }
-        return back();
+        if($request->input("action")=="delete"){
+            $user->delete();
+            return redirect()->route("admin");
+        }
+
     }
 
-    public function logout(){
-        Auth::logout();
-        return redirect()->back();
+    private function save(UserRequest $request,User $user = null){
+        if(!$user) $user = new User;
+        $user->name = $request->input("name");
+        $user->username = $request->input("username");
+        if($request->input("password"))$user->password = $request->input("password");
+        $user->save();
+        if($request->input("group"))$user->groups()->sync($request->input("group"));
 
+        return $user;
     }
 }
