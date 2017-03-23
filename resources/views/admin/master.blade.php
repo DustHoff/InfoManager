@@ -8,7 +8,7 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane @if("$panel"=="user")active @endif" id="user">
-            @include("admin.user.all")
+            @include("admin.User.all")
         </div>
         <div role="tabpanel" class="tab-pane @if("$panel"=="group")active @endif" id="group">
             @include("admin.Group.all")
