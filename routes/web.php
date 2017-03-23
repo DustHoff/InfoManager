@@ -14,8 +14,8 @@
 Route::get("/",function (){
     return redirect()->route("login");
 });
-Route::match(["get","post"],'/login', 'UserController@login')->name("login");
-Route::get("/logout","UserController@logout")->name("logout");
+Route::match(["get","post"],'/login', 'AuthController@login')->name("login");
+Route::get("/logout","AuthController@logout")->name("logout");
 // Admin stuff
 Route::get("/admin",function (){
     return view("admin.master",["panel"=>"user"]);
