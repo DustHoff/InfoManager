@@ -1,7 +1,7 @@
 @component("mail::layout")
 
 @slot("header")
-@component("email.component.mailrow)
+@component("email.component.mailrow")
 
 @component("info.maintenance.headerinfo")
         @slot("title")
