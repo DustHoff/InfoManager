@@ -16,7 +16,7 @@ class UserRequest extends PermissiableRequest
             "name" => "required",
             "username" => "required",
             "password" => "sometimes|confirmed",
-            "group.*" => "sometimes|exists:Groups,id",
+            "group.*" => "sometimes|exists:groups,id",
             "action" => "required|in:save,delete"
         ];
     }
