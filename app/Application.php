@@ -2,18 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model implements MaintainableInterface
 {
+    public $timestamps = false;
     protected $table="applications";
     protected $fillable=["host_id"];
-    public $timestamps=false;
-
-    public function maintainable(){
-        return $this->morphOne('Maintainable','maintainable');
-    }
 
     public function host(){
         return $this->belongsTo('Host');
@@ -28,15 +23,20 @@ class Application extends Model implements MaintainableInterface
         //return $this->belongsToMany("Application","application_dependencies","dependency_id","application_id");
         $result = array();
         foreach ($this->belongsToMany("Application","application_dependencies","dependency_id","application_id")->get() as $application){
-            array_push($result,$application->maintainable);
+            array_push($result, $application->maintainable->id);
             $result = array_merge($result,$application->infect());
         }
-        return $result;
+        return array_unique($result);
     }
 
     public function delete()
     {
         $this->maintainable()->delete();
         return parent::delete();
+    }
+
+    public function maintainable()
+    {
+        return $this->morphOne('Maintainable', 'maintainable');
     }
 }

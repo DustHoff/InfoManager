@@ -47,11 +47,10 @@ class MaintenanceController extends Controller
 
         foreach ($request->input("maintainable") as $maintainableId) {
             $maintainable = Maintainable::find($maintainableId);
-            $maintenance->infected()->attach($maintainable);
+            $maintenance->infected()->syncWithoutDetaching([$maintainable->id]);
             if (request('infect') == 'on') {
-                foreach ($maintainable->infect() as $dependency) {
-                    $maintenance->infected()->attach($dependency);
-                }
+                $maintenance->infected()->syncWithoutDetaching($maintainable->infect());
+                $maintenance->save();
             }
         }
 
@@ -68,10 +67,6 @@ class MaintenanceController extends Controller
         return redirect()->route("maintenance", compact("maintenance"));
     }
 
-    public function batch(){
-        return view("info.batchschedule");
-    }
-
     public
     function transit(Maintenance $maintenance)
     {
@@ -84,6 +79,11 @@ class MaintenanceController extends Controller
 
         //parent::transit($maintenance);
         return back();
+    }
+
+    public function batch()
+    {
+        return view("info.batchschedule");
     }
 
     public

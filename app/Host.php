@@ -6,14 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Host extends Model implements MaintainableInterface
 {
+    const STAGE = ["TEST", "QS", "PROD"];
+    public $timestamps = false;
     protected $table="hosts";
     protected $fillable=["zabbix_id","stage","owner","host_id"];
-    public $timestamps=false;
-    const STAGE=["TEST","QS","PROD"];
-
-    public function maintainable(){
-        return $this->morphOne('Maintainable',"maintainable");
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|Application
@@ -36,17 +32,22 @@ class Host extends Model implements MaintainableInterface
         return parent::delete();
     }
 
+    public function maintainable()
+    {
+        return $this->morphOne('Maintainable', "maintainable");
+    }
+
     public function infect()
     {
         $results=array();
         foreach ($this->applications as $application){
-            array_push($results,$application->maintainable);
+            array_push($results, $application->maintainable->id);
             $results = array_merge($results,$application->infect());
         }
         foreach ($this->vms as $vm){
-            array_push($results,$vm->maintainable);
+            array_push($results, $vm->maintainable->id);
             $results =array_merge($results,$vm->infect());
         }
-        return $results;
+        return array_unique($results);
     }
 }
