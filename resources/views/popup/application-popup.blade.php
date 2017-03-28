@@ -11,7 +11,7 @@
                 @slot("url") {{route("storeApplication")}} @endslot
                 @slot("name")@endslot
                 @slot("type") Application @endslot
-                @slot("host")@endslot
+                @slot("host"){{$maintainable->maintainable->id or ''}}@endslot
                 @endcomponent
             </div>
         </div>

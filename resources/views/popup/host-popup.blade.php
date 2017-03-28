@@ -11,7 +11,7 @@
                 @slot("url") {{route("storeHost")}} @endslot
                 @slot("name")@endslot
                 @slot("type") Host @endslot
-                @slot("host")@endslot
+                @slot("host"){{$maintainable->maintainable->id or ''}}@endslot
                 <div class="form-group">
                     <div class="control-label col-sm-2">Stage</div>
                     <div class="col-sm-10">

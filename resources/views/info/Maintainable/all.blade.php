@@ -15,6 +15,7 @@
             <span class="label label-info">{{$maintainable->maintainable_type}}</span> {{$maintainable->name}}
             @endcomponent
         @endforeach
+        <?php unset($maintainable); ?>
     </div>
     {{$maintainables->links()}}
 @endsection
