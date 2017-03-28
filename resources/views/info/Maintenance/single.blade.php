@@ -6,11 +6,11 @@
         <div class="row">
             @component("info.Maintenance.headerinfo")
             @slot("title")
-            {{$maintenance->state}} {{ $maintenance->type }}
+            {{__("maintenance.".$maintenance->state)}} {{ __("maintenance.".$maintenance->type) }}
             @endslot
-            Start {{$maintenance->maintenance_start}}
+            @lang("maintenance.from",["start"=>$maintenance->maintenance_start])
             @if($maintenance->maintenance_end!=null)
-                End {{$maintenance->maintenance_end}}
+                @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
             @endif
             @endcomponent
         </div>

@@ -7,7 +7,7 @@
     @foreach($maintainables as $maintainable)
         @component("info.Maintainable.item")
             @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
-            <span class="label label-info">{{$maintainable->maintainable_type}}</span> {{$maintainable->name}}
+            <span class="label label-info">{{__("maintainable.".$maintainable->maintainable_type)}}</span> {{$maintainable->name}}
         @endcomponent
     @endforeach
     </div>

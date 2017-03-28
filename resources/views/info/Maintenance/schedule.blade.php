@@ -3,7 +3,7 @@
         <div class="col-lg-9">
             <div class="list-group">
                 <div class="list-group-item">
-                    <div class="list-group-item-heading">Schedule</div>
+                    <div class="list-group-item-heading">@lang("menu.schedule")</div>
                     <div class="list-group-item-text">
                         {{ csrf_field() }}
                         <div class="row">
@@ -35,7 +35,7 @@
                             <div class="col-lg-3">
                                 <select id="type" name="type" class="form-control">
                                     @foreach(\App\Maintenance::TYPE as $type)
-                                        <option value="{{$type}}">{{$type}}</option>
+                                        <option value="{{$type}}">{{__("maintenance.".$type)}}</option>
                                     @endforeach
                                 </select>
 
