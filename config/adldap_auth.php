@@ -131,7 +131,7 @@ return [
         |
         */
 
-        'ldap' => 'sAMAccountName',
+        'ldap' => env("ADLDAP_USERATTRIBUTE",""),
 
         /*
         |--------------------------------------------------------------------------
@@ -240,6 +240,7 @@ return [
     'sync_attributes' => [
 
         'name' => 'cn',
+        'username' => env("ADLDAP_USERATTRIBUTE",""),
 
     ],
 
