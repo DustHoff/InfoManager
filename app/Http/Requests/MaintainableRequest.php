@@ -15,7 +15,7 @@ class MaintainableRequest extends PermissiableRequest
             'name' => 'required',
             'desc' => 'required',
             'maintainable_type' => 'required|in:Host,Application',
-            'host_id' => 'required_if:maintainable_type,Application|exists:hosts,id',
+            'host_id' => 'required_if:maintainable_type,Application|nullable|exists:hosts,id',
             'emails.*' => 'nullable|email',
             'stage' => 'required_if:maintainable_type,Host',
             'owner' => 'required_if:maintainable_type,Host',
