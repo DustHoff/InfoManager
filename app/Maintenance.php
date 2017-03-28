@@ -2,21 +2,17 @@
 
 namespace App;
 
-use App\Jobs\SendNotification;
-use App\Mail\Notification;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Model;
 
 class Maintenance extends Model
 {
+    const TYPE = ['maintenance', 'incident', 'restricted'];
+    const STATE = ['announced', 'active', 'inactive'];
+    public $timestamps = false;
     protected $table = "maintenances";
     protected $guarded = ['id'];
-    public $timestamps = false;
     protected $dates = ["maintenance_start", "maintenance_end"];
-    const TYPE = ['Maintenance', 'Incident','Restricted Performance'];
-    const STATE = ['announced', 'active', 'inactive'];
 
     public function scopeActiveMaintenance(Builder $query)
     {
