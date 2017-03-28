@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-
 class MaintainableRequest extends PermissiableRequest
 {
     /**
@@ -18,7 +15,7 @@ class MaintainableRequest extends PermissiableRequest
             'name' => 'required',
             'desc' => 'required',
             'maintainable_type' => 'required|in:Host,Application',
-            'host_id' => 'nullable|exists:hosts,id',
+            'host_id' => 'required_if:maintainable_type,Application|exists:hosts,id',
             'emails.*' => 'nullable|email',
             'stage' => 'required_if:maintainable_type,Host',
             'owner' => 'required_if:maintainable_type,Host',
