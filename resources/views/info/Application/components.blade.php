@@ -3,7 +3,9 @@
         <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post">
             {{csrf_field()}}
             <select name="dependency">
+                <option value="">Select Application</option>
                 @foreach(\App\Application::all() as $application)
+                    @if($application->id == $maintainable->maintainable->id) @continue @endif
                     <option value="{{$application->id}}">{{$application->maintainable->name}}</option>
                 @endforeach
             </select>
