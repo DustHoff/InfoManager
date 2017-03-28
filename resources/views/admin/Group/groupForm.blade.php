@@ -1,15 +1,17 @@
-<form class="form-horizontal" method="post" action="{{$url or '#'}}">
+<form class="form-horizontal" method="post" action="{{route("storeGroup")}}">
     <div class="form-group">
         <div class="control-label col-sm-2">Name</div>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="name" value="{{$name or ''}}">
+            <input type="text" class="form-control" name="name">
         </div>
     </div>
     <div class="form-group">
         <div class="control-label col-sm-2">Permissions</div>
         <div class="col-sm-10">
             <select class="form-control" name="permissions[]" multiple>
-                {{$permissions or ''}}
+                @foreach(\App\Permission::all() as $permission)
+                    <option value="{{$permission->id}}">{{$permission->name}}</option>
+                @endforeach
             </select>
         </div>
     </div>
