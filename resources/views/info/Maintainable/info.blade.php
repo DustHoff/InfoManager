@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-10">
             <select class="form-control" name="host_id">
-                <option value="">No VM</option>
+                <option value="">Physical Machine</option>
                 @foreach(\App\Host::all() as $value)
                     @if($name != $value->maintainable->name)
                         <option value="{{$value->id}}"
