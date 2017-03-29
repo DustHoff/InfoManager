@@ -1,23 +1,15 @@
-@component("mail::layout")
+@component("email.component.layout")
 
 @slot("header")
-@component("email.component.mailrow")
-
-@component("info.maintenance.headerinfo")
-        @slot("title")
-            {{$maintenance->state}} {{ $maintenance->type }}
-        @endslot
-        Start {{$maintenance->maintenance_start}}
-        @if($maintenance->maintenance_end!=null)
-            End {{$maintenance->maintenance_end}}
-        @endif
-    @endcomponent
-@endcomponent
+<h3>{{ __("maintenance.".$maintenance->type) }} {{__("maintenance.".$maintenance->state)}}</h3>
+@lang("maintenance.from",["start"=>$maintenance->maintenance_start])
+@if($maintenance->maintenance_end!=null)
+    @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
+@endif
 @endslot
 
-@component("email.component.mailrow")
 @foreach($maintenance->comments as $comment)
-    @component("info.Maintenance.comment")
+    @component("email.component.comment")
     @slot("user")
     {{$comment->user->name}}
     @endslot
@@ -27,11 +19,11 @@
     {{$comment->body}}
     @endcomponent
 @endforeach
-@endcomponent
 
 @slot("footer")
 @component("email.component.footer")
-{{ date('Y') }} {{ config('app.name') }}. All rights reserved. <a href="{{route("maintenanceMessage",compact("maintenance"))}}">view in Browser</a>
+{{ date('Y') }} {{ config('app.name') }}. <a
+        href="{{route("maintenance",compact("maintenance"))}}">view in Browser</a>
 @endcomponent
 @endslot
 
