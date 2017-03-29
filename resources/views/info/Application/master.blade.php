@@ -31,7 +31,7 @@
                 @foreach($maintainable->infect() as $infectable)
                     @component("info.Maintainable.item")
                     @slot("url") {{route("maintainable",["maintainable"=>$infectable])}} @endslot
-                    {{$infectable->name}}
+                    {{Maintainable::find($infectable)->name}}
                     @endcomponent
                 @endforeach
             </div>
