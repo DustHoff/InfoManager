@@ -31,7 +31,7 @@ Route::post("/user","UserController@store")->name("storeUser");
 Route::get('/maintainable','MaintainableController@showAll')->name("allMaintainables");;
 Route::get('/maintainable/{maintainable}','MaintainableController@show')->name("maintainable");
 Route::post("/application","ApplicationController@store")->name("storeApplication");
-Route::post("/application/{application}","ApplicationController@updateApplication")->name("updateApplication");
+Route::post("/application/{application}","ApplicationController@update")->name("updateApplication");
 Route::post("/application/{application}/dependency","ApplicationController@addDependency")->name("addDependency");
 Route::get("/application/{application}/{dependency}","ApplicationController@removeDependency")->name("removeDependency");
 Route::post("/host","HostController@store")->name("storeHost");
