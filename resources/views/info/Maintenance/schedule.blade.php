@@ -32,7 +32,7 @@
                             <div class="col-lg-2">
                                 <label><input type="checkbox" id="infect" class="checkbox" name="infect" value="on" checked>Infect</label>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <select id="type" name="type" class="form-control">
                                     @foreach(\App\Maintenance::TYPE as $type)
                                         <option value="{{$type}}">{{__("maintenance.".$type)}}</option>
