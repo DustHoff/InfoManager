@@ -12,6 +12,7 @@ return [
      */
     "announced" => "Announced",
     "active" => "Active",
+    "inactive" => "Inactive",
 
     /**
      * Maintenance messages
