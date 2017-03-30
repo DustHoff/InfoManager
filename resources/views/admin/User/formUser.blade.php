@@ -7,7 +7,7 @@
             <label for="password_confirmation">Conformation</label><input id="password_confirmation" type="password"
                                                                           name="password_confirmation">
             {{csrf_field()}}
-            <input type="submit" class="btn btn-success" value="save" name="action">
+            <input type="submit" class="btn btn-success" value="@lang("menu.save")" name="action">
             @include("layout.error")
         </div>
     </form>

@@ -6,8 +6,9 @@
                 <h3 class="panel-title">Login</h3>
             </div>
             <div class="panel-body">
-                <label for="username">Username</label><input id="username" type="text" name="name"><br>
-                <label for="password">Password</label><input id="password" type="password" name="password"><br>
+                <label for="username">@lang("menu.username")</label><input id="username" type="text" name="name"><br>
+                <label for="password">@lang("menu.password")</label><input id="password" type="password"
+                                                                           name="password"><br>
                 {{csrf_field()}}
                 <button type="submit" class="btn btn-success">Login</button>
                 @include("layout.error")

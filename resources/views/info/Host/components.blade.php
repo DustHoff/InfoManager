@@ -1,8 +1,7 @@
 <div class="list-group">
     <div class="list-group-item">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-application">add
-            Application
-        </button>
+        <button type="button" class="btn btn-success" data-toggle="modal"
+                data-target="#add-application">@lang("menu.add",["thing"=>__("maintainable.Application")])</button>
     </div>
     @foreach($maintainable->maintainable->applications as $application)
         <a href="{{route("maintainable",["maintainable"=>$application->maintainable])}}"
@@ -10,7 +9,8 @@
     @endforeach
     @if($maintainable->maintainable->host_id == null)
         <div class="list-group-item">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-host">add VM</button>
+            <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#add-host">@lang("menu.add",["thing"=>__("maintainable.Host")])</button>
         </div>
         @foreach($maintainable->maintainable->vms as $vm)
             <a href="{{route("maintainable",$vm->maintainable->id)}}"

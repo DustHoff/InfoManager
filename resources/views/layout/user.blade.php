@@ -4,9 +4,10 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="userMenu">
-        <li><a href="{{route("profile",["user"=>\Illuminate\Support\Facades\Auth::user()])}}">Pofile</a></li>
-        <li><a href="{{route("admin")}}">Administration</a></li>
+        <li><a href="{{route("profile",["user"=>\Illuminate\Support\Facades\Auth::user()])}}">@lang("menu.profile")</a>
+        </li>
+        <li><a href="{{route("admin")}}">@lang("menu.administration")</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="{{route("logout")}}">Logout</a></li>
+        <li><a href="{{route("logout")}}">@lang("menu.logout")</a></li>
     </ul>
 </li>

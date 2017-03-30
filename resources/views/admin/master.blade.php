@@ -1,9 +1,13 @@
 @extends("layout.master")
 @section("content")
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" @if("$panel"=="user") class="active" @endif><a href="#user" aria-controls="user" role="tab" data-toggle="tab">Users</a>
+        <li role="presentation" @if("$panel"=="user") class="active" @endif><a href="#user" aria-controls="user"
+                                                                               role="tab"
+                                                                               data-toggle="tab">@lang("menu.user")</a>
         </li>
-        <li role="presentation" @if("$panel"=="group") class="active" @endif><a href="#group" aria-controls="group" role="tab" data-toggle="tab">Groups</a>
+        <li role="presentation" @if("$panel"=="group") class="active" @endif><a href="#group" aria-controls="group"
+                                                                                role="tab"
+                                                                                data-toggle="tab">@lang("menu.group")</a>
         </li>
     </ul>
     <div class="tab-content">

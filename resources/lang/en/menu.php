@@ -2,7 +2,9 @@
 return [
     "save" => "Save",
     "delete" => "Delete",
-    "create" => "Create",
+    "create" => "Create :thing",
+    "add" => "add :thing",
+    "select" => "Select :thing",
 
     "systems" => "Systems",
     "dates" => "Dates",
@@ -12,4 +14,16 @@ return [
 
     "user" => "User",
     "group" => "Group",
+    "administration" => "Administration",
+    "profile" => "Profile",
+    "logout" => "Logout",
+
+    "info" => "Information",
+    "components" => "Components",
+    "dependency" => "Dependency",
+
+    "infect" => "Infect",
+
+    "username" => "Username",
+    "password" => "Password",
 ];

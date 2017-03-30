@@ -3,11 +3,10 @@
     {{$maintainables->links()}}
     <div class="list-group">
         <div class="list-group-item">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-application">create
-                Application
-            </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-host">create Host
-            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#add-application">@lang("menu.create",["thing"=>__("maintainable.Application")])</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#add-host">@lang("menu.create",["thing"=>__("maintainable.Host")])</button>
         </div>
         @foreach($maintainables as $maintainable)
             @component("info.Maintainable.item")

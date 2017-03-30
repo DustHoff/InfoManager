@@ -30,7 +30,8 @@
                                 </script>
                             </div>
                             <div class="col-lg-2">
-                                <label><input type="checkbox" id="infect" class="checkbox" name="infect" value="on" checked>Infect</label>
+                                <label><input type="checkbox" id="infect" class="checkbox" name="infect" value="on"
+                                              checked>@lang("menu.infect")</label>
                             </div>
                             <div class="col-lg-2">
                                 <select id="type" name="type" class="form-control">
@@ -41,7 +42,7 @@
 
                             </div>
                             <div class="col-lg-2">
-                                <input type="submit" class="btn btn-success" value="Schedule">
+                                <input type="submit" class="btn btn-success" value="@lang("menu.schedule")">
 
                             </div>
                         </div>

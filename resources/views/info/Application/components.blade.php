@@ -3,13 +3,13 @@
         <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post">
             {{csrf_field()}}
             <select name="dependency">
-                <option value="">Select Application</option>
+                <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
                 @foreach(\App\Application::all() as $application)
                     @if($application->id == $maintainable->maintainable->id) @continue @endif
                     <option value="{{$application->id}}">{{$application->maintainable->name}}</option>
                 @endforeach
             </select>
-            <button type="submit" class="btn btn-success">add</button>
+            <button type="submit" class="btn btn-success">@lang("menu.add",["thing"=>""])</button>
         </form>
     </div>
     @foreach($maintainable->maintainable->requires as $application)
