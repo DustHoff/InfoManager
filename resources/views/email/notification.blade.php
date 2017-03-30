@@ -1,7 +1,7 @@
 @component("email.component.layout")
 
 @slot("header")
-<h3>{{ __("maintenance.".$maintenance->type) }} {{__("maintenance.".$maintenance->state)}}</h3>
+{{ __("maintenance.".$maintenance->type) }} {{__("maintenance.".$maintenance->state)}}
 @lang("maintenance.from",["start"=>$maintenance->maintenance_start])
 @if($maintenance->maintenance_end!=null)
     @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
@@ -22,7 +22,7 @@
 
 @slot("footer")
 @component("email.component.footer")
-{{ date('Y') }} {{ config('app.name') }}. <a
+{{ config('app.name') }}. <a
         href="{{route("maintenance",compact("maintenance"))}}">view in Browser</a>
 @endcomponent
 @endslot
