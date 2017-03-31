@@ -7,13 +7,11 @@ use App\Http\Requests\MaintenanceRequest;
 use App\Jobs\SendNotification;
 use App\Maintainable;
 use App\Maintenance;
-use App\Traits\ZabbixScheduleTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class MaintenanceController extends Controller
 {
-    use ZabbixScheduleTrait;
 
     public function __construct()
     {
@@ -96,7 +94,6 @@ class MaintenanceController extends Controller
         $comment->user()->associate(Auth::user());
         $comment->save();
         $this->dispatch(new SendNotification($maintenance));
-        return back();
     }
 
 }
