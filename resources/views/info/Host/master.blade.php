@@ -33,6 +33,16 @@
                                     @endif value="{{$stage}}">{{$stage}}</option>
                         @endforeach
                     </select>
+                    @if($errors->get("stage"))
+                        <div class="tooltip bottom" style="opacity: 1">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">
+                                @foreach($errors->get("stage") as $error)
+                                    {{$error}}<br>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="form-group">

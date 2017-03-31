@@ -3,12 +3,32 @@
         <div class="control-label col-sm-2">@lang("maintainable.name")</div>
         <div class="col-sm-10">
             <input id="name" name="name" value="{{$name or ''}}" class="form-control">
+            @if($errors->get("name"))
+                <div class="tooltip bottom" style="opacity: 1">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        @foreach($errors->get("name") as $error)
+                            {{$error}}<br>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <div class="form-group">
         <div class="control-label col-sm-2">@lang("maintainable.description")</div>
         <div class="col-sm-10">
             <textarea id="desc" name="desc" class="form-control">{{$desc or ''}}</textarea>
+            @if($errors->get("desc"))
+                <div class="tooltip bottom" style="opacity: 1">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        @foreach($errors->get("desc") as $error)
+                            {{$error}}<br>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <div class="form-group">
@@ -17,6 +37,16 @@
             <select id="contacts" data-role="tagsinput" name="emails[]" multiple>
                 {{$contacts or ''}}
             </select>
+            @if($errors->get("emails.*"))
+                <div class="tooltip bottom" style="opacity: 1">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        @foreach($errors->get("emails.*") as $error)
+                            {!! var_dump($error) !!}<br>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     {{$slot}}
@@ -34,6 +64,16 @@
                     @endif
                 @endforeach
             </select>
+            @if($errors->get("host_id"))
+                <div class="tooltip bottom" style="opacity: 1">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        @foreach($errors->get("host_id") as $error)
+                            {{$error}}<br>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <div class="form-group">
@@ -45,5 +85,4 @@
             <input type="submit" value="@lang("menu.save")" class="btn btn-success">
         </div>
     </div>
-    @include("layout.error")
 </form>
