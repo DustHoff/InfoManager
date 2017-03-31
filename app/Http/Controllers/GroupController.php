@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\GroupRequest;
-use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
@@ -26,11 +25,6 @@ class GroupController extends Controller
         return redirect()->route("group",compact("group"));
     }
 
-    public function update(GroupRequest $request, Group $group){
-        $group = $this->save($group,$request->input());
-        return redirect()->route("group",compact("group"));
-    }
-
     /**
      * @param Group|null $group
      * @param array $data
@@ -39,8 +33,14 @@ class GroupController extends Controller
     private function save(Group $group = null,array $data){
         if($group == null) $group = new Group;
         $group->name = $data["name"];
-        $group->permissions->sync($data["permissions"]);
         $group->save();
+        $group->permissions()->sync($data["permissions"]);
         return $group;
+    }
+
+    public function update(GroupRequest $request, Group $group)
+    {
+        $group = $this->save($group, $request->input());
+        return redirect()->route("group", compact("group"));
     }
 }

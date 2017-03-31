@@ -2,7 +2,7 @@
     <div class="form-group">
         <div class="control-label col-sm-2">Name</div>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" value="{{$name or ''}}">
         </div>
     </div>
     <div class="form-group">
@@ -10,7 +10,8 @@
         <div class="col-sm-10">
             <select class="form-control" name="permissions[]" multiple>
                 @foreach(\App\Permission::all() as $permission)
-                    <option value="{{$permission->id}}">{{$permission->name}}</option>
+                    <option value="{{$permission->id}}"
+                            @if($permissions->contains($permission)) selected @endif>{{$permission->name}}</option>
                 @endforeach
             </select>
         </div>
