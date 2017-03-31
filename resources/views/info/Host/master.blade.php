@@ -20,9 +20,9 @@
             @slot("host"){{$maintainable->maintainable->host_id}}@endslot
             @slot("owner") {{$maintainable->maintainable->owner}} @endslot
             @slot("contacts")
-                @foreach($maintainable->emails as $email)
-                    <option value="{{$email->email}}">{{$email->email}}</option>
-                @endforeach
+            @foreach($maintainable->emails as $email)
+                <option value="{{$email->email}}">{{$email->email}}</option>
+            @endforeach
             @endslot
             <div class="form-group">
                 <div class="control-label col-sm-2">Stage</div>
@@ -75,4 +75,10 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="components">@include("info.Host.components")</div>
     </div>
+@endsection
+
+@section('footer')
+    <script>
+        $('a[href="' + window.location.hash + '"]').tab('show');
+    </script>
 @endsection
