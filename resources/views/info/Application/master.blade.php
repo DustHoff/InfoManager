@@ -29,7 +29,7 @@
             @component("info.Maintenance.schedule")
             @slot("infected")
             <div class="list-group">
-                <div class="list-group-item">Infected Systems</div>
+                <div class="list-group-item">@lang("menu.infectedsystems")</div>
                 @foreach($maintainable->infect() as $infectable)
                     @component("info.Maintainable.item")
                     @slot("url") {{route("maintainable",["maintainable"=>$infectable])}} @endslot

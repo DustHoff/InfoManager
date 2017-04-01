@@ -23,6 +23,7 @@ return [
     "dependency" => "Abh&auml;ngigkeiten",
 
     "infect" => "inkl Abh&auml;ngigkeiten",
+    "infectedsystems" => "Betroffende Systeme",
 
     "username" => "Benutzername",
     "password" => "Passwort",
