@@ -241,6 +241,7 @@ return [
         'Permission' => \App\Permission::class,
         'Email' => \App\Email::class,
         'Comment' => \App\Comment::class,
+        'MaintainableGroup' => \App\MaintainableGroup::class,
         'Adldap' => Adldap\Laravel\Facades\Adldap::class
     ],
 

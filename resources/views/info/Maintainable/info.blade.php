@@ -51,6 +51,24 @@
     </div>
     {{$slot}}
     <div class="form-group">
+        <div class="col-sm-2 control-label">@lang("maintainable.group")</div>
+        <div class="col-sm-10">
+            <select id="maintainablegroup" data-role="tagsinput" name="maintainablegroups[]" multiple>
+                {{$maintainablegroup or ''}}
+            </select>
+            @if($errors->get("maintainablegroup.*"))
+                <div class="tooltip bottom" style="opacity: 1">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        @foreach($errors->get("emails.*") as $error)
+                            {!! var_dump($error) !!}<br>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-2">
             <div class="control-label">@lang("maintainable.runson")</div>
         </div>

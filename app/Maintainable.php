@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Maintainable extends Model implements MaintainableInterface
 {
@@ -35,5 +35,10 @@ class Maintainable extends Model implements MaintainableInterface
     public function infect()
     {
         return $this->maintainable->infect();
+    }
+
+    public function maintainableGroups()
+    {
+        return $this->belongsToMany("MaintainableGroup", "maintainable_maintainablegroup");
     }
 }

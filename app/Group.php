@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 class Group extends Model implements Permissiable
 {
@@ -23,5 +22,10 @@ class Group extends Model implements Permissiable
 
     public function members(){
         return $this->belongsToMany("User","user_group");
+    }
+
+    public function maintainableMembers()
+    {
+        return $this->belongsToMany("MaintainableGroup", "maintainablegroup_group");
     }
 }
