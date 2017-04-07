@@ -8,10 +8,10 @@
     <div class="form-group">
         <div class="control-label col-sm-2">Permissions</div>
         <div class="col-sm-10">
-            <select class="form-control" name="permissions[]" multiple>
-                @foreach(\App\Permission::all() as $permission)
-                    <option value="{{$permission->id}}"
-                            @if($permissions->contains($permission)) selected @endif>{{$permission->name}}</option>
+            <select class="form-control" name="maintainablegroups[]" multiple>
+                @foreach(\App\MaintainableGroup::all() as $maintainablegroup)
+                    <option value="{{$maintainablegroup->id}}"
+                            @if($permissions->contains($maintainablegroup)) selected @endif>{{$maintainablegroup->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -19,7 +19,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             {{csrf_field()}}
-            <input type="submit" class="btn btn-success">
+            <input type="submit" class="btn btn-success" value="@lang("menu.save")">
         </div>
     </div>
 </form>

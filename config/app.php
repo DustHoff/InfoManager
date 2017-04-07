@@ -238,7 +238,6 @@ return [
         'Maintenance' => \App\Maintenance::class,
         'User' => \App\User::class,
         'Group' => \App\Group::class,
-        'Permission' => \App\Permission::class,
         'Email' => \App\Email::class,
         'Comment' => \App\Comment::class,
         'MaintainableGroup' => \App\MaintainableGroup::class,

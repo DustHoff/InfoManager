@@ -1,5 +1,6 @@
 @extends("layout.master")
 @section("content")
+
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" @if("$panel"=="user") class="active" @endif><a href="#user" aria-controls="user"
                                                                                role="tab"
@@ -12,10 +13,14 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane @if("$panel"=="user")active @endif" id="user">
-            @include("admin.User.all")
+            @can("administrate",\App\User::class)
+                @include("admin.User.all")
+            @endcan
         </div>
         <div role="tabpanel" class="tab-pane @if("$panel"=="group")active @endif" id="group">
-            @include("admin.Group.all")
+            @can("administrate",\App\Group::class)
+                @include("admin.Group.all")
+            @endcan
         </div>
     </div>
 @endsection

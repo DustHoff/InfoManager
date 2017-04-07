@@ -3,22 +3,32 @@
     {{$maintainables->links()}}
     <div class="list-group">
         <div class="list-group-item">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#add-application">@lang("menu.create",["thing"=>__("maintainable.Application")])</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#add-host">@lang("menu.create",["thing"=>__("maintainable.Host")])</button>
+            @can("administrate",\App\Application::class)
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#add-application">@lang("menu.create",["thing"=>__("maintainable.Application")])</button>
+            @endcan
+            @can("administrate",\App\Host::class)
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#add-host">@lang("menu.create",["thing"=>__("maintainable.Host")])</button>
+            @endcan
         </div>
         @foreach($maintainables as $maintainable)
-            @component("info.Maintainable.item")
-            @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
-            <span class="label label-info">{{__("maintainable.".$maintainable->maintainable_type)}}</span> {{$maintainable->name}}
-            @endcomponent
+            @can("view",$maintainable)
+                @component("info.Maintainable.item")
+                    @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
+                    <span class="label label-info">{{__("maintainable.".$maintainable->maintainable_type)}}</span> {{$maintainable->name}}
+                @endcomponent
+            @endcan
         @endforeach
         <?php unset($maintainable); ?>
     </div>
     {{$maintainables->links()}}
 @endsection
 @section("footer")
-    @include("popup.application-popup")
-    @include("popup.host-popup")
+    @can("administrate",\App\Application::class)
+        @include("popup.application-popup")
+    @endcan
+    @can("administrate",\App\Host::class)
+        @include("popup.host-popup")
+    @endcan
 @endsection

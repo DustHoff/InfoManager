@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Host;
 use App\Http\Requests\MaintainableRequest;
-use App\Maintainable;
-use Illuminate\Support\Facades\App;
 
 class HostController extends Controller
 {
@@ -21,6 +19,7 @@ class HostController extends Controller
 
     public function update(MaintainableRequest $request, Host $host)
     {
+        $this->authorize("edit", $host->maintainable);
         $host->update([
             "zabbix_id"=>$request->input("zabbix_id"),
             "stage"=>$request->input("stage"),

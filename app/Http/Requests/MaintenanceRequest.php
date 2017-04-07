@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Maintenance;
+use Illuminate\Foundation\Http\FormRequest;
 
-class MaintenanceRequest extends PermissiableRequest
+class MaintenanceRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

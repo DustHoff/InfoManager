@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Adldap\Laravel\Traits\UsesAdldap;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements Permissiable
 {
@@ -26,10 +24,34 @@ class User extends Authenticatable implements Permissiable
         return $this->belongsToMany("Group","user_group");
     }
 
-    public function hasPermission($permission)
+    public function hasPermission(array $maintainablegroup)
     {
         foreach ($this->groups as $group){
-            if ($group->hasPermission($permission))return true;
+            if ($group->hasPermission($maintainablegroup)) return true;
+        }
+        return false;
+    }
+
+    public function isEditor(array $maintainableGroup)
+    {
+        foreach ($this->groups as $group) {
+            if ($group->isEditor()) return true;
+        }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        foreach ($this->groups as $group) {
+            if ($group->isAdmin()) return true;
+        }
+        return false;
+    }
+
+    public function isScheduler(array $maintainableGroup)
+    {
+        foreach ($this->groups as $group) {
+            if ($group->isScheduler()) return true;
         }
         return false;
     }

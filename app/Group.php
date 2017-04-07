@@ -8,18 +8,6 @@ class Group extends Model implements Permissiable
 {
     protected $fillable = ["name"];
 
-    public function permissions(){
-        return $this->belongsToMany("Permission");
-    }
-
-    public function hasPermission($perm)
-    {
-        foreach ($this->permissions as $permission){
-            if($permission->permission == $perm)return true;
-        }
-        return false;
-    }
-
     public function members(){
         return $this->belongsToMany("User","user_group");
     }
@@ -27,5 +15,25 @@ class Group extends Model implements Permissiable
     public function maintainableMembers()
     {
         return $this->belongsToMany("MaintainableGroup", "maintainablegroup_group");
+    }
+
+    public function isEditor(array $maintainablegroup)
+    {
+        return $this->hasPermission($maintainablegroup) && $this->editor;
+    }
+
+    public function hasPermission(array $maintainablegroup)
+    {
+        return $this->maintainableMembers->whereIn($maintainablegroup)->isNotEmpty();
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
+
+    public function isScheduler(array $maintainableGroup)
+    {
+        return $this->hasPermission($maintainablegroup) && $this->schedule;
     }
 }

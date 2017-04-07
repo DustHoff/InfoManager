@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use App\Application;
+use App\Group;
+use App\Host;
+use App\Maintainable;
+use App\Policies\AdminPolicy;
+use App\Policies\MaintainablePolicy;
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,7 +19,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Maintainable::class => MaintainablePolicy::class,
+        User::class => AdminPolicy::class,
+        Group::class => AdminPolicy::class,
+        Host::class => AdminPolicy::class,
+        Application::class => AdminPolicy::class,
     ];
 
     /**
@@ -25,9 +34,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        /*Auth::provider("DBLdap",function ($app,$config){
-            return new DBLdapUserProvider();
-        }); */
     }
 }

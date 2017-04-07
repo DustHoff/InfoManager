@@ -23,6 +23,7 @@ class MaintainableController extends Controller
 
     public function show(Maintainable $maintainable)
     {
+        $this->authorize("view", $maintainable);
         return view("info.Maintainable.single", compact('maintainable'));
     }
 

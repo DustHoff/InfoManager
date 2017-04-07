@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Http\Requests\MaintainableRequest;
-use App\Maintainable;
 
 class ApplicationController extends Controller
 {
@@ -17,17 +16,27 @@ class ApplicationController extends Controller
 
     public function store(MaintainableRequest $request)
     {
-        $application = Application::create(["host_id"=>$request->input("host_id")]);
-
+        $application = $this->save($request);
         return $this->maintainableController->store($request,$application);
     }
 
-    public function update(MaintainableRequest $request, Application $application){
+    private function save(MaintainableRequest $request, Application $application = null)
+    {
+        if ($application == null) $application = new Application;
         $application->host_id=$request->input("host_id");
+        $application->save();
+        return $application;
+    }
+
+    public function update(MaintainableRequest $request, Application $application)
+    {
+        $application = $this->save($request, $application);
         return $this->maintainableController->update($request,$application->maintainable);
     }
+
     public function addDependency(Application $application)
     {
+        $this->authorize("edit", $application->maintainable);
         $this->validate(request(), [
             "dependency" => "required|integer|exists:applications,id|not_in:" . $application->id
         ]);

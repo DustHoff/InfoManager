@@ -11,5 +11,16 @@ namespace App;
 
 interface Permissiable
 {
-    public function hasPermission($permission);
+    /**
+     * @param array|MaintainableGroup $maintainableGroup
+     * @return boolean
+     */
+    public function hasPermission(array $maintainableGroup);
+
+    public function isEditor(array $maintainableGroup);
+
+    public function isScheduler(array $maintainableGroup);
+
+    public function isAdmin();
+
 }

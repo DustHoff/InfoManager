@@ -1,17 +1,19 @@
 <div class="list-group">
-    <div class="list-group-item">
-        <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post">
-            {{csrf_field()}}
-            <select name="dependency">
-                <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
-                @foreach(\App\Application::all() as $application)
-                    @if($application->id == $maintainable->maintainable->id) @continue @endif
-                    <option value="{{$application->id}}">{{$application->maintainable->name}}</option>
-                @endforeach
-            </select>
-            <button type="submit" class="btn btn-success">@lang("menu.add",["thing"=>""])</button>
-        </form>
-    </div>
+    @can("edit",$maintainable)
+        <div class="list-group-item">
+            <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post">
+                {{csrf_field()}}
+                <select name="dependency">
+                    <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
+                    @foreach(\App\Application::all() as $application)
+                        @if($application->id == $maintainable->maintainable->id) @continue @endif
+                        <option value="{{$application->id}}">{{$application->maintainable->name}}</option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-success">@lang("menu.add",["thing"=>""])</button>
+            </form>
+        </div>
+    @endcan
     @foreach($maintainable->maintainable->requires as $application)
         <div class="list-group-item">
             <a href="{{route("maintainable",$application->maintainable->id)}}">{{$application->maintainable->name}}</a>

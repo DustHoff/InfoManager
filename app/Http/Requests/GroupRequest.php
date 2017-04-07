@@ -15,7 +15,7 @@ class GroupRequest extends PermissiableRequest
     {
         return [
             "name" => "required",
-            "permissions.*" => "required|exists:permissions,id"
+            "maintainablegroups.*" => "required|exists:maintainablegroups,id"
         ];
     }
 }
