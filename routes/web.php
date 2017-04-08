@@ -36,6 +36,8 @@ Route::post("/application/{application}/dependency","ApplicationController@addDe
 Route::get("/application/{application}/{dependency}","ApplicationController@removeDependency")->name("removeDependency");
 Route::post("/host","HostController@store")->name("storeHost");
 Route::post("/host/{host}","HostController@update")->name("updateHost");
+Route::get("/maintenance/calendar", "CalendarController@index")->name("calendar");
+Route::get("/maintenance/calendar/feed", "CalendarController@maintenanceFeed")->name("calendarFeed");
 Route::get('/maintenance', 'MaintenanceController@showAll');
 Route::post("/maintenance","MaintenanceController@store")->name("storeMaintenance");
 Route::get("/maintenance/batch","MaintenanceController@batch")->name("batchMaintenance");

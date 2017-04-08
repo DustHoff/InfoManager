@@ -19,10 +19,13 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-tagsinput.js"></script>
     <script src="/js/moment.js"></script>
+    <script src="/js/fullcalendar.min.js"></script>
     <script src="/js/bootstrap-datetimepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <link type="text/css" href="/css/app.css" rel="stylesheet">
     <link type="text/css" href="/css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link type="text/css" href="/css/fullcalendar.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/fullcalendar.print.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
