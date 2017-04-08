@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Monitoring\impl\Zabbix;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        App::bind("Zabbix", function () {
+            return new Zabbix;
+        });
     }
 }
