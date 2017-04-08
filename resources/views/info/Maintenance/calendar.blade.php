@@ -7,7 +7,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month,agendaWeek,listDay'
                 },
                 events: '{{route("calendarFeed")}}',
                 startParam: 'maintenance_start',

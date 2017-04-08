@@ -7,7 +7,7 @@ return [
     "select" => "Select :thing",
 
     "systems" => "Systems",
-    "dates" => "Dates",
+    "calendar" => "Calendar",
     "batch" => "Batch",
     "schedule" => "Schedule",
     "search" => "search",

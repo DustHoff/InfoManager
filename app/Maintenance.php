@@ -39,7 +39,7 @@ class Maintenance extends Model
 
     public function getTitleAttribute()
     {
-        return __("maintenance." . $this->type);
+        return __("maintenance." . $this->type) . " " . $this->infected->first()->name;
     }
 
     public function getClassNameAttribute()

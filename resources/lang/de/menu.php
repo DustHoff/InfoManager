@@ -7,7 +7,7 @@ return [
     "select" => ":thing W&auml;hlen",
 
     "systems" => "Systeme",
-    "dates" => "Wartungen/St&ouml;rungen",
+    "calendar" => "Kalender",
     "batch" => "Sammel",
     "schedule" => "Planung",
     "search" => "search",
