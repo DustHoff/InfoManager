@@ -6,6 +6,16 @@
         </div>
     </div>
     <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <label class="control-label">Admin<input name="admin" type="checkbox" value="1"
+                                                     class="checkbox-inline"></label>
+            <label class="control-label">Editor<input name="editor" type="checkbox" value="1"
+                                                      class="checkbox-inline"></label>
+            <label class="control-label">@lang("menu.schedule")<input name="schedule" type="checkbox" value="1"
+                                                                      class="checkbox-inline"></label>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="control-label col-sm-2">Permissions</div>
         <div class="col-sm-10">
             <select class="form-control" name="maintainablegroups[]" multiple>

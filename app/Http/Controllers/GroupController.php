@@ -21,7 +21,7 @@ class GroupController extends Controller
     }
 
     public function store(GroupRequest $request){
-        $group = $this->save(null,$request->input());
+        $group = $this->save(null, $request);
         return redirect()->route("group",compact("group"));
     }
 
@@ -30,17 +30,21 @@ class GroupController extends Controller
      * @param array $data
      * @return Group
      */
-    private function save(Group $group = null,array $data){
+    private function save(Group $group = null, GroupRequest $request)
+    {
         if($group == null) $group = new Group;
-        $group->name = $data["name"];
+        $group->name = $request->input("name");
+        $group->admin = $request->input("admin");
+        $group->editor = $request->input("editor");
+        $group->schedule = $request->input("schedule");
         $group->save();
-        $group->permissions()->sync($data["permissions"]);
+        $group->maintainableMembers()->sync($request->input(["maintainablegroups"]));
         return $group;
     }
 
     public function update(GroupRequest $request, Group $group)
     {
-        $group = $this->save($group, $request->input());
+        $group = $this->save($group, $request);
         return redirect()->route("group", compact("group"));
     }
 }
