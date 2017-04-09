@@ -12,7 +12,7 @@ class MaintainablePolicy
 
     public function before(User $user)
     {
-        return $user->isAdmin();
+        if ($user->isAdmin()) return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class MaintainablePolicy
      */
     public function view(User $user, Maintainable $maintainable)
     {
-        return $user->hasPermission($maintainable->maintainableGroups);
+        return $user->hasPermission($maintainable->maintainableGroups()->get(["maintainablegroups.id"])->toArray());
     }
 
     /**
@@ -36,6 +36,11 @@ class MaintainablePolicy
      */
     public function edit(User $user, Maintainable $maintainable)
     {
-        return $user->isEditor($maintainable->maintainableGroups);
+        return $user->isEditor($maintainable->maintainableGroups()->get(["maintainablegroups.id"])->toArray());
+    }
+
+    public function schedule(User $user, Maintainable $maintainable)
+    {
+        return $user->isScheduler($maintainable->maintainableGroups()->get(["maintainablegroups.id"])->toArray());
     }
 }

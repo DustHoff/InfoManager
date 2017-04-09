@@ -2,13 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
     public function authorize()
     {
-        return Auth::user()->can("administrate", Group::class);
+        return Auth::user()->can("administrate", User::class);
     }
 
     /**
@@ -23,7 +25,7 @@ class UserRequest extends FormRequest
             "username" => "required",
             "password" => "sometimes|confirmed",
             "group.*" => "sometimes|exists:groups,id",
-            "action" => "required|in:save,delete"
+            "action" => "required|in:" . __("menu.save") . "," . __("menu.delete")
         ];
     }
 }

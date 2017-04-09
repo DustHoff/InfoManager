@@ -34,9 +34,9 @@ class GroupController extends Controller
     {
         if($group == null) $group = new Group;
         $group->name = $request->input("name");
-        $group->admin = $request->input("admin");
-        $group->editor = $request->input("editor");
-        $group->schedule = $request->input("schedule");
+        $group->admin = $request->input("admin") != null ? true : false;
+        $group->editor = $request->input("editor") != null ? true : false;
+        $group->schedule = $request->input("schedule") != null ? true : false;
         $group->save();
         $group->maintainableMembers()->sync($request->input(["maintainablegroups"]));
         return $group;

@@ -44,10 +44,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-offset-10 col-sm-2">
+                    <div class="col-sm-offset-8 col-sm-4">
                         {{ csrf_field() }}
-                        <input type="submit" name="action" value="save" class="btn btn-success">
-                        <input type="submit" name="action" value="delete" class="btn btn-danger">
+                        <input type="submit" name="action" value="@lang("menu.save")" class="btn btn-success">
+                        <input type="submit" name="action" value="@lang("menu.delete")" class="btn btn-danger">
                     </div>
                 </div>
             </form>

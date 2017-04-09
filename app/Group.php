@@ -24,7 +24,7 @@ class Group extends Model implements Permissiable
 
     public function hasPermission(array $maintainablegroup)
     {
-        return $this->maintainableMembers->whereIn($maintainablegroup)->isNotEmpty();
+        return $this->maintainableMembers->whereIn("id", array_column($maintainablegroup, "id"))->isNotEmpty();
     }
 
     public function isAdmin()
@@ -32,7 +32,7 @@ class Group extends Model implements Permissiable
         return $this->admin;
     }
 
-    public function isScheduler(array $maintainableGroup)
+    public function isScheduler(array $maintainablegroup)
     {
         return $this->hasPermission($maintainablegroup) && $this->schedule;
     }

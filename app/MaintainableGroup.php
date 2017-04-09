@@ -8,6 +8,7 @@ class MaintainableGroup extends Model
 {
     protected $table = "maintainablegroups";
     protected $fillable = ["name"];
+    protected $hidden = ["pivot"];
 
     public function maintainables()
     {

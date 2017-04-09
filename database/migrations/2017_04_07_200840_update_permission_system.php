@@ -16,9 +16,10 @@ class UpdatePermissionSystem extends Migration
         Schema::dropIfExists("permissions");
         Schema::dropIfExists("group_permission");
         Schema::table("groups", function (Blueprint $table) {
-            $table->boolean("admin");
-            $table->boolean("editor");
-            $table->boolean("schedule");
+            $table->boolean("admin")->default(false);
+            $table->boolean("editor")->default(false);
+            $table->boolean("schedule")->default(false);
+            $table->unique("name");
         });
         DB::table("groups")->where("id", 1)->update(["admin" => 1, "editor" => 1, "schedule" => 1]);
     }

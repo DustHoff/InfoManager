@@ -35,7 +35,7 @@ class User extends Authenticatable implements Permissiable
     public function isEditor(array $maintainableGroup)
     {
         foreach ($this->groups as $group) {
-            if ($group->isEditor()) return true;
+            if ($group->isEditor($maintainableGroup)) return true;
         }
         return false;
     }
@@ -51,7 +51,7 @@ class User extends Authenticatable implements Permissiable
     public function isScheduler(array $maintainableGroup)
     {
         foreach ($this->groups as $group) {
-            if ($group->isScheduler()) return true;
+            if ($group->isScheduler($maintainableGroup)) return true;
         }
         return false;
     }

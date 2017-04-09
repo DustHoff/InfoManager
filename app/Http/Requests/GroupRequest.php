@@ -23,9 +23,9 @@ class GroupRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "admin" => "required|boolean",
-            "editor" => "required|boolean",
-            "schedule" => "required|boolean",
+            "admin" => "boolean",
+            "editor" => "boolean",
+            "schedule" => "boolean",
             "maintainablegroups.*" => "required|exists:maintainablegroups,id"
         ];
     }
