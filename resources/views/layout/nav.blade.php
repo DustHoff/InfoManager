@@ -12,7 +12,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{route("maintainableList")}}">@lang("menu.systems")</a></li>
+                <li><a href="{{route("allMaintainables")}}">@lang("menu.systems")</a></li>
                 <li><a href="{{route("calendar")}}">@lang("menu.calendar")</a></li>
                 <li><a href="{{route("batchMaintenance")}}">@lang("menu.batch") @lang("menu.schedule")</a></li>
                 @if(\Illuminate\Support\Facades\Auth::user())
