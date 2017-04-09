@@ -50,4 +50,8 @@ class Host extends Model implements MaintainableInterface
         }
         return array_unique($results);
     }
+
+    public function monitoring() {
+        return $this->hasMany("MonitoringHost","host_id","id");
+    }
 }

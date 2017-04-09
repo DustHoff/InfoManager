@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Host;
 use App\Http\Requests\MaintainableRequest;
+use App\Monitoring\MonitoringHost;
 
 class HostController extends Controller
 {
@@ -20,24 +21,31 @@ class HostController extends Controller
     public function update(MaintainableRequest $request, Host $host)
     {
         $this->authorize("edit", $host->maintainable);
-        $host->update([
-            "zabbix_id"=>$request->input("zabbix_id"),
-            "stage"=>$request->input("stage"),
-            "owner"=>$request->input("owner"),
-            "host_id"=>$request->input("host_id")
-            ]);
+        $host = $this->save($request,$host);
 
         return $this->maintainableController->update($request,$host->maintainable);
     }
 
     public function store(MaintainableRequest $request)
     {
+        $host = $this->save($request);
+        return $this->maintainableController->store($request, $host);
+    }
 
-        $host = Host::create([
-            "zabbix_id"=>$request->input("zabbix_id"),
+    private function save(MaintainableRequest $request, Host $host = null){
+        if($host == null) $host=new Host;
+        $host->fill([
             "stage"=>$request->input("stage"),
             "owner"=>$request->input("owner"),
-            "host_id"=>$request->input("host_id")]);
-        return $this->maintainableController->store($request, $host);
+            "host_id"=>$request->input("host_id")
+        ]);
+        $host->save();
+        $host->monitoring()->delete();
+        if(is_array($request->input("monitoring")))$list = $request->input("monitoring");
+        else $list = array($request->input("monitoring"));
+        foreach ($list as $identifier){
+            $host->monitoring()->firstOrCreate(["identifier"=>$identifier]);
+        }
+        return $host;
     }
 }

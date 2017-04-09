@@ -234,6 +234,7 @@ return [
         # application specific
         'Application' => \App\Application::class,
         'Host' => \App\Host::class,
+        'MonitoringHost' => \App\Monitoring\MonitoringHost::class,
         'Maintainable' => \App\Maintainable::class,
         'Maintenance' => \App\Maintenance::class,
         'User' => \App\User::class,

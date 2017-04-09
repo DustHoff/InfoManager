@@ -13,7 +13,9 @@ use App\Maintenance;
 
 interface Monitoring
 {
-    public function listHosts();
+    public function getList();
+
+    public function getDataByID($identifier);
 
     public function schedule(MonitoringHost $host, Maintenance $maintenance);
 }

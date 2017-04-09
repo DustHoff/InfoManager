@@ -25,7 +25,7 @@ class MaintainableRequest extends FormRequest
             'emails.*' => 'nullable|email',
             'stage' => 'required_if:maintainable_type,Host',
             'owner' => 'required_if:maintainable_type,Host',
-            'zabbix_id' => 'required_if:maintainable_type,Host|integer',
+            'monitoring' => 'required_if:maintainable_type,Host',
         ];
     }
 }

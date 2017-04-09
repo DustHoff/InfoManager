@@ -32,7 +32,12 @@
                 <div class="form-group">
                     <div class="control-label col-sm-2">Zabbix Host ID</div>
                     <div class="col-sm-10">
-                        <input name="zabbix_id" class="form-control" value="">
+                        <select name="monitoring[]" class="form-control" multiple>
+                            <option value="">None</option>
+                            @foreach(\App\Monitoring\Monitor::getList() as $monitoringhost)
+                                <option value="{{$monitoringhost->identifier}}">{{$monitoringhost->name()}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 @endcomponent

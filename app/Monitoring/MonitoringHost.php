@@ -1,49 +1,23 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Dustin
- * Date: 08.04.2017
- * Time: 20:17
- */
 
 namespace App\Monitoring;
 
+use Illuminate\Database\Eloquent\Model;
 
-class MonitoringHost
+class MonitoringHost extends Model
 {
-    private $identifier;
-    private $displayName;
-
-    /**
-     * @return mixed
-     */
-    public function getDisplayName()
+    protected $primaryKey = "identifier";
+    public $external = array();
+    protected $table = "monitoringhosts";
+    protected $fillable = ["identifier"];
+    public $timestamps =false;
+    public function __construct(array $attributes = [])
     {
-        return $this->displayName;
+        parent::__construct($attributes);
+        if(!empty($attributes))$this->external = Monitor::getDataByID($attributes["identifier"]);
     }
 
-    /**
-     * @param mixed $displayName
-     */
-    public function setDisplayName($displayName)
-    {
-        $this->displayName = $displayName;
+    public function name(){
+        return $this->external[env("monitoring_name_field")];
     }
-
-    /**
-     * @return mixed
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param mixed $identifier
-     */
-    public function setIdentifier($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
 }

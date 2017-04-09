@@ -9,8 +9,16 @@
 namespace App\Monitoring;
 
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class Monitor
+ * @package App\Monitoring
+ * @method static Collection | MonitoringHost getList()
+ * @method static MonitoringHost getDataByID($identifier)
+ * @method static schedule(MonitoringHost $monitoringhost, Maintenance $maintenance)
+ */
 class Monitor extends Facade
 {
     protected static function getFacadeAccessor()
