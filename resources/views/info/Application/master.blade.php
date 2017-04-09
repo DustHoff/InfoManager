@@ -25,6 +25,11 @@
                         <option value="{{$email->email}}">{{$email->email}}</option>
                     @endforeach
                 @endslot
+                    @slot("maintainablegroup")
+                        @foreach($maintainable->maintainablegroups as $maintainablegroup)
+                            <option value="{{$maintainablegroup->name}}">{{$maintainablegroup->name}}</option>
+                        @endforeach
+                    @endslot
             @endcomponent
         </div>
         @can("schedule",$maintainable)
