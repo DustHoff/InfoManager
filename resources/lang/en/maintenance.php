@@ -18,5 +18,6 @@ return [
      * Maintenance messages
      */
     "from" => "From :start",
-    "till" => "till :end"
+    "till" => "till :end",
+    "causedBy" => "Inherited by :system"
 ];

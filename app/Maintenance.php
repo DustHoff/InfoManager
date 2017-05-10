@@ -20,6 +20,10 @@ class Maintenance extends Model
         return $query->where('state', '=', "active")->paginate();
     }
 
+    public function causedBy()
+    {
+        return $this->hasOne("Maintainable", "id", "rootcause");
+    }
     public function infected()
     {
         return $this->belongsToMany('Maintainable');

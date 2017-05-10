@@ -10,13 +10,14 @@ return [
     /**
      * Maintenance States
      */
-    "announced" => "Anku&uuml;ndigung",
+    "announced" => "Ank&uuml;ndigung",
     "active" => "Aktiv",
     "inactive" => "Inaktiv",
 
     /**
      * Maintenance messages
      */
-    "from" => "Von :start",
-    "till" => "bis :end"
+    "from" => "von :start",
+    "till" => "bis :end",
+    "causedBy" => "Ausgel&ouml;st durch :system"
 ];

@@ -4,10 +4,8 @@ namespace App\Mail;
 
 use App\Maintainable;
 use App\Maintenance;
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Notification extends Mailable
 {
@@ -16,6 +14,7 @@ class Notification extends Mailable
      * @var Maintenance
      */
     private $maintenance;
+    private $maintainable;
 
     /**
      * Notification constructor.
@@ -25,7 +24,8 @@ class Notification extends Mailable
     public function __construct(Maintenance $maintenance,Maintainable $maintainable)
     {
         $this->maintenance = $maintenance;
-        $this->subject($maintenance->type." ".$maintenance->state." for ".$maintainable->name);
+        $this->maintainable = $maintainable;
+        $this->subject("[" . __("maintenance." . $maintenance->type) . "] " . __("maintenance." . $maintenance->state) . " for " . $maintainable->name);
     }
 
     /**
@@ -35,6 +35,6 @@ class Notification extends Mailable
      */
     public function build()
     {
-        return $this->markdown("email.notification",["maintenance"=>$this->maintenance]);
+        return $this->markdown("email.notification", ["maintenance" => $this->maintenance, "maintainable" => $this->maintainable]);
     }
 }

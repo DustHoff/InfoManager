@@ -81,7 +81,7 @@ class Zabbix implements Monitoring
             "name" => $maintenance->type . " " . $maintenance->id,
             "active_since" => $maintenance->maintenance_start->timestamp,
             "active_till" => $maintenance->maintenance_end->timestamp,
-            "hostids" => array_column($maintenance->infected->toArray(), "monitoring_id"),
+            "hostids" => array_filter(array_column($maintenance->infected->toArray(), "monitoring_id")),
             "timeperiods" => [
                 (object)[
                     "timeperiod_type" => 0,
