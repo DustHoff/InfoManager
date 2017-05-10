@@ -18,6 +18,12 @@
                 @slot("url") {{route("updateHost",["host" => $maintainable->maintainable])}} @endslot
                 @slot("name") {{$maintainable->name}} @endslot
                 @slot("desc") {{$maintainable->desc}} @endslot
+                @slot("monitoring")
+                    @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
+                        <option value="{{$monitoringitem->identifier()}}" )
+                                @if($maintainable->monitoring_id == $monitoringitem->identifier()) selected @endif>{{$monitoringitem->name()}}</option>
+                    @endforeach
+                @endslot
                 @slot("type") {{$maintainable->maintainable_type}} @endslot
                 @slot("host"){{$maintainable->maintainable->host_id}}@endslot
                 @slot("owner") {{$maintainable->maintainable->owner}} @endslot
@@ -62,19 +68,6 @@
                 <div class="form-group" class="control-label col-sm-2">
                     <div class="control-label col-sm-2">Applications</div>
                     <div class=" col-sm-10">{{$maintainable->maintainable->applications->count()}}</div>
-                </div>
-                <div class="form-group">
-                    <div class="control-label col-sm-2">Zabbix Host ID</div>
-                    <div class="col-sm-10">
-                        <select name="monitoring[]" class="form-control" multiple>
-                            <option value="">None</option>
-                            @foreach(\App\Monitoring\Monitor::getList() as $monitoringhost)
-                                <option value="{{$monitoringhost->identifier}}"
-                                        @if($maintainable->maintainable->monitoring->contains($monitoringhost)) selected @endif
-                                >{{$monitoringhost->name()}}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
             @endcomponent
         </div>

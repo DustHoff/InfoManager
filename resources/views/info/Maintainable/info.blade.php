@@ -95,6 +95,15 @@
         </div>
     </div>
     <div class="form-group">
+        <div class="control-label col-sm-2">@lang("maintainable.monitoring")</div>
+        <div class="col-sm-10">
+            <select name="monitoring" class="form-control">
+                <option value="">None</option>
+                {{$monitoring or ''}}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-2">
             {{csrf_field()}}
             <input type="hidden" name="maintainable_type" value="{{$type}}">

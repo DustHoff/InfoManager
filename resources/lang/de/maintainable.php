@@ -4,6 +4,7 @@ return [
     "name" => "Name",
     "runson" => "Machine",
     "contact" => "Kontakt",
+    "group" => "Gruppe",
 
     /**
      * Maintainable Types

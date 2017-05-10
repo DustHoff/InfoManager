@@ -17,5 +17,5 @@ interface Monitoring
 
     public function getDataByID($identifier);
 
-    public function schedule(MonitoringHost $host, Maintenance $maintenance);
+    public function schedule(Maintenance $maintenance);
 }

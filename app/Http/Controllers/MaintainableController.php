@@ -41,6 +41,7 @@ class MaintainableController extends Controller
 
         $maintainable->name = $request->input("name");
         $maintainable->desc = $request->input("desc");
+        $maintainable->monitoring_id = $request->input("monitoring");
         $maintainable->save();
         if ($model != null) {
             $maintainable->maintainable()->associate($model);

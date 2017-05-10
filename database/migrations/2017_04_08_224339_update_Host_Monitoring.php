@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class UpdateHostMonitoring extends Migration
 {
@@ -13,19 +13,14 @@ class UpdateHostMonitoring extends Migration
      */
     public function up()
     {
-        Schema::create("monitoringhosts",function (Blueprint $table){
-            $table->char("identifier",64)->primary();
-            $table->bigInteger("host_id");
-        });
-
-        foreach (\App\Host::all() as $host){
-            if($host->zabbix_id==-1) continue;
-            $monitoringHost = new \App\Monitoring\MonitoringHost;
-            $monitoringHost->identifier = $host->zabbix_id;
-            $monitoringHost->host_id = $host->id;
-        }
         Schema::table("hosts",function (Blueprint $table){
             $table->dropColumn("zabbix_id");
+        });
+        Schema::table("maintainables", function (Blueprint $table) {
+            $table->char("monitoring_id", 32)->nullable();
+        });
+        Schema::table("maintenances", function (Blueprint $table) {
+            $table->char("monitoring_id")->nullable();
         });
     }
 
@@ -36,6 +31,5 @@ class UpdateHostMonitoring extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("monitoringhosts");
     }
 }

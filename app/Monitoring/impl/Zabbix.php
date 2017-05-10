@@ -11,7 +11,7 @@ namespace App\Monitoring\impl;
 
 use App\Maintenance;
 use App\Monitoring\Monitoring;
-use App\Monitoring\MonitoringHost;
+use App\Monitoring\MonitoringItem;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Collection;
@@ -48,11 +48,11 @@ class Zabbix implements Monitoring
         ];
 
         $response = $this->client->request("Post", env("zabbix_url") . "/api_jsonrpc.php", $data);
-        //Log::debug($data);
+        Log::debug($data);
         //Log::debug($response->getBody()->getContents());
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody(), true);
-            //Log::debug($result);
+            Log::debug($result);
             return $result["result"];
         }
         return array();
@@ -63,26 +63,38 @@ class Zabbix implements Monitoring
      */
     public function getList()
     {
-        if(Cache::has("monitoring_list")) return Cache::get("monitoring_list");
+        if (Cache::has("monitoring_list")) return Cache::get("monitoring_list");
         $rawdata = $this->zabbixMethod("host.get", ["output" => [env("monitoring_identifier_field"), env("monitoring_name_field")]]);
         $data = array();
-        foreach ($rawdata as $row){
-            $mh = new MonitoringHost;
-            $mh->identifier = $row[env("monitoring_identifier_field")];
-            $mh->external = $row;
-            array_push($data,$mh);
+        foreach ($rawdata as $row) {
+            $mh = new MonitoringItem($row);
+            array_push($data, $mh);
         }
-        Cache::put("monitoring_list",collect($data),Carbon::now()->addDay(1));
+        Cache::put("monitoring_list", collect($data), Carbon::now()->addDay(1));
         return collect($data);
     }
 
-    public function schedule(MonitoringHost $host, Maintenance $maintenance)
+    public function schedule(Maintenance $maintenance)
     {
+        //$startdate = Carbon::createFromDate($maintenance->maintenance_start->year, $maintenance->maintenance_start->month, $maintenance->maintenance_start->day)->timestamp;
+        $this->zabbixMethod("maintenance.create", [
+            "name" => $maintenance->type . " " . $maintenance->id,
+            "active_since" => $maintenance->maintenance_start->timestamp,
+            "active_till" => $maintenance->maintenance_end->timestamp,
+            "hostids" => array_column($maintenance->infected->toArray(), "monitoring_id"),
+            "timeperiods" => [
+                (object)[
+                    "timeperiod_type" => 0,
+                    "start_date" => $maintenance->maintenance_start->timestamp,
+                    "period" => $maintenance->maintenance_end->timestamp - $maintenance->maintenance_start->timestamp
+                ]
+            ]
+        ]);
     }
 
     public function getDataByID($identifier)
     {
-        $data = $this->zabbixMethod("host.get",["filter" => ["hostid"=>$identifier],"output"=>env("monitoring_name_field")]);
+        $data = $this->zabbixMethod("host.get", ["filter" => ["hostid" => $identifier], "output" => env("monitoring_name_field")]);
         Log::debug($data);
         return $data;
     }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Monitoring\MonitoringHost;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,7 @@ class Maintainable extends Model implements MaintainableInterface
     protected $table="maintainables";
     protected $fillable = ["name","desc"];
 
-    public function scopeSearch(Builder $query,$search){
+    public function scopeSearch(Builder $query, $search){
         return $query->where("name","like","%".$search."%")->paginate();
     }
 
@@ -28,6 +29,7 @@ class Maintainable extends Model implements MaintainableInterface
     public function latestMaintenance(){
         return $this->maintenances()->where("state","=",Maintenance::STATE[1]);
     }
+
     public function maintenances(){
         return $this->belongsToMany('Maintenance');
     }

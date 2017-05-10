@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Facade;
  * @package App\Monitoring
  * @method static Collection | MonitoringHost getList()
  * @method static MonitoringHost getDataByID($identifier)
- * @method static schedule(MonitoringHost $monitoringhost, Maintenance $maintenance)
+ * @method static schedule(Maintenance $maintenance)
  */
 class Monitor extends Facade
 {

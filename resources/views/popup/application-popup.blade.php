@@ -8,10 +8,15 @@
             </div>
             <div class="modal-body">
                 @component("info.Maintainable.info")
-                @slot("url") {{route("storeApplication")}} @endslot
-                @slot("name")@endslot
-                @slot("type") Application @endslot
-                @slot("host"){{$maintainable->maintainable->id or ''}}@endslot
+                    @slot("url") {{route("storeApplication")}} @endslot
+                    @slot("name")@endslot
+                    @slot("type") Application @endslot
+                    @slot("host"){{$maintainable->maintainable->id or ''}}@endslot
+                    @slot("monitoring")
+                        @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
+                            <option value="{{$monitoringitem->identifier()}}" )>{{$monitoringitem->name()}}</option>
+                        @endforeach
+                    @endslot
                 @endcomponent
             </div>
         </div>

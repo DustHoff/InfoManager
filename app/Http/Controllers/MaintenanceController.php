@@ -7,6 +7,7 @@ use App\Http\Requests\MaintenanceRequest;
 use App\Jobs\SendNotification;
 use App\Maintainable;
 use App\Maintenance;
+use App\Monitoring\Monitor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,6 +63,7 @@ class MaintenanceController extends Controller
 
         if ($maintenance->type != Maintenance::TYPE[0]) return $this->transit($maintenance);
         else $this->dispatch(new SendNotification($maintenance));
+        if ($maintenance->type == Maintenance::TYPE[0]) Monitor::schedule($maintenance);
         return redirect()->route("maintenance", compact("maintenance"));
     }
 
