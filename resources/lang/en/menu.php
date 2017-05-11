@@ -6,6 +6,8 @@ return [
     "add" => "add :thing",
     "select" => "Select :thing",
 
+    "for" => "for",
+
     "systems" => "Systems",
     "calendar" => "Calendar",
     "batch" => "Batch",

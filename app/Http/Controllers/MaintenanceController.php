@@ -43,7 +43,7 @@ class MaintenanceController extends Controller
         if ($maintenance->type == Maintenance::TYPE[0]) $maintenance->maintenance_end = $request->input("maintenance_end");
         $maintenance->user()->associate(Auth::user());
         $maintenance->save();
-        $maintenance->rootcause = $request->input("maintainable")[0];
+        $maintenance->rootcause = $request->input("rootcause");
 
         foreach ($request->input("maintainable") as $maintainableId) {
             $maintainable = Maintainable::find($maintainableId);

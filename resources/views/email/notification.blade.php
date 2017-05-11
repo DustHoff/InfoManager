@@ -7,9 +7,11 @@
             @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
         @endif
 
-        @if($maintenance->rootcause != $maintainable->id)
-            <br>
-            @lang("maintenance.causedBy",["system" => $maintenance->causedBy->name])
+        @if($maintenance->rootcause != null)
+            @if($maintenance->rootcause != $maintainable->id)
+                <br>
+                @lang("maintenance.causedBy",["system" => $maintenance->causedBy->name])
+            @endif
         @endif
     @endslot
 

@@ -23,6 +23,7 @@ class MaintenanceRequest extends FormRequest
             'maintenance_end' => 'required_if:type,' . Maintenance::TYPE[0] . '|after:maintenance_start',
             'type' => 'required|in:' . implode(",", Maintenance::TYPE),
             'maintainable.*' => 'required|exists:maintainables,id',
+            'rootcause' => 'sometimes|exists:maintainables,id',
             "reason" => "required"];
     }
 

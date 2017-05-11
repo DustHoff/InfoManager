@@ -1,10 +1,12 @@
 <?php
 return [
     "save" => "Speichern",
-    "delete" => "L&ouml;schen",
+    "delete" => "Löschen",
     "create" => ":thing erstellen",
     "add" => ":thing hinzufügen",
-    "select" => ":thing W&auml;hlen",
+    "select" => ":thing Wählen",
+
+    "for" => "für",
 
     "systems" => "Systeme",
     "calendar" => "Kalender",
@@ -20,9 +22,9 @@ return [
 
     "info" => "Information",
     "components" => "Komponenten",
-    "dependency" => "Abh&auml;ngigkeiten",
+    "dependency" => "Abhängigkeiten",
 
-    "infect" => "inkl Abh&auml;ngigkeiten",
+    "infect" => "inkl Abhängigkeiten",
     "infectedsystems" => "Betroffende Systeme",
 
     "username" => "Benutzername",

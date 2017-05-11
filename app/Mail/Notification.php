@@ -25,7 +25,7 @@ class Notification extends Mailable
     {
         $this->maintenance = $maintenance;
         $this->maintainable = $maintainable;
-        $this->subject("[" . __("maintenance." . $maintenance->type) . "] " . __("maintenance." . $maintenance->state) . " for " . $maintainable->name);
+        $this->subject("[" . __("maintenance." . $maintenance->type) . "] " . __("maintenance." . $maintenance->state) . " " . __("menu.for") . " " . $maintainable->name);
     }
 
     /**

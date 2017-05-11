@@ -57,6 +57,8 @@
                         </div>
                         <input type="hidden" id="maintainable_id" name="maintainable[]"
                                value="{{$maintainable->id}}">
+                        <input type="hidden" id="maintainable_id" name="rootcause"
+                               value="{{$maintainable->id}}">
                     @endslot
                     @foreach($maintainable->maintenances as $maintenance)
                         @include("info.Maintenance.item")

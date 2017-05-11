@@ -4,13 +4,13 @@ return [
      * Maintenance Types
      */
     "maintenance" => "Wartung",
-    "incident" => "St&ouml;rung",
-    "restricted" => "Eingeschränkte Funktionalit&auml;t/Performance",
+    "incident" => "Störung",
+    "restricted" => "Eingeschränkte Funktionalität/Performance",
 
     /**
      * Maintenance States
      */
-    "announced" => "Ank&uuml;ndigung",
+    "announced" => "Ankündigung",
     "active" => "Aktiv",
     "inactive" => "Inaktiv",
 
@@ -19,5 +19,5 @@ return [
      */
     "from" => "von :start",
     "till" => "bis :end",
-    "causedBy" => "Ausgel&ouml;st durch :system"
+    "causedBy" => "Ausgelöst durch :system"
 ];
