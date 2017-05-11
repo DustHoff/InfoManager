@@ -23,6 +23,7 @@ return [
     "dependency" => "Dependency",
 
     "infect" => "Infect",
+    "infectedsystems" => "Infected Systems",
 
     "username" => "Username",
     "password" => "Password",
