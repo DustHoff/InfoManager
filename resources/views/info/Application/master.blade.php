@@ -24,6 +24,12 @@
                 @slot("desc") {{$maintainable->desc}} @endslot
                 @slot("type") {{$maintainable->maintainable_type}} @endslot
                 @slot("host"){{$maintainable->maintainable->host_id}}@endslot
+                @slot("monitoring")
+                    @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
+                        <option value="{{$monitoringitem->identifier()}}" )
+                                @if($maintainable->monitoring_id == $monitoringitem->identifier()) selected @endif>{{$monitoringitem->name()}}</option>
+                    @endforeach
+                @endslot
                 @slot("contacts")
                     @foreach($maintainable->emails as $email)
                         <option value="{{$email->email}}">{{$email->email}}</option>
