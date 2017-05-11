@@ -76,12 +76,13 @@ class Zabbix implements Monitoring
 
     public function schedule(Maintenance $maintenance)
     {
-        //$startdate = Carbon::createFromDate($maintenance->maintenance_start->year, $maintenance->maintenance_start->month, $maintenance->maintenance_start->day)->timestamp;
+        $ids = array_filter(array_column($maintenance->infected->toArray(), "monitoring_id"));
+        if (empty($ids)) return;
         $this->zabbixMethod("maintenance.create", [
             "name" => $maintenance->type . " " . $maintenance->id,
             "active_since" => $maintenance->maintenance_start->timestamp,
             "active_till" => $maintenance->maintenance_end->timestamp,
-            "hostids" => array_filter(array_column($maintenance->infected->toArray(), "monitoring_id")),
+            "hostids" => $ids,
             "timeperiods" => [
                 (object)[
                     "timeperiod_type" => 0,
