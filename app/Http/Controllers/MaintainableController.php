@@ -74,4 +74,11 @@ class MaintainableController extends Controller
         $maintainable = $this->save($request, null, $model);
         return redirect()->route("maintainable", compact("maintainable"));
     }
+
+    public function delete(Maintainable $maintainable)
+    {
+        $this->authorize("delete", $maintainable);
+        $maintainable->maintainable->delete();
+        return redirect()->route("allMaintainables");
+    }
 }

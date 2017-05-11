@@ -11,6 +11,10 @@
         @endcan
         <li role="presentation"><a href="#components" aria-controls="components" role="tab"
                                    data-toggle="tab">@lang("menu.dependency")</a></li>
+        @can("delete",$maintainable)
+            <li role="presentation"><a href="{{route("deleteMaintainable",$maintainable)}}">@lang("menu.delete")</a>
+            </li>
+        @endcan
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="info">
