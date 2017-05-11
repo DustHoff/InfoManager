@@ -29,21 +29,21 @@ class Maintenance extends Model
         return $this->belongsToMany('Maintainable');
     }
 
-    public function comments()
-    {
-        return $this->hasMany("Comment");#->paginate(10);
-    }
-
     public function user()
     {
         return $this->belongsTo('User');
     }
 
-    /* Calendar Data functions */
-
     public function getTitleAttribute()
     {
-        return __("maintenance." . $this->type) . " " . $this->infected->first()->name;
+        return __("maintenance." . $this->type) . " " . $this->comments()->first()->body;
+    }
+
+    /* Calendar Data functions */
+
+    public function comments()
+    {
+        return $this->hasMany("Comment");#->paginate(10);
     }
 
     public function getClassNameAttribute()
