@@ -8,7 +8,7 @@ class Option extends Model
 {
     public function __toString()
     {
-        return $this->attributes["value"];
+        return "" . $this->value;
     }
 
 }

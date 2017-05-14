@@ -36,8 +36,13 @@ class Notification extends Mailable
      */
     public function build()
     {
-        $header = Option::query()->where("name", "=", "email_header");
-        $footer = Option::query()->where("name", "=", "email_footer");
-        return $this->markdown("email.notification", ["maintenance" => $this->maintenance, "maintainable" => $this->maintainable, "header" => $header, "footer" => $footer]);
+        $header = Option::query()->where("name", "=", "email_header")->first(["value"]);
+        $footer = Option::query()->where("name", "=", "email_footer")->first(["value"]);
+        return $this->markdown("email.notification", [
+            "maintenance" => $this->maintenance,
+            "maintainable" => $this->maintainable,
+            "header" => $header,
+            "footer" => $footer
+        ]);
     }
 }

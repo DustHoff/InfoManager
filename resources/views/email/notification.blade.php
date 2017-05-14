@@ -15,21 +15,15 @@
         @endif
     @endslot
 
-    {!! $header !!}
+    {{ $header }}
 
     @foreach($maintenance->comments as $comment)
         @component("email.component.comment")
-            @slot("user")
-                {{$comment->user->name}}
-            @endslot
-            @slot("date")
-                {{$comment->created_at}}
-            @endslot
             {{$comment->body}}
         @endcomponent
     @endforeach
 
-    {!! $footer !!}
+    {{ $footer }}
 
     @slot("footer")
         @component("email.component.footer")
