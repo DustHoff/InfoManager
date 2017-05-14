@@ -1,6 +1,6 @@
 @extends("layout.master")
 @section("content")
-    @component("info.Maintenance.schedule")
+    @component("info.Maintenance.schedule",["id"=>0])
         @slot("infected")
             <select class="form-control" name="maintainable[]" multiple>
                 @foreach(\App\Maintainable::all() as $maintainable)

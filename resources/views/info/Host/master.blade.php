@@ -77,7 +77,7 @@
         </div>
         @can("schedule",$maintainable)
             <div role="tabpanel" class="tab-pane" id="schedule">
-                @component("info.Maintenance.schedule")
+                @component("info.Maintenance.schedule",["id"=>$maintainable->id])
                     @slot("infected")
                         <div class="list-group">
                             <div class="list-group-item">@lang("menu.infectedsystems")</div>

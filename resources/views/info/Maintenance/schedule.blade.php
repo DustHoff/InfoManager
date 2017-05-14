@@ -61,3 +61,17 @@
         </div>
     </div>
 </form>
+@if($id != 0)
+    <script>
+        $("#type").change(function () {
+            var type = this.value;
+            $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$id}}').done(function (data) {
+                $("#reason").val(data);
+            });
+        });
+        var type = $("#type").val();
+        $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$id}}').done(function (data) {
+            $("#reason").val(data);
+        });
+    </script>
+@endif

@@ -48,3 +48,5 @@ Route::post("/maintenance/{maintenance}/comment", "MaintenanceController@comment
 Route::get("/maintenance/{maintenance}/message", "MaintenanceController@showMessage")->name("maintenanceMessage");
 
 Route::post("/search","SearchController@search")->name("search");
+Route::post("/option", "OptionController@update")->name("updateOptions");
+Route::get("/option/get/{key}/{maintainable}", "OptionController@get")->name("getOption");
