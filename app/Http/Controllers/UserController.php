@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Http\Requests\UserRequest;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -26,14 +28,15 @@ class UserController extends Controller
         return redirect()->route("profile",compact("user"));
     }
 
-    private function save(UserRequest $request,User $user = null){
+    private function save(UserRequest $request, User $user = null){
         if(!$user) $user = new User;
         $user->name = $request->input("name");
         $user->username = $request->input("username");
         if ($request->input("password")) $user->password = Hash::make($request->input("password"));
         $user->save();
-        if($request->input("group"))$user->groups()->sync($request->input("group"));
-
+        if (Auth::user()->can("administrate", Group::class)) {
+            if ($request->input("group")) $user->groups()->sync($request->input("group"));
+        }
         return $user;
     }
 
