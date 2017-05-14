@@ -29,4 +29,6 @@ return [
 
     "username" => "Username",
     "password" => "Password",
+
+    "option" => "Options"
 ];

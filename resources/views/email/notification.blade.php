@@ -15,6 +15,8 @@
         @endif
     @endslot
 
+    {!! $header !!}
+
     @foreach($maintenance->comments as $comment)
         @component("email.component.comment")
             @slot("user")
@@ -26,6 +28,8 @@
             {{$comment->body}}
         @endcomponent
     @endforeach
+
+    {!! $footer !!}
 
     @slot("footer")
         @component("email.component.footer")
