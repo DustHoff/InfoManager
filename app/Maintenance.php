@@ -36,7 +36,7 @@ class Maintenance extends Model
 
     public function getTitleAttribute()
     {
-        return __("maintenance." . $this->type) . " " . $this->comments()->first()->body;
+        return __("maintenance." . $this->type);
     }
 
     /* Calendar Data functions */
