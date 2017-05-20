@@ -5,6 +5,7 @@ return [
     "create" => ":thing erstellen",
     "add" => ":thing hinzufügen",
     "select" => ":thing Wählen",
+    "comment" => "Kommentieren",
 
     "for" => "für",
 
@@ -29,4 +30,9 @@ return [
 
     "username" => "Benutzername",
     "password" => "Passwort",
+
+    "option" => "Einstellungen",
+    "status" => "Status",
+    "start" => "Beginne",
+    "close" => "Beende",
 ];

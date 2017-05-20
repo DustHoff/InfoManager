@@ -5,6 +5,7 @@ return [
     "create" => "Create :thing",
     "add" => "add :thing",
     "select" => "Select :thing",
+    "comment" => "Comment",
 
     "for" => "for",
 
@@ -30,5 +31,8 @@ return [
     "username" => "Username",
     "password" => "Password",
 
-    "option" => "Options"
+    "option" => "Options",
+    "status" => "Status",
+    "start" => "Start",
+    "close" => "Close",
 ];

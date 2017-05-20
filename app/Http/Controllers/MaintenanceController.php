@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\MaintenanceRequest;
 use App\Jobs\SendNotification;
 use App\Maintainable;
@@ -88,14 +89,17 @@ class MaintenanceController extends Controller
     }
 
     public
-    function comment(Maintenance $maintenance)
+    function comment(Maintenance $maintenance, CommentRequest $request)
     {
-        $this->validate(request(), ["body" => "required"]);
         $comment = new Comment;
-        $comment->body = request("body");
+        $comment->body = $request->get("body");
         $comment->maintenance()->associate($maintenance);
         $comment->user()->associate(Auth::user());
         $comment->save();
+        if ($request->get("maintenance_end") != null) {
+            $maintenance->maintenance_end = $request->get("maintenance_end");
+            $maintenance->save();
+        }
         $this->dispatch(new SendNotification($maintenance));
         return back();
     }

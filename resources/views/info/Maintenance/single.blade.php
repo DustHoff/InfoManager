@@ -5,24 +5,39 @@
         @include("layout.error")
         <div class="row">
             @component("info.Maintenance.headerinfo")
-            @slot("title")
-            {{__("maintenance.".$maintenance->state)}} {{ __("maintenance.".$maintenance->type) }}
-            @endslot
-            @lang("maintenance.from",["start"=>$maintenance->maintenance_start])
-            @if($maintenance->maintenance_end!=null)
-                @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
-            @endif
+                @slot("title")
+                    {{__("maintenance.".$maintenance->state)}} {{ __("maintenance.".$maintenance->type) }}
+                @endslot
+                @lang("maintenance.from",["start"=>$maintenance->maintenance_start])
+                @if($maintenance->maintenance_end!=null)
+                    @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
+                @endif
             @endcomponent
         </div>
         <div class="row">
             <div class="col-lg-8">
                 @if($maintenance->state!="inactive")
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <input type="submit" value="comment" class="btn btn-primary">
-                        </div>
+                        <div class="panel-heading">@lang("menu.status")</div>
                         <div class="panel-body">
-                            <textarea name="body" class="form-control"></textarea>
+                            <div class="col-sm-12 col-lg-3">
+                                <input type="submit" value="@lang("menu.comment")" class="btn btn-primary">
+                            </div>
+                            <div class="col-sm-12 col-lg-9">
+                                @if($maintenance->type==\App\Maintenance::TYPE[0])
+                                    <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
+                                           placeholder="End">
+                                    <script type="text/javascript">
+                                        $("#maintenance_end").datetimepicker({
+                                            format: "YYYY-MM-DD HH:mm:ss",
+                                            useCurrent: false
+                                        });
+                                    </script>
+                                @endif
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea name="body" class="form-control"></textarea>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -32,13 +47,13 @@
                 {{ $comments->links() }}
                 @foreach($comments as $comment)
                     @component("info.Maintenance.comment")
-                    @slot("user")
-                    {{$comment->user->name}}
-                    @endslot
-                    @slot("date")
-                    {{$comment->created_at}}
-                    @endslot
-                    {{$comment->body}}
+                        @slot("user")
+                            {{$comment->user->name}}
+                        @endslot
+                        @slot("date")
+                            {{$comment->created_at}}
+                        @endslot
+                        {{$comment->body}}
                     @endcomponent
                 @endforeach
                 {{ $comments->links() }}
@@ -46,17 +61,18 @@
             <div class="col-lg-4">
                 <div class="list-group">
                     @if($maintenance->state!="inactive")
-                        <a href="{{route("maintenanceTransit",compact("maintenance"))}}" class="list-group-item list-group-item-success">
+                        <a href="{{route("maintenanceTransit",compact("maintenance"))}}"
+                           class="list-group-item list-group-item-success">
                             @if($maintenance->state=="active")
-                                Close {{$maintenance->type}}
+                                @lang("menu.close") @lang("maintenance.".$maintenance->type)
                             @else
-                                start {{$maintenance->type}}
+                                @lang("menu.start") @lang("maintenance.".$maintenance->type)
                             @endif</a>
                     @endif
                     @foreach($maintenance->infected as $maintainable)
                         @component("info.Maintainable.item")
-                        @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
-                        {{$maintainable->name}}
+                            @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
+                            {{$maintainable->name}}
                         @endcomponent
                     @endforeach
                 </div>
