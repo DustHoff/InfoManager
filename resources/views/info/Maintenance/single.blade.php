@@ -70,9 +70,7 @@
                             @endif</a>
                     @endif
                     @foreach($maintenance->infected as $maintainable)
-                        @component("info.Maintainable.item")
-                            @slot("url"){{route("maintainable",compact("maintainable"))}}@endslot
-                            {{$maintainable->name}}
+                        @component("info.Maintainable.item",compact("maintainable"))
                         @endcomponent
                     @endforeach
                 </div>

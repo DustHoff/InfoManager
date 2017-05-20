@@ -49,9 +49,7 @@
                         <div class="list-group">
                             <div class="list-group-item">@lang("menu.infectedsystems")</div>
                             @foreach($maintainable->infect() as $infectable)
-                                @component("info.Maintainable.item")
-                                    @slot("url") {{route("maintainable",["maintainable"=>$infectable])}} @endslot
-                                    {{Maintainable::find($infectable)->name}}
+                                @component("info.Maintainable.item",["maintainable"=>\App\Maintainable::find($infectable)])
                                 @endcomponent
                             @endforeach
                         </div>

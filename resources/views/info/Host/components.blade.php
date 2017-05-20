@@ -6,8 +6,8 @@
         </div>
     @endcan
     @foreach($maintainable->maintainable->applications as $application)
-        <a href="{{route("maintainable",["maintainable"=>$application->maintainable])}}"
-           class="list-group-item">{{$application->maintainable->name}}</a>
+        @component("info.maintainable.item",["maintainable"=>$application->maintainable])}}")
+        @endcomponent
     @endforeach
     @if($maintainable->maintainable->host_id == null)
         @can("administrate",\App\Host::class)
@@ -17,8 +17,8 @@
             </div>
         @endcan
         @foreach($maintainable->maintainable->vms as $vm)
-            <a href="{{route("maintainable",$vm->maintainable->id)}}"
-               class="list-group-item">{{$vm->maintainable->name}}</a>
+            @component("info.maintainable.item",["maintainable"=>$vm->maintainable])}}")
+            @endcomponent
         @endforeach
     @endif
 </div>
