@@ -22,8 +22,8 @@ return [
     "logout" => "Logout",
 
     "info" => "Information",
-    "components" => "Components",
-    "dependency" => "Dependency",
+    "Host_component" => "Components",
+    "Application_component" => "Dependency",
 
     "infect" => "Infect",
     "infectedsystems" => "Infected Systems",

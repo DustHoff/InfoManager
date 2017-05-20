@@ -22,8 +22,8 @@ return [
     "logout" => "Logout",
 
     "info" => "Information",
-    "components" => "Komponenten",
-    "dependency" => "Abhängigkeiten",
+    "Host_component" => "Komponenten",
+    "Application_component" => "Abhängigkeiten",
 
     "infect" => "inkl Abhängigkeiten",
     "infectedsystems" => "Betroffende Systeme",
