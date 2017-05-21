@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Maintenance;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 
 class CommentRequest extends FormRequest
 {
@@ -23,9 +25,13 @@ class CommentRequest extends FormRequest
      */
     public function rules()
     {
+        /**
+         * @var Maintenance
+         */
+        $maintenance = Route::current()->parameter("maintenance");
         return [
             "body" => "required",
-            "maintenance_end" => "sometimes|nullable|date"
+            "maintenance_end" => "sometimes|nullable|date|after:" . $maintenance->maintenance_end
         ];
     }
 }
