@@ -16,6 +16,7 @@ class Maintainable extends Model implements MaintainableInterface
 {
     protected $table = "maintainables";
     protected $fillable = ["name", "desc"];
+    protected $with = ["emails"];
 
     public function scopeSearch(Builder $query, $search)
     {

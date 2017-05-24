@@ -51,9 +51,7 @@
                                           rows="10"></textarea>
                         </div>
                         <div class="row">
-                            <div id="cloud">
-
-                            </div>
+                            <input id="targets" data-role="tagsinput" disabled>
                         </div>
                         @include("layout.error")
                     </div>
@@ -116,9 +114,13 @@
             '"infected" :' + $("#infect").is(":checked") + "}")
             .done(function (data) {
                 $("#infected").empty();
+                $("#targets").empty();
                 $.each(data, function (index, element) {
                     $.get('{{route("apiMaintainableHTML")}}/' + element.id).done(function (html) {
                         $("#infected").append(html);
+                        $.each(element.emails, function (mailindex, mailelement) {
+                            $("#targets").tagsinput("add", mailelement.email);
+                        })
                     })
                 })
             })
