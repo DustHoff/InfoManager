@@ -50,28 +50,86 @@
                                 <textarea class="form-control" id="reason" name="reason"
                                           rows="10"></textarea>
                         </div>
+                        <div class="row">
+                            <div id="cloud">
+
+                            </div>
+                        </div>
                         @include("layout.error")
                     </div>
                 </div>
-                {{$slot or ''}}
+                @if(isset($maintainable))
+                    @foreach($maintainable->maintenances->sortByDesc("maintenance_start") as $maintenance)
+                        @component("info.Maintenance.item",compact("maintenance"))
+                        @endcomponent
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="col-lg-3">
-            {{$infected or ''}}
+            @if(isset($maintainable))
+                <input type="hidden" id="maintainables" name="maintainable[]"
+                       value="{{$maintainable->id}}">
+                <input type="hidden" name="rootcause"
+                       value="{{$maintainable->id}}">
+            @else
+                <select size="5" class="form-control list-group" id="maintainables" name="maintainable[]" multiple>
+                    @foreach(\App\Maintainable::all() as $maintainable)
+                        @can("schedule",$maintainable)
+                            <option class="list-group-item" value="{{$maintainable->id}}">
+                                {{$maintainable->name}}
+                            </option>
+                        @endcan
+                    @endforeach
+                    <?php unset($maintainable) ?>
+                </select>
+            @endif
+            <div class="list-group">
+                <div class="list-group-item">@lang("menu.infectedsystems")</div>
+                <div id="infected">
+                </div>
+            </div>
         </div>
     </div>
 </form>
-@if($id != 0)
+@if(isset($maintainable))
     <script>
         $("#type").change(function () {
             var type = this.value;
-            $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$id}}').done(function (data) {
+            $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$maintainable->id or ''}}').done(function (data) {
                 $("#reason").val(data);
             });
         });
         var type = $("#type").val();
-        $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$id}}').done(function (data) {
+        $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$maintainable->id or ''}}').done(function (data) {
             $("#reason").val(data);
         });
     </script>
 @endif
+<script>
+    $.ajaxSetup({
+        contentType: "application/json; charset=utf-8"
+    });
+    function updateInfection() {
+        $.post('{{route("apiMaintainables")}}',
+            '{"maintainables" : [' + $("#maintainables").val() + "]," +
+            '"infected" :' + $("#infect").is(":checked") + "}")
+            .done(function (data) {
+                $("#infected").empty();
+                $.each(data, function (index, element) {
+                    $.get('{{route("apiMaintainableHTML")}}/' + element.id).done(function (html) {
+                        $("#infected").append(html);
+                    })
+                })
+            })
+            .fail(function () {
+                alert("error");
+            })
+    }
+    $("#infect").change(function () {
+        updateInfection();
+    })
+    $("#maintainables").change(function () {
+        updateInfection();
+    })
+</script>

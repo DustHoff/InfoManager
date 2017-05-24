@@ -23,7 +23,7 @@ class Application extends Model implements MaintainableInterface
         //return $this->belongsToMany("Application","application_dependencies","dependency_id","application_id");
         $result = array();
         foreach ($this->belongsToMany("Application","application_dependencies","dependency_id","application_id")->get() as $application){
-            array_push($result, $application->maintainable->id);
+            array_push($result, $application->maintainable);
             $result = array_merge($result,$application->infect());
         }
         return array_unique($result);

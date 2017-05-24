@@ -41,11 +41,11 @@ class Host extends Model implements MaintainableInterface
     {
         $results=array();
         foreach ($this->applications as $application){
-            array_push($results, $application->maintainable->id);
+            array_push($results, $application->maintainable);
             $results = array_merge($results,$application->infect());
         }
         foreach ($this->vms as $vm){
-            array_push($results, $vm->maintainable->id);
+            array_push($results, $vm->maintainable);
             $results =array_merge($results,$vm->infect());
         }
         return array_unique($results);

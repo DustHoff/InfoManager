@@ -20,30 +20,14 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="info">
             @component("info.Maintainable.info",[
-            "url"=>route("updateApplication",["application" => $maintainable->maintainable]),
+            "url"=>route("update".$maintainable->maintainable_type,[strtolower($maintainable->maintainable_type) => $maintainable->maintainable]),
             "type"=>$maintainable->maintainable_type,
             "maintainable"=>$maintainable])
             @endcomponent
         </div>
         @can("schedule",$maintainable)
             <div role="tabpanel" class="tab-pane" id="schedule">
-                @component("info.Maintenance.schedule",["id"=>$maintainable->id])
-                    @slot("infected")
-                        <div class="list-group">
-                            <div class="list-group-item">@lang("menu.infectedsystems")</div>
-                            @foreach($maintainable->infect() as $infectable)
-                                @component("info.Maintainable.item",["maintainable"=>\App\Maintainable::find($infectable)])
-                                @endcomponent
-                            @endforeach
-                        </div>
-                        <input type="hidden" id="maintainable_id" name="maintainable[]"
-                               value="{{$maintainable->id}}">
-                        <input type="hidden" id="maintainable_id" name="rootcause"
-                               value="{{$maintainable->id}}">
-                    @endslot
-                    @foreach($maintainable->maintenances as $maintenance)
-                        @include("info.Maintenance.item")
-                    @endforeach
+                @component("info.Maintenance.schedule",compact("maintainable"))
                 @endcomponent
             </div>
         @endcan

@@ -26,9 +26,4 @@ class EmailController extends Controller
 
         return response($email)->json($email);
     }
-
-    public function destroy(Email $email)
-    {
-        //
-    }
 }
