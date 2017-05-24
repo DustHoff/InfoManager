@@ -132,4 +132,5 @@
     $("#maintainables").change(function () {
         updateInfection();
     })
+    updateInfection();
 </script>
