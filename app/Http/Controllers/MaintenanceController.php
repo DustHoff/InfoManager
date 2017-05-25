@@ -50,7 +50,8 @@ class MaintenanceController extends Controller
             $maintainable = Maintainable::find($maintainableId);
             $maintenance->infected()->syncWithoutDetaching([$maintainable->id]);
             if (request('infect') == 'on') {
-                $maintenance->infected()->syncWithoutDetaching($maintainable->infect());
+                foreach ($maintainable->infect() as $infect)
+                    $maintenance->infected()->syncWithoutDetaching($infect->id);
                 $maintenance->save();
             }
         }
@@ -78,6 +79,7 @@ class MaintenanceController extends Controller
             $maintenance->save();
             $this->dispatch(new SendNotification($maintenance));
         }
+        if ($maintenance->state == Maintenance::STATE[2] && isset($maintenance->monitoring_id)) Monitor::deleteSchedule($maintenance);
 
         //parent::transit($maintenance);
         return back();
@@ -99,6 +101,8 @@ class MaintenanceController extends Controller
         if ($request->get("maintenance_end") != null) {
             $maintenance->maintenance_end = $request->get("maintenance_end");
             $maintenance->save();
+            Monitor::deleteSchedule($maintenance);
+            Monitor::schedule($maintenance);
         }
         $this->dispatch(new SendNotification($maintenance));
         return back();

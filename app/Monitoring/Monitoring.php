@@ -18,4 +18,6 @@ interface Monitoring
     public function getDataByID($identifier);
 
     public function schedule(Maintenance $maintenance);
+
+    public function deleteSchedule(Maintenance $maintenance);
 }

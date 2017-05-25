@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Collection | MonitoringHost getList()
  * @method static MonitoringHost getDataByID($identifier)
  * @method static schedule(Maintenance $maintenance)
+ * @method static deleteSchedule(Maintenance $maintenance)
  */
 class Monitor extends Facade
 {

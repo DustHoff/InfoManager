@@ -78,7 +78,7 @@ class Zabbix implements Monitoring
     {
         $ids = array_filter(array_column($maintenance->infected->toArray(), "monitoring_id"));
         if (empty($ids)) return;
-        $this->zabbixMethod("maintenance.create", [
+        $response = $this->zabbixMethod("maintenance.create", [
             "name" => $maintenance->type . " " . $maintenance->id,
             "active_since" => $maintenance->maintenance_start->timestamp,
             "active_till" => $maintenance->maintenance_end->timestamp,
@@ -91,6 +91,8 @@ class Zabbix implements Monitoring
                 ]
             ]
         ]);
+        $maintenance->monitoring_id = $response["maintenanceids"][0];
+        $maintenance->save();
     }
 
     public function getDataByID($identifier)
@@ -98,5 +100,10 @@ class Zabbix implements Monitoring
         $data = $this->zabbixMethod("host.get", ["filter" => ["hostid" => $identifier], "output" => env("monitoring_name_field")]);
         Log::debug($data);
         return $data;
+    }
+
+    public function deleteSchedule(Maintenance $maintenance)
+    {
+        $this->zabbixMethod("maintenance.delete", [$maintenance->monitoring_id]);
     }
 }
