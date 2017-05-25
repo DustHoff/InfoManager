@@ -65,13 +65,13 @@ class Zabbix implements Monitoring
     {
         if (Cache::has("monitoring_list")) return Cache::get("monitoring_list");
         $rawdata = $this->zabbixMethod("host.get", ["output" => [env("monitoring_identifier_field"), env("monitoring_name_field")]]);
-        $data = array();
+        $data = collect();
         foreach ($rawdata as $row) {
             $mh = new MonitoringItem($row);
-            array_push($data, $mh);
+            $data->push($mh);
         }
-        Cache::put("monitoring_list", collect($data), Carbon::now()->addDay(1));
-        return collect($data);
+        Cache::put("monitoring_list", $data, Carbon::now()->addDay(1));
+        return Cache::get("monitoring_list");
     }
 
     public function schedule(Maintenance $maintenance)
