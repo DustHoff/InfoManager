@@ -108,6 +108,16 @@
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8"
     });
+    $("#type").change(function () {
+        var type = this.value;
+        if (type == '{{\App\Maintenance::TYPE[0]}}') {
+            $("#maintenance_end").removeAttr('disabled');
+        } else {
+            $("#maintenance_end").attr("disabled", "disabled");
+            $("#maintenance_start").val('{{\Carbon\Carbon::now()}}');
+
+        }
+    })
     function updateInfection() {
         $.post('{{route("apiMaintainables")}}',
             '{"maintainables" : [' + $("#maintainables").val() + "]," +
