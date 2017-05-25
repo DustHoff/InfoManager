@@ -51,7 +51,7 @@
                                           rows="10"></textarea>
                         </div>
                         <div class="row">
-                            <input id="targets" data-role="tagsinput" disabled>
+                            <div id="targets" class="bootstrap-tagsinput"></div>
                         </div>
                         @include("layout.error")
                     </div>
@@ -119,7 +119,8 @@
                     $.get('{{route("apiMaintainableHTML")}}/' + element.id).done(function (html) {
                         $("#infected").append(html);
                         $.each(element.emails, function (mailindex, mailelement) {
-                            $("#targets").tagsinput("add", mailelement.email);
+                            if ($("#" + mailelement.id).length == 0)
+                                $('#targets').append("<span id='" + mailelement.id + "' class='tag label label-info'>" + mailelement.email + "</span>");
                         })
                     })
                 })
