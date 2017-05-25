@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OptionsRequest;
-use App\Maintainable;
 use App\Option;
-use Illuminate\Support\Facades\Blade;
 
 class OptionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth");
+        $this->middleware("auth")->except("get");
     }
 
     public function update(OptionsRequest $request)
@@ -25,12 +23,8 @@ class OptionController extends Controller
         return back();
     }
 
-    public function get($key, Maintainable $maintainable = null)
+    public function get($key)
     {
-        $template = Blade::compileString(Option::query()->where("name", "=", $key)->firstOrFail()->value);
-
-        return view([
-            "template" => $template,
-        ], compact("maintainable"));
+        return Option::query()->where("name", "=", $key)->firstOrFail()->value;
     }
 }

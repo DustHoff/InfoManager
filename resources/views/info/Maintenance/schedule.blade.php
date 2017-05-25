@@ -90,26 +90,14 @@
         </div>
     </div>
 </form>
-@if(isset($maintainable))
-    <script>
-        $("#type").change(function () {
-            var type = this.value;
-            $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$maintainable->id or ''}}').done(function (data) {
-                $("#reason").val(data);
-            });
-        });
-        var type = $("#type").val();
-        $.get('{{route("getOption",["key"=>"","maintainable"=>""])}}/message_' + type + '/{{$maintainable->id or ''}}').done(function (data) {
-            $("#reason").val(data);
-        });
-    </script>
-@endif
 <script>
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8"
     });
+
     $("#type").change(function () {
         var type = this.value;
+
         if (type == '{{\App\Maintenance::TYPE[0]}}') {
             $("#maintenance_end").removeAttr('disabled');
         } else {
@@ -117,7 +105,15 @@
             $("#maintenance_start").val('{{\Carbon\Carbon::now()}}');
 
         }
-    })
+
+        $.get('{{route("getOption",["key"=>""])}}/message_' + type).done(function (data) {
+            $("#reason").val(data);
+        });
+    });
+    $.get('{{route("getOption",["key"=>""])}}/message_' + $("#type").val()).done(function (data) {
+        $("#reason").val(data);
+    });
+
     function updateInfection() {
         $.post('{{route("apiMaintainables")}}',
             '{"maintainables" : [' + $("#maintainables").val() + "]," +

@@ -6,16 +6,9 @@
         @if($maintenance->maintenance_end!=null)
             @lang("maintenance.till",["end"=>$maintenance->maintenance_end])
         @endif
-
-        @if($maintenance->rootcause != null)
-            @if($maintenance->rootcause != $maintainable->id)
-                <br>
-                @lang("maintenance.causedBy",["system" => $maintenance->causedBy->name])
-            @endif
-        @endif
     @endslot
 
-    {{ $header }}
+    {{ Illuminate\Mail\Markdown::parse($header) }}
 
     @foreach($maintenance->comments as $comment)
         @component("email.component.comment")
@@ -23,7 +16,7 @@
         @endcomponent
     @endforeach
 
-    {{ $footer }}
+    {{ Illuminate\Mail\Markdown::parse($footer) }}
 
     @slot("footer")
         @component("email.component.footer")

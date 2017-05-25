@@ -49,4 +49,3 @@ Route::get("/maintenance/{maintenance}/message", "MaintenanceController@showMess
 
 Route::post("/search","SearchController@search")->name("search");
 Route::post("/option", "OptionController@update")->name("updateOptions");
-Route::get("/option/get/{key}/{maintainable}", "OptionController@get")->name("getOption");

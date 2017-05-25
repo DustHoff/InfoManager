@@ -22,12 +22,13 @@ class Notification extends Mailable
      * @param Maintenance $maintenance
      * @param Maintainable $maintainable
      */
-    public function __construct(Maintenance $maintenance,Maintainable $maintainable)
+    public function __construct(Maintenance $maintenance, Maintainable $maintainable)
     {
         $this->maintenance = $maintenance;
         $this->maintainable = $maintainable;
         $this->subject("[" . __("maintenance." . $maintenance->type) . "] " . __("maintenance." . $maintenance->state) . " " . __("menu.for") . " " . $maintainable->name);
     }
+
 
     /**
      * Build the message.
@@ -36,8 +37,14 @@ class Notification extends Mailable
      */
     public function build()
     {
-        $header = Option::query()->where("name", "=", "email_header")->first(["value"]);
-        $footer = Option::query()->where("name", "=", "email_footer")->first(["value"]);
+        $header = view([
+            "template" => Option::query()->where("name", "=", "email_header")->first()->value],
+            ["maintenance" => $this->maintenance,
+                "maintainable" => $this->maintainable]);
+        $footer = view([
+            "template" => Option::query()->where("name", "=", "email_footer")->first()->value,
+            ["maintenance" => $this->maintenance,
+                "maintainable" => $this->maintainable]]);
         return $this->markdown("email.notification", [
             "maintenance" => $this->maintenance,
             "maintainable" => $this->maintainable,
