@@ -12,7 +12,7 @@ return [
      */
     "announced" => "Ankündigung",
     "active" => "Aktiv",
-    "inactive" => "Inaktiv",
+    "inactive" => "Abgeschlossen",
 
     /**
      * Maintenance messages
