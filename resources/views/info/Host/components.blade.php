@@ -6,7 +6,7 @@
         </div>
     @endcan
     @foreach($maintainable->maintainable->applications as $application)
-        @component("info.maintainable.item",["maintainable"=>$application->maintainable])}}")
+        @component("info.Maintainable.item",["maintainable"=>$application->maintainable])}}")
         @endcomponent
     @endforeach
     @if($maintainable->maintainable->host_id == null)
