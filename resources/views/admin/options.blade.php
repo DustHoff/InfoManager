@@ -11,7 +11,7 @@
     @endforeach
     <div class="col-sm-offset-4 col-sm-8">
         {{ csrf_field() }}
-        <input type="submit" value="@lang("manu.save")" class="btn btn-success">
+        <input type="submit" value="@lang("menu.save")" class="btn btn-success">
     </div>
 </form>
 {{$options->links()}}
