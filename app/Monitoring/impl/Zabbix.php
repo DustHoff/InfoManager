@@ -46,8 +46,12 @@ class Zabbix implements Monitoring
                 "auth" => $this->auth
             ]
         ];
-
-        $response = $this->client->request("Post", env("zabbix_url") . "/api_jsonrpc.php", $data);
+        try {
+            $response = $this->client->request("Post", env("zabbix_url") . "/api_jsonrpc.php", $data);
+        } catch (\Exception $e) {
+            Log::error("Error while reaching zabbix. " . $e->getMessage());
+            return array();
+        }
         Log::debug($data);
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody(), true);
