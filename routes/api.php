@@ -13,3 +13,4 @@
 Route::post("/maintainable/", "MaintainableApiController@showJSON")->name("apiMaintainables");
 Route::get("/maintainable/html/{maintainable?}", "MaintainableApiController@showHTML")->name("apiMaintainableHTML");
 Route::get("/option/get/{key}", "OptionController@get")->name("getOption");
+Route::get("/option/clearCache", "OptionController@clearCache")->name("clearCache");

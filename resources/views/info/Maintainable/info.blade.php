@@ -139,15 +139,21 @@
     <div class="form-group">
         <div class="control-label col-sm-2">@lang("maintainable.monitoring")</div>
         <div class="col-sm-10">
-            <select name="monitoring" class="form-control">
-                <option value="">None</option>
-                @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
-                    <option value="{{$monitoringitem->identifier()}}"
-                            @if(isset($maintainable))
-                            @if($maintainable->monitoring_id == $monitoringitem->identifier()) selected @endif
-                            @endif>{{$monitoringitem->name()}}</option>
-                @endforeach
-            </select>
+            <div class="input-group">
+                <select name="monitoring" class="form-control">
+                    <option value="">None</option>
+                    @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
+                        <option value="{{$monitoringitem->identifier()}}"
+                                @if(isset($maintainable))
+                                @if($maintainable->monitoring_id == $monitoringitem->identifier()) selected @endif
+                                @endif>{{$monitoringitem->name()}}</option>
+                    @endforeach
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn glyphicon glyphicon-refresh" type="button"
+                            onclick="$.get('{{route("clearCache")}}');location.reload()"></button>
+                </span>
+            </div>
         </div>
     </div>
     <div class="form-group">

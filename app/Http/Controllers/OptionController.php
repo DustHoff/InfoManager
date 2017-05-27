@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OptionsRequest;
 use App\Option;
+use Illuminate\Support\Facades\Cache;
 
 class OptionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth")->except("get");
+        $this->middleware("auth")->only("update");
     }
 
     public function update(OptionsRequest $request)
@@ -26,5 +27,10 @@ class OptionController extends Controller
     public function get($key)
     {
         return Option::query()->where("name", "=", $key)->firstOrFail()->value;
+    }
+
+    public function clearCache()
+    {
+        Cache::flush();
     }
 }
