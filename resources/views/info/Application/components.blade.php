@@ -1,16 +1,20 @@
 <div class="list-group">
     @can("edit",$maintainable)
         <div class="list-group-item">
-            <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post">
+            <form action="{{route("addDependency",$maintainable->maintainable->id)}}" method="post" class="form-inline">
                 {{csrf_field()}}
-                <select name="dependency">
-                    <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
-                    @foreach(\App\Application::all() as $application)
-                        @if($application->id == $maintainable->maintainable->id) @continue @endif
-                        <option value="{{$application->id}}">{{$application->maintainable->name}}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-success">@lang("menu.add",["thing"=>""])</button>
+                <div class="form-group">
+                    <select name="dependency" class="form-control">
+                        <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
+                        @foreach(\App\Application::all() as $application)
+                            @if($application->id == $maintainable->maintainable->id) @continue @endif
+                            <option value="{{$application->id}}">{{$application->maintainable->name}}
+                                ( @lang("maintainable.Host") {{$application->host->maintainable->name}} )
+                            </option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-success">@lang("menu.add",["thing"=>""])</button>
+                </div>
             </form>
         </div>
     @endcan
