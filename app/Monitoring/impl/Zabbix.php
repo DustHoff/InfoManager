@@ -49,7 +49,6 @@ class Zabbix implements Monitoring
 
         $response = $this->client->request("Post", env("zabbix_url") . "/api_jsonrpc.php", $data);
         Log::debug($data);
-        //Log::debug($response->getBody()->getContents());
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody(), true);
             Log::debug($result);
@@ -64,7 +63,7 @@ class Zabbix implements Monitoring
     public function getList()
     {
         if (Cache::has("monitoring_list")) return Cache::get("monitoring_list");
-        $rawdata = $this->zabbixMethod("host.get", ["output" => [env("monitoring_identifier_field"), env("monitoring_name_field")]]);
+        $rawdata = $this->zabbixMethod("host.get", ["output" => [env("monitoring_identifier_field"), env("monitoring_name_field")], "sortfield" => env("monitoring_name_field")]);
         $data = collect();
         foreach ($rawdata as $row) {
             $mh = new MonitoringItem($row);
