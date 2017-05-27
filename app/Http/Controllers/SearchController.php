@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
 use App\Maintainable;
 
 class SearchController extends Controller
@@ -14,7 +13,7 @@ class SearchController extends Controller
 
     public function search(){
         //$this->validate(request(),["search","required"]);
-        $maintainables = Maintainable::search(request("search"));
+        $maintainables = Maintainable::search(request("search"))->orderBy("maintainable_type")->paginate();
 
         return view("info.search.list", compact("maintainables"));
     }

@@ -4,7 +4,7 @@
 
     {{$maintainables->links()}}
     <div class="list-group">
-        @foreach($maintainables->sortBy("maintainable_type") as $maintainable)
+        @foreach($maintainables as $maintainable)
             @can("view",$maintainable)
                 @component("info.Maintainable.item",compact("maintainable"))
                 @endcomponent

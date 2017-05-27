@@ -20,7 +20,7 @@ class Maintainable extends Model implements MaintainableInterface
 
     public function scopeSearch(Builder $query, $search)
     {
-        return $query->where("name", "like", "%" . $search . "%")->paginate();
+        return $query->where("name", "like", "%" . $search . "%");
     }
 
     /**
