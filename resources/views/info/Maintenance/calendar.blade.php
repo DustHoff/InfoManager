@@ -12,7 +12,8 @@
                 events: '{{route("calendarFeed")}}',
                 startParam: 'maintenance_start',
                 endParam: 'maintenance_end',
-                selectable: true
+                selectable: true,
+                locale: '{{env("local")}}'
             });
         });
     </script>
