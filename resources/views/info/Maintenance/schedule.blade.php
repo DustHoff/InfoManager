@@ -6,7 +6,7 @@
                     <div class="list-group-item-heading">@lang("menu.schedule")</div>
                     <div class="list-group-item-text">
                         {{ csrf_field() }}
-                        <div class="row">
+                        <div class="form-group">
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" id="maintenance_start"
                                        name="maintenance_start" placeholder="Start">
@@ -46,11 +46,11 @@
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="form-group">
                                 <textarea class="form-control" id="reason" name="reason"
                                           rows="10"></textarea>
                         </div>
-                        <div class="row">
+                        <div class="form-group">
                             <div id="targets" class="bootstrap-tagsinput"></div>
                         </div>
                         @include("layout.error")
