@@ -8,9 +8,9 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <label class="control-label">Admin<input name="admin" type="checkbox" value="1" {{$admin or ''}}
-                                                     class="checkbox-inline"></label>
+                class="checkbox-inline"></label>
             <label class="control-label">Editor<input name="editor" type="checkbox" value="1" {{$editor or ''}}
-                                                      class="checkbox-inline"></label>
+                class="checkbox-inline"></label>
             <label class="control-label">@lang("menu.schedule")<input name="schedule" type="checkbox" value="1"
                                                                       {{$schedule or ''}}
                                                                       class="checkbox-inline"></label>
@@ -30,7 +30,10 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             {{csrf_field()}}
-            <input type="submit" class="btn btn-success" value="@lang("menu.save")">
+            <input type="submit" class="btn btn-success" value="@lang("menu.save")" name="action">
+            @if(isset($name))
+                <input type="submit" class="btn btn-danger" value="@lang("menu.delete")" name="action">
+            @endif
         </div>
     </div>
 </form>

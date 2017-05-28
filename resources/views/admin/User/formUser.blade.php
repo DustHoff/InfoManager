@@ -1,14 +1,26 @@
 <div class="panel panel-danger">
-    <form method="post" action="{{route("storeUser")}}">
-        <div class="panel-body">
-            <label for="name">Name</label><input id="name" name="name" type="text">
-            <label for="username">Username</label><input id="username" type="text" name="username">
-            <label for="password">Password</label><input id="password" type="password" name="password">
-            <label for="password_confirmation">Conformation</label><input id="password_confirmation" type="password"
-                                                                          name="password_confirmation">
-            {{csrf_field()}}
-            <input type="submit" class="btn btn-success" value="@lang("menu.save")" name="action">
-            @include("layout.error")
-        </div>
-    </form>
+    <div class="panel-body">
+        <form method="post" action="{{route("storeUser")}}">
+            <div class="form-group col-lg-3">
+                <div for="name" class="control-label">@lang("menu.name")</div>
+                <input id="name" name="name" type="text" class="form-control">
+            </div>
+            <div class="form-group col-lg-3">
+                <div for="username" class="control-label">@lang("menu.username")</div>
+                <input id="username" type="text" name="username" class="form-control">
+            </div>
+            <div class="form-group col-lg-2">
+                <div for="password" class="control-label">@lang("menu.password")</div>
+                <input id="password" type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group col-lg-2">
+                <div for="password_confirmation" class="control-label">@lang("menu.confirmation")</div>
+                <input id="password_confirmation" type="password" name="password_confirmation" class="form-control">
+            </div>
+            <div class="form-group col-lg-2">
+                {{csrf_field()}}
+                <input type="submit" class="btn btn-success" value="@lang("menu.save")" name="action">
+            </div>
+        </form>
+    </div>
 </div>

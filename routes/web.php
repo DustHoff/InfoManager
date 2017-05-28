@@ -18,13 +18,11 @@ Route::match(["get","post"],'/login', 'AuthController@login')->name("login");
 Route::get("/logout","AuthController@logout")->name("logout");
 // Admin stuff
 Route::get("/admin",function (){
-    return view("admin.master",["panel"=>"user"]);
+    return view("admin.master");
 })->name("admin")->middleware('auth');
-Route::get("/admin/group","GroupController@index")->name("allGroups");
 Route::post("/admin/group","GroupController@store")->name("storeGroup");
 Route::get("/admin/group/{group}","GroupController@detail")->name("group");
 Route::post("/admin/group/{group}","GroupController@update")->name("updateGroup");
-Route::get("/admin/user","UserController@index")->name("allUsers");
 Route::get("/admin/user/{user}","UserController@show")->name("profile");
 Route::post("/admin/user/{user}","UserController@update")->name("updateUser");
 Route::post("/user","UserController@store")->name("storeUser");

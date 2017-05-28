@@ -28,8 +28,10 @@ return [
     "infect" => "Infect",
     "infectedsystems" => "Infected Systems",
 
+    "name" => "Name",
     "username" => "Username",
     "password" => "Password",
+    "confirmation" => "Password again",
 
     "option" => "Options",
     "status" => "Status",

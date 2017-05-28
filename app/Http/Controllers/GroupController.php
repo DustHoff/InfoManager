@@ -12,10 +12,6 @@ class GroupController extends Controller
         $this->middleware("auth");
     }
 
-    public function index(){
-        return view("admin.master",["panel"=>"group"]);
-    }
-
     public function detail(Group $group){
         return view("admin.Group.single",compact("group"));
     }
@@ -45,6 +41,10 @@ class GroupController extends Controller
     public function update(GroupRequest $request, Group $group)
     {
         $group = $this->save($group, $request);
+        if ($request->input("action") == __("menu.delete")) {
+            $group->delete();
+            return redirect()->route("admin");
+        }
         return redirect()->route("group", compact("group"));
     }
 }

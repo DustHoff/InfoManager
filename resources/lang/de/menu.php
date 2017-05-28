@@ -30,6 +30,7 @@ return [
 
     "username" => "Benutzername",
     "password" => "Passwort",
+    "confirmation" => "Passwort wiederholen",
 
     "option" => "Einstellungen",
     "status" => "Status",

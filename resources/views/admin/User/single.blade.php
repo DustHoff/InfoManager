@@ -12,23 +12,23 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <div class="col-sm-4 control-label">Name</div>
+                            <div class="col-sm-4 control-label">@lang("menu.name")</div>
                             <div class="col-sm-8">
                                 <input class="form-control" type="text" name="name" value="{{$user->name}}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-4 control-label">Username</div>
+                            <div class="col-sm-4 control-label">@lang("menu.username")</div>
                             <div class="col-sm-8">
                                 <input class="form-control" type="text" name="username" value="{{$user->username}}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-4 control-label">Password</div>
+                            <div class="col-sm-4 control-label">@lang("menu.password")</div>
                             <div class="col-sm-8"><input class="form-control" type="password" name="password"></div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-4 control-label">retype Password</div>
+                            <div class="col-sm-4 control-label">@lang("menu.confirmation")</div>
                             <div class="col-sm-8"><input class="form-control" type="password"
                                                          name="password_confirmation"></div>
                         </div>
