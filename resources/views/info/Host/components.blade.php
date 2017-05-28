@@ -17,7 +17,7 @@
             </div>
         @endcan
         @foreach($maintainable->maintainable->vms as $vm)
-            @component("info.maintainable.item",["maintainable"=>$vm->maintainable])}}")
+                @component("info.Maintainable.item",["maintainable"=>$vm->maintainable])}}")
             @endcomponent
         @endforeach
     @endif
