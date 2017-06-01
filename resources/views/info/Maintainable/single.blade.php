@@ -35,3 +35,8 @@
              id="components">@include("info.".$maintainable->maintainable_type.".components")</div>
     </div>
 @endsection
+@section('footer')
+    <script>
+        $('a[href="' + window.location.hash + '"]').tab('show');
+    </script>
+@endsection
