@@ -42,8 +42,10 @@
 
                             </div>
                             <div class="col-lg-2">
-                                <input type="submit" class="btn btn-success" value="@lang("menu.schedule")">
-
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#finalSchedule">
+                                    @lang("menu.schedule")
+                                </button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -89,6 +91,23 @@
             </div>
         </div>
     </div>
+    <div id="finalSchedule" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@lang("menu.schedule")</h4>
+                </div>
+                <div class="modal-body">
+                    <p>@lang("menu.are_you_sure")</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="@lang("menu.schedule")">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </form>
 <script>
     $.ajaxSetup({

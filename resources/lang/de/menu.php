@@ -32,6 +32,8 @@ return [
     "password" => "Passwort",
     "confirmation" => "Passwort wiederholen",
 
+    "are_you_sure" => "Sind sie sich Sicher?",
+
     "option" => "Einstellungen",
     "status" => "Status",
     "start" => "Beginne",
