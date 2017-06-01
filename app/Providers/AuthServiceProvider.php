@@ -6,9 +6,11 @@ use App\Application;
 use App\Group;
 use App\Host;
 use App\Maintainable;
+use App\Maintenance;
 use App\Option;
 use App\Policies\AdminPolicy;
 use App\Policies\MaintainablePolicy;
+use App\Policies\MaintenancePolicy;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Host::class => AdminPolicy::class,
         Application::class => AdminPolicy::class,
         Option::class => AdminPolicy::class,
+        Maintenance::class => MaintenancePolicy::class
     ];
 
     /**

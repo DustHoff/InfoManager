@@ -16,31 +16,34 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                @if($maintenance->state!="inactive")
-                    <div class="panel panel-default">
-                        <div class="panel-heading">@lang("menu.status")</div>
-                        <div class="panel-body">
-                            <div class="col-sm-12 col-lg-3">
-                                <input type="submit" value="@lang("menu.comment")" class="btn btn-primary">
-                            </div>
-                            <div class="col-sm-12 col-lg-9">
-                                @if($maintenance->type==\App\Maintenance::TYPE[0])
-                                    <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
-                                           placeholder="End">
-                                    <script type="text/javascript">
-                                        $("#maintenance_end").datetimepicker({
-                                            format: "YYYY-MM-DD HH:mm:ss",
-                                            useCurrent: false
-                                        });
-                                    </script>
-                                @endif
-                            </div>
-                            <div class="col-lg-12">
-                                <textarea name="body" class="form-control"></textarea>
+                @can("change",$maintenance)
+                    @if($maintenance->state!="inactive")
+                        <div class="panel panel-default">
+                            <div class="panel-heading">@lang("menu.status")</div>
+                            <div class="panel-body">
+                                <div class="col-sm-12 col-lg-3">
+                                    <input type="submit" value="@lang("menu.comment")" class="btn btn-primary">
+                                </div>
+                                <div class="col-sm-12 col-lg-9">
+                                    @if($maintenance->type==\App\Maintenance::TYPE[0])
+                                        <input type="text" class="form-control" id="maintenance_end"
+                                               name="maintenance_end"
+                                               placeholder="End">
+                                        <script type="text/javascript">
+                                            $("#maintenance_end").datetimepicker({
+                                                format: "YYYY-MM-DD HH:mm:ss",
+                                                useCurrent: false
+                                            });
+                                        </script>
+                                    @endif
+                                </div>
+                                <div class="col-lg-12">
+                                    <textarea name="body" class="form-control"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                @endcan
                 @php
                     $comments = $maintenance->comments()->paginate(10);
                 @endphp
@@ -60,15 +63,17 @@
             </div>
             <div class="col-lg-4">
                 <div class="list-group">
-                    @if($maintenance->state!="inactive")
-                        <a href="{{route("maintenanceTransit",compact("maintenance"))}}"
-                           class="list-group-item list-group-item-success">
-                            @if($maintenance->state=="active")
-                                @lang("menu.close") @lang("maintenance.".$maintenance->type)
-                            @else
-                                @lang("menu.start") @lang("maintenance.".$maintenance->type)
-                            @endif</a>
-                    @endif
+                    @can("change",$maintenance)
+                        @if($maintenance->state!="inactive")
+                            <a href="{{route("maintenanceTransit",compact("maintenance"))}}"
+                               class="list-group-item list-group-item-success">
+                                @if($maintenance->state=="active")
+                                    @lang("menu.close") @lang("maintenance.".$maintenance->type)
+                                @else
+                                    @lang("menu.start") @lang("maintenance.".$maintenance->type)
+                                @endif</a>
+                        @endif
+                    @endcan
                     @foreach($maintenance->infected as $maintainable)
                         @component("info.Maintainable.item",compact("maintainable"))
                         @endcomponent
