@@ -117,11 +117,11 @@
         <div class="col-sm-10">
             <select class="form-control" name="host_id">
                 <option value="">Physical Machine</option>
-                @foreach(\App\Host::all() as $host)
-                    <option value="{{$host->id}}"
+                @foreach(\App\Maintainable::query()->where("maintainable_type","=","Host")->orderBy("name")->get() as $host)
+                    <option value="{{$host->maintainable->id}}"
                             @if(isset($maintainable))
-                            @if("$host->id" == $maintainable->maintainable->host_id) selected @endif
-                            @endif>{{$host->maintainable->name}}</option>
+                            @if($host->maintainable->id == $maintainable->maintainable->host_id) selected @endif
+                            @endif>{{$host->name}}</option>
                 @endforeach
             </select>
             @if($errors->get("host_id"))
