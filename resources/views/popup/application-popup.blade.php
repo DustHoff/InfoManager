@@ -7,16 +7,7 @@
                 <h4 class="modal-title">@lang("menu.create",["thing"=>__("maintainable.Application")])</h4>
             </div>
             <div class="modal-body">
-                @component("info.Maintainable.info")
-                    @slot("url") {{route("storeApplication")}} @endslot
-                    @slot("name")@endslot
-                    @slot("type") Application @endslot
-                    @slot("host"){{$maintainable->maintainable->id or ''}}@endslot
-                    @slot("monitoring")
-                        @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
-                            <option value="{{$monitoringitem->identifier()}}" )>{{$monitoringitem->name()}}</option>
-                        @endforeach
-                    @endslot
+                @component("info.Maintainable.info",["url"=>route("storeApplication"),"type"=>"Application","selectHost"=> (isset($maintainable))?$maintainable->maintainable->id:null])
                 @endcomponent
             </div>
         </div>

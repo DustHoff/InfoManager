@@ -19,11 +19,22 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="info">
-            @component("info.Maintainable.info",[
-            "url"=>route("update".$maintainable->maintainable_type,[strtolower($maintainable->maintainable_type) => $maintainable->maintainable]),
-            "type"=>$maintainable->maintainable_type,
-            "maintainable"=>$maintainable])
-            @endcomponent
+            @if(\Illuminate\Support\Facades\View::exists("info.".$maintainable->maintainable_type.".info"))
+                @component("info.".$maintainable->maintainable_type.".info",[
+                "url"=>route("update".$maintainable->maintainable_type,[strtolower($maintainable->maintainable_type) => $maintainable->maintainable]),
+                "type"=>$maintainable->maintainable_type,
+                "maintainable"=>$maintainable,
+                "selectHost"=>$maintainable->maintainable->host_id])
+                @endcomponent
+            @else
+                @component("info.Maintainable.info",[
+                "url"=>route("update".$maintainable->maintainable_type,[strtolower($maintainable->maintainable_type) => $maintainable->maintainable]),
+                "type"=>$maintainable->maintainable_type,
+                "maintainable"=>$maintainable,
+                "selectHost"=>$maintainable->maintainable->host_id])
+                @endcomponent
+            @endif
+
         </div>
         @can("schedule",$maintainable)
             <div role="tabpanel" class="tab-pane" id="schedule">
