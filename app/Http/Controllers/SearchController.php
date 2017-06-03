@@ -13,7 +13,7 @@ class SearchController extends Controller
 
     public function search(){
         //$this->validate(request(),["search","required"]);
-        $maintainables = Maintainable::search(request("search"))->orderBy("maintainable_type")->orderBy("name")->paginate();
+        $maintainables = Maintainable::search(request("search"))->orderBy("maintainable_type")->orderBy("name")->get();
 
         return view("info.search.list", compact("maintainables"));
     }

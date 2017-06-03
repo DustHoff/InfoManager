@@ -2,7 +2,6 @@
 
 @section("content")
 
-    {{$maintainables->links()}}
     <div class="list-group">
         @foreach($maintainables as $maintainable)
             @can("view",$maintainable)
@@ -11,5 +10,4 @@
             @endcan
         @endforeach
     </div>
-    {{$maintainables->links()}}
 @endsection
