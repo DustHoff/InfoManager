@@ -10,6 +10,7 @@ class MaintainableRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,5 +28,17 @@ class MaintainableRequest extends FormRequest
             'owner' => 'required_if:maintainable_type,Host',
             'monitoring' => 'sometimes',
         ];
+    }
+
+    protected function getRedirectUrl()
+    {
+        $url = parent::getRedirectUrl();
+        if ($url == route("allMaintainables")) return $url . "#add-" . strtolower($this->get("maintainable_type"));
+
+        $updateURL = route("maintainable", $this->route("maintainable"));
+        if (substr($url, 0, strlen($updateURL)) == route("maintainable", $this->route("maintainable"))) {
+            if ($this->route()->getName() == "store" . $this->get("maintainable_type")) return $url . "#add-" . strtolower($this->get("maintainable_type"));
+        }
+        return parent::getRedirectUrl();
     }
 }

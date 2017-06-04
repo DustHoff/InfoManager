@@ -29,4 +29,7 @@
     @can("administrate",\App\Host::class)
         @include("popup.host-popup")
     @endcan
+    <script>
+        $(window.location.hash).modal('show');
+    </script>
 @endsection

@@ -49,5 +49,9 @@
 @section('footer')
     <script>
         $('a[href="' + window.location.hash + '"]').tab('show');
+        if (window.location.hash.match("^#add")) {
+            $('a[href="#components"]').tab('show');
+            $(window.location.hash).modal('show');
+        }
     </script>
 @endsection
