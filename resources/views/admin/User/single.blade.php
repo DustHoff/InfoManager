@@ -14,33 +14,49 @@
                         <div class="form-group">
                             <div class="col-sm-4 control-label">@lang("menu.name")</div>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" name="name" value="{{$user->name}}">
+                                @component("html.error",["field"=>"name"])
+                                    <input class="form-control" type="text" id="name" name="name"
+                                           value="{{$user->name}}">
+                                @endcomponent
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 control-label">@lang("menu.username")</div>
                             <div class="col-sm-8">
-                                <input class="form-control" type="text" name="username" value="{{$user->username}}">
+                                @component("html.error",["field"=>"username"])
+                                    <input class="form-control" type="text" id="username" name="username"
+                                           value="{{$user->username}}">
+                                @endcomponent
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 control-label">@lang("menu.password")</div>
-                            <div class="col-sm-8"><input class="form-control" type="password" name="password"></div>
+                            <div class="col-sm-8">
+                                @component("html.error",["field"=>"password"])
+                                    <input class="form-control" type="password" id="password" name="password">
+                                @endcomponent
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 control-label">@lang("menu.confirmation")</div>
-                            <div class="col-sm-8"><input class="form-control" type="password"
-                                                         name="password_confirmation"></div>
+                            <div class="col-sm-8">
+                                @component("html.error",["field"=>"password_confirmation"])
+                                    <input class="form-control" type="password"
+                                           name="password_confirmation">
+                                @endcomponent
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <select name="group[]" class="form-control" style="height: auto" multiple>
-                            <option value="">None</option>
-                            @foreach(\App\Group::all() as $group)
-                                <option value="{{$group->id}}"
-                                        @if($user->groups->contains($group))selected @endif>{{$group->name}}</option>
-                            @endforeach
-                        </select>
+                        @component("html.error",["field"=>"group"])
+                            <select id="group" name="group[]" class="form-control" style="height: auto" multiple>
+                                <option value="">None</option>
+                                @foreach(\App\Group::all() as $group)
+                                    <option value="{{$group->id}}"
+                                            @if($user->groups->contains($group))selected @endif>{{$group->name}}</option>
+                                @endforeach
+                            </select>
+                        @endcomponent
                     </div>
                 </div>
                 <div class="row">

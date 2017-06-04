@@ -26,19 +26,23 @@
                                 </div>
                                 <div class="col-sm-12 col-lg-9">
                                     @if($maintenance->type==\App\Maintenance::TYPE[0])
-                                        <input type="text" class="form-control" id="maintenance_end"
-                                               name="maintenance_end"
-                                               placeholder="End">
-                                        <script type="text/javascript">
-                                            $("#maintenance_end").datetimepicker({
-                                                format: "YYYY-MM-DD HH:mm:ss",
-                                                useCurrent: false
-                                            });
-                                        </script>
+                                        @component("html.error",["field"=>"maintenance_end"])
+                                            <input type="text" class="form-control" id="maintenance_end"
+                                                   name="maintenance_end"
+                                                   placeholder="End">
+                                            <script type="text/javascript">
+                                                $("#maintenance_end").datetimepicker({
+                                                    format: "YYYY-MM-DD HH:mm:ss",
+                                                    useCurrent: false
+                                                });
+                                            </script>
+                                        @endcomponent
                                     @endif
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea name="body" class="form-control"></textarea>
+                                    @component("html.error",["field"=>"body"])
+                                        <textarea id="body" name="body" class="form-control"></textarea>
+                                    @endcomponent
                                 </div>
                             </div>
                         </div>

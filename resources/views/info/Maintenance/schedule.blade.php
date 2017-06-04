@@ -8,26 +8,30 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" id="maintenance_start"
-                                       name="maintenance_start" placeholder="Start">
-                                <script type="text/javascript">
-                                    $("#maintenance_start").datetimepicker({
-                                        format: "YYYY-MM-DD HH:mm:ss"
-                                    });
-                                </script>
+                                @component("html.error",["field"=>"maintenance_start"])
+                                    <input type="text" class="form-control" id="maintenance_start"
+                                           name="maintenance_start" placeholder="Start">
+                                    <script type="text/javascript">
+                                        $("#maintenance_start").datetimepicker({
+                                            format: "YYYY-MM-DD HH:mm:ss"
+                                        });
+                                    </script>
+                                @endcomponent
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
-                                       placeholder="End">
-                                <script type="text/javascript">
-                                    $("#maintenance_end").datetimepicker({
-                                        format: "YYYY-MM-DD HH:mm:ss",
-                                        useCurrent: false
-                                    });
-                                    $("#maintenance_start").on("dp.change", function (e) {
-                                        $('#maintenance_end').data("DateTimePicker").minDate(e.date);
-                                    });
-                                </script>
+                                @component("html.error",["field"=>"maintenance_end"])
+                                    <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
+                                           placeholder="End">
+                                    <script type="text/javascript">
+                                        $("#maintenance_end").datetimepicker({
+                                            format: "YYYY-MM-DD HH:mm:ss",
+                                            useCurrent: false
+                                        });
+                                        $("#maintenance_start").on("dp.change", function (e) {
+                                            $('#maintenance_end').data("DateTimePicker").minDate(e.date);
+                                        });
+                                    </script>
+                                @endcomponent
                             </div>
                             <div class="col-lg-2">
                                 <label><input type="checkbox" id="infect" class="checkbox" name="infect" value="on"
@@ -49,8 +53,10 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            @component("html.error",["field"=>"reason"])
                                 <textarea class="form-control" id="reason" name="reason"
                                           rows="10"></textarea>
+                            @endcomponent
                         </div>
                         <div class="form-group">
                             <div id="targets" class="bootstrap-tagsinput"></div>
