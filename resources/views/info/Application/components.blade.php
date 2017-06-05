@@ -6,10 +6,10 @@
                 <div class="form-group">
                     <select name="dependency" class="form-control">
                         <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
-                        @foreach(\App\Application::all() as $application)
-                            @if($application->id == $maintainable->maintainable->id) @continue @endif
-                            <option value="{{$application->id}}">{{$application->maintainable->name}}
-                                ( @lang("maintainable.Host") {{$application->host->maintainable->name}} )
+                        @foreach(\App\Maintainable::query()->where("maintainable_type","=","Application")->orderBy("name")->get() as $application)
+                            @if($application->id == $maintainable->id) @continue @endif
+                            <option value="{{$application->maintainable->id}}">{{$application->name}}
+                                ( @lang("maintainable.Host") {{$application->maintainable->host->maintainable->name}} )
                             </option>
                         @endforeach
                     </select>
