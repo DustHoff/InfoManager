@@ -7,7 +7,7 @@
                 <h4 class="modal-title">@lang("menu.create",["thing"=>__("maintainable.Host")])</h4>
             </div>
             <div class="modal-body">
-                @component("info.Host.info",["url" =>route("storeHost"),"type"=>"Host","selectHost"=> (isset($maintainable))?$maintainable->maintainable->id:null])
+                @component("info.Maintainable.information",["url" =>route("storeHost"),"type"=>"Host","selectHost"=> (isset($maintainable))?$maintainable->maintainable->id:null])
                 @endcomponent
             </div>
         </div>
