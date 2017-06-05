@@ -1,6 +1,6 @@
 @extends("layout.master")
 @section("content")
-    <form method="post" action="{{route("commentMaintenance",compact("maintenance"))}}">
+    <form method="post" action="{{route("commentMaintenance",compact("maintenance"))}}" class="form-horizontal">
         {{ csrf_field() }}
         @include("layout.error")
         <div class="row">
