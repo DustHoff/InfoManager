@@ -8,6 +8,7 @@ return [
     "comment" => "Kommentieren",
 
     "for" => "für",
+    "none" => "Kein",
 
     "systems" => "Systeme",
     "calendar" => "Kalender",
@@ -38,4 +39,6 @@ return [
     "status" => "Status",
     "start" => "Beginne",
     "close" => "Beende",
+
+    "physical_machine" => "Phsikalische Maschine"
 ];

@@ -8,6 +8,7 @@ return [
     "comment" => "Comment",
 
     "for" => "for",
+    "none" => "none",
 
     "systems" => "Systems",
     "calendar" => "Calendar",
@@ -39,4 +40,6 @@ return [
     "status" => "Status",
     "start" => "Start",
     "close" => "Close",
+
+    "physical_machine" => "Physical Machine"
 ];

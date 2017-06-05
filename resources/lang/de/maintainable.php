@@ -2,7 +2,7 @@
 return [
     "description" => "Beschreibung",
     "name" => "Name",
-    "runson" => "Machine",
+    "runson" => "Maschine",
     "contact" => "Kontakt",
     "group" => "Gruppe",
 

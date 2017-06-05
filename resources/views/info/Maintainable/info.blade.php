@@ -51,7 +51,7 @@
         <div class="col-sm-10">
             @component("html.error",["field"=>"host_id"])
                 <select id="host_id" class="form-control" name="host_id">
-                    <option value="">Physical Machine {{$selectHost}}</option>
+                    <option value="">@lang("menu.physical_machine")</option>
                     @foreach(\App\Maintainable::query()->where("maintainable_type","=","Host")->orderBy("name")->get() as $host)
                         <option value="{{$host->maintainable->id}}"
                                 @if(isset($selectHost))
@@ -68,7 +68,7 @@
             <div class="input-group">
                 @component("html.error",["field"=>"monitoring"])
                     <select id="monitoring" name="monitoring" class="form-control">
-                        <option value="">None</option>
+                        <option value="">@lang("menu.none")</option>
                         @foreach(\App\Monitoring\Monitor::getList() as $monitoringitem)
                             <option value="{{$monitoringitem->identifier()}}"
                                     @if(isset($maintainable))
