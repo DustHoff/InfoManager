@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Monitoring\impl\Zabbix;
+use App\Observer\UserObserver;
+use App\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
             'Application' => 'App\Application',
             'Maintainable' => 'App\Maintainable'
         ]);
+        User::observe(new UserObserver());
     }
 
     /**

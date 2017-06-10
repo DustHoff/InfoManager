@@ -30,6 +30,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="col-sm-4 control-label">@lang("menu.email")</div>
+                            <div class="col-sm-8">
+                                @component("html.error",["field"=>"email"])
+                                    <input class="form-control" type="text" id="email" name="email"
+                                           value="{{$user->email}}">
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-4 control-label">@lang("menu.password")</div>
                             <div class="col-sm-8">
                                 @component("html.error",["field"=>"password"])

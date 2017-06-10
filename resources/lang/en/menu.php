@@ -31,6 +31,7 @@ return [
 
     "name" => "Name",
     "username" => "Username",
+    "email" => "E-Mail",
     "password" => "Password",
     "confirmation" => "Password again",
 

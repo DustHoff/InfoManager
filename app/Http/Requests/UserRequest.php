@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
         return [
             "name" => "required",
             "username" => "required",
+            "email" => "nullable|email",
             "password" => "sometimes|confirmed",
             "group.*" => "sometimes|exists:groups,id",
             "action" => "required|in:" . __("menu.save") . "," . __("menu.delete")
