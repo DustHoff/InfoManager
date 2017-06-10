@@ -156,9 +156,6 @@
                     })
                 })
             })
-            .fail(function () {
-                alert("error");
-            })
     }
     $("#infect").change(function () {
         updateInfection();
