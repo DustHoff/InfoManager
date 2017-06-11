@@ -17,6 +17,7 @@ use garethp\ews\API\Enumeration\ImportanceChoicesType;
 use garethp\ews\API\Enumeration\ItemClassType;
 use garethp\ews\API\Enumeration\SensitivityChoicesType;
 use garethp\ews\API\Type;
+use Illuminate\Support\Facades\Log;
 
 class MaintenanceObserver
 {
@@ -51,9 +52,13 @@ class MaintenanceObserver
             ],
             'SendMeetingInvitations' => CalendarItemCreateOrDeleteOperationType::SEND_TO_NONE
         ];
-        $request = Type::buildFromArray($request);
-        $response = $this->client->CreateItem($request);
-        $maintenance->exchangeid = $response->get("id");
+        try {
+            $request = Type::buildFromArray($request);
+            $response = $this->client->CreateItem($request);
+            $maintenance->exchangeid = $response->get("id");
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+        }
 
     }
 
@@ -73,9 +78,12 @@ class MaintenanceObserver
                 'ConflictResolution' => 'AlwaysOverwrite',
                 'SendMeetingInvitationsOrCancellations' => CalendarItemCreateOrDeleteOperationType::SEND_TO_NONE
             ];
-
-            $request = Type::buildFromArray($request);
-            $response = $this->client->UpdateItem($request);
+            try {
+                $request = Type::buildFromArray($request);
+                $response = $this->client->UpdateItem($request);
+            } catch (\Exception $exception) {
+                Log::error($exception->getMessage());
+            }
         }
     }
 }
