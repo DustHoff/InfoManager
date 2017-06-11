@@ -56,7 +56,7 @@ class Zabbix implements Monitoring
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody(), true);
             Log::debug($result);
-            return $result["result"];
+            if (array_key_exists("result", $result)) return $result["result"];
         }
         return array();
     }
