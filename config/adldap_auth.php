@@ -241,6 +241,7 @@ return [
 
         'name' => 'cn',
         'username' => env("ADLDAP_USERATTRIBUTE",""),
+        'email' => 'mail',
 
     ],
 
