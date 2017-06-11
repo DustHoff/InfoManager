@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Maintenance;
 use App\Monitoring\impl\Zabbix;
+use App\Observer\MaintenanceObserver;
 use App\Observer\UserObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             'Maintainable' => 'App\Maintainable'
         ]);
         User::observe(new UserObserver());
+        Maintenance::observe(new MaintenanceObserver());
     }
 
     /**

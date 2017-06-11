@@ -75,4 +75,9 @@ class Maintenance extends Model
     {
         return false;
     }
+
+    public function getCategories()
+    {
+        return [__("maintenance." . $this->type)];
+    }
 }
