@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Mail\Notification;
 use App\Maintenance;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -36,6 +37,9 @@ class SendNotification implements ShouldQueue
      */
     public function handle()
     {
+        if (isset($this->maintenance->last_mail) && $this->maintenance->last_mail->diffInSeconds(Carbon::now()) <= 60) return;
+        $this->maintenance->last_mail = Carbon::now();
+        $this->maintenance->save();
         Log::info("Job Started");
         Log::info("infected Systems ".count($this->maintenance->infected));
         foreach ($this->maintenance->infected as $maintainable) {

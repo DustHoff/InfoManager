@@ -12,7 +12,7 @@ class Maintenance extends Model
     public $timestamps = false;
     protected $table = "maintenances";
     protected $guarded = ['id'];
-    protected $dates = ["maintenance_start", "maintenance_end", "start", "end"];
+    protected $dates = ["maintenance_start", "maintenance_end", "start", "end", "last_mail"];
     protected $appends = ["title", "className", "url", "start", "end", "editable", "durationEditable"];
 
     public function scopeActiveMaintenance(Builder $query)
