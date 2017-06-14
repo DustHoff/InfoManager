@@ -10,7 +10,7 @@ class UserRequest extends FormRequest
 {
     public function authorize()
     {
-        return Auth::user()->can("administrate", User::class);
+        return true;
     }
 
     /**
