@@ -25,6 +25,7 @@ class UserController extends Controller
     }
 
     private function save(UserRequest $request, User $user = null){
+        $this->authorize("administrate", User::class);
         if(!$user) $user = new User;
         $user->name = $request->input("name");
         $user->username = $request->input("username");
@@ -39,6 +40,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
+        if(Auth::user() != $user) $this->authorize("administrate", User::class);
         if ($request->input("action") == __("menu.save")) {
             $user = $this->save($request, $user);
             return redirect()->route("profile", compact("user"));
