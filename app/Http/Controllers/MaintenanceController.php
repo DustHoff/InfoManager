@@ -64,7 +64,7 @@ class MaintenanceController extends Controller
         //$maintenance->comments()->save($comment);
         $maintainable->save();
 
-        if ($maintenance->type != Maintenance::TYPE[0]) return $this->transit($maintenance);
+        if ($maintenance->type != Maintenance::TYPE[0]) $this->transit($maintenance);
         else $this->dispatch(new SendNotification($maintenance));
         if ($maintenance->type == Maintenance::TYPE[0]) Monitor::schedule($maintenance);
         return redirect()->route("maintenance", compact("maintenance"));
