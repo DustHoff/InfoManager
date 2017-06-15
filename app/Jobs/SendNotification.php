@@ -37,7 +37,7 @@ class SendNotification implements ShouldQueue
      */
     public function handle()
     {
-        if (isset($this->maintenance->last_mail) && $this->maintenance->last_mail->diffInSeconds(Carbon::now()) <= 60) return;
+        if (isset($this->maintenance->last_mail) && $this->maintenance->last_mail->diffInSeconds(Carbon::now()) < 60) return;
         $this->maintenance->last_mail = Carbon::now();
         $this->maintenance->save();
         Log::info("Job Started");
