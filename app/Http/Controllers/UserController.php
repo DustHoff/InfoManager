@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -25,14 +24,14 @@ class UserController extends Controller
     }
 
     private function save(UserRequest $request, User $user = null){
-        $this->authorize("administrate", User::class);
+        if (Auth::user() != $user) $this->authorize("administrate", User::class);
         if(!$user) $user = new User;
         $user->name = $request->input("name");
         $user->username = $request->input("username");
         $user->email = $request->input("email");
         if ($request->input("password")) $user->password = Hash::make($request->input("password"));
         $user->save();
-        if (Auth::user()->can("administrate", Group::class)) {
+        if (Auth::user()->can("administrate", User::class)) {
             if ($request->input("group")) $user->groups()->sync($request->input("group"));
         }
         return $user;
@@ -40,12 +39,12 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        if(Auth::user() != $user) $this->authorize("administrate", User::class);
         if ($request->input("action") == __("menu.save")) {
             $user = $this->save($request, $user);
             return redirect()->route("profile", compact("user"));
         }
         if ($request->input("action") == __("menu.delete")) {
+            $this->authorize("administrate", User::class);
             $user->delete();
             return redirect()->route("admin");
         }
