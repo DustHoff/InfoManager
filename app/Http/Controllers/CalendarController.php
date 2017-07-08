@@ -22,7 +22,7 @@ class CalendarController extends Controller
         $start = $request->input("maintenance_start");
         $end = $request->input("maintenance_end");
 
-        return Maintenance::query()->where("type", "=", Maintenance::TYPE[0])
+        return Maintenance::query()//->where("type", "=", Maintenance::TYPE[0])
             ->where("maintenance_start", ">", $start)
             ->where("maintenance_end", "<", $end)->get();
     }
