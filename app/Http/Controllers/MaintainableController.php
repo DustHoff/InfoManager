@@ -17,7 +17,7 @@ class MaintainableController extends Controller
 
     public function showAll()
     {
-        $maintainables = Maintainable::query()->orderBy("maintainable_type")->orderBy("name")->paginate();
+        $maintainables = Maintainable::withPermission()->orderBy("maintainable_type")->orderBy("name")->paginate();
         return view("info.Maintainable.all", compact("maintainables"));
     }
 

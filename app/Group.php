@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model implements Permissiable
 {
     protected $fillable = ["name"];
+    protected $hidden = ['pivot'];
+    protected $with = ["maintainableMembers"];
 
     public function members(){
         return $this->belongsToMany("User","user_group");
@@ -14,7 +16,7 @@ class Group extends Model implements Permissiable
 
     public function maintainableMembers()
     {
-        return $this->belongsToMany("MaintainableGroup", "maintainablegroup_group");
+        return $this->belongsToMany("MaintainableGroup", "maintainablegroup_group", "group_id");
     }
 
     public function isEditor(array $maintainablegroup)

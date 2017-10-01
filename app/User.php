@@ -10,7 +10,7 @@ class User extends Authenticatable implements Permissiable
         'name', 'password',
     ];
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pivot',
     ];
 
     public function maintenances(){
