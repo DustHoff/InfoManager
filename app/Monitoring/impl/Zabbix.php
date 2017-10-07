@@ -52,10 +52,9 @@ class Zabbix implements Monitoring
             Log::error("Error while reaching zabbix. " . $e->getMessage());
             return array();
         }
-        Log::debug($data);
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody(), true);
-            Log::debug($result);
+            Log::debug(["Zabbix", $result]);
             if (array_key_exists("result", $result)) return $result["result"];
         }
         return array();
@@ -101,7 +100,6 @@ class Zabbix implements Monitoring
     public function getDataByID($identifier)
     {
         $data = $this->zabbixMethod("host.get", ["filter" => ["hostid" => $identifier], "output" => env("monitoring_name_field")]);
-        Log::debug($data);
         return $data;
     }
 
