@@ -38,13 +38,15 @@ class Notification extends Mailable
     public function build()
     {
         $header = view([
+            "secondsTemplateCacheExpires" => 0,
             "template" => Option::query()->where("name", "=", "email_header")->first()->value],
             ["maintenance" => $this->maintenance,
                 "maintainable" => $this->maintainable]);
         $footer = view([
-            "template" => Option::query()->where("name", "=", "email_footer")->first()->value,
+            "secondsTemplateCacheExpires" => 0,
+            "template" => Option::query()->where("name", "=", "email_footer")->first()->value],
             ["maintenance" => $this->maintenance,
-                "maintainable" => $this->maintainable]]);
+                "maintainable" => $this->maintainable]);
         return $this->markdown("email.notification", [
             "maintenance" => $this->maintenance,
             "maintainable" => $this->maintainable,
