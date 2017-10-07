@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Maintenance;
+use App\Monitoring\impl\None;
 use App\Monitoring\impl\Zabbix;
 use App\Observer\MaintenanceObserver;
 use App\Observer\UserObserver;
@@ -38,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
     {
         App::bind("Zabbix", function () {
             return new Zabbix;
+        });
+        App::bind("None", function () {
+            return new None;
         });
     }
 }
