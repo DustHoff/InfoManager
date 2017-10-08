@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Maintainable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaintainableApiController
 {
@@ -22,7 +23,8 @@ class MaintainableApiController
         $data = $data->merge($maintainables);
         if ($request->get("infected")) {
             foreach ($maintainables as $maintainable) {
-                foreach ($maintainable->infect() as $infect) $data->push($infect);
+                foreach ($maintainable->infect() as $infect)
+                    if (Auth::user()->can("view", $infect)) $data->push($infect);
             }
         }
         return response()->json($data->unique("id")->sortBy("maintainable_type"));
