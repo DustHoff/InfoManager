@@ -106,17 +106,17 @@ class MaintenanceObserver
             "secondsTemplateCacheExpires" => 0,
             "template" => Option::query()->where("name", "=", "email_header")->first()->value],
             ["maintenance" => $maintenance,
-                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first())]);
+                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy : $maintenance->infected->first())]);
         $footer = view([
             "secondsTemplateCacheExpires" => 0,
             "template" => Option::query()->where("name", "=", "email_footer")->first()->value],
             ["maintenance" => $maintenance,
-                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first())]);
+                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy : $maintenance->infected->first())]);
 
         $markdown = new Markdown(view(), config('mail.markdown'));
         return $markdown->render("email.notification", [
             "maintenance" => $maintenance,
-            "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first()),
+            "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy : $maintenance->infected->first()),
             "header" => $header,
             "footer" => $footer])->toHtml();
     }
