@@ -47,26 +47,14 @@ class MaintenanceObserver
 
     public function createCalendarItem(Maintenance $maintenance)
     {
-        $header = view(["template" => Option::query()->where("name", "=", "email_header")->first()->value],
-            ["maintenance" => $maintenance,
-                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first())]);
-        $footer = view([
-            "template" => Option::query()->where("name", "=", "email_footer")->first()->value],
-            ["maintenance" => $maintenance,
-                "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first())]);
-
         $request = [
             'Items' => [
                 'CalendarItem' => [
                     'Start' => $maintenance->maintenance_start->format('c'),
                     'End' => $maintenance->maintenance_end->format('c'),
                     'Body' => [
-                        'BodyType' => BodyTypeType::HTML,
-                        '_value' => view("email.notification", [
-                            "maintenance" => $maintenance,
-                            "maintainable" => ($maintenance->causedBy != null ? $maintenance->causedBy() : $maintenance->infected->first()),
-                            "header" => $header,
-                            "footer" => $footer])->render()
+                            'BodyType' => BodyTypeType::HTML,
+                            '_value' => $this->buildBody($maintenance)
                     ],
                     'Subject' => $maintenance->getTitleAttribute(),
                     'ItemClass' => ItemClassType::APPOINTMENT,
