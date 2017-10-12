@@ -33,16 +33,10 @@ class MaintenanceObserver
         $this->client = API::withUsernameAndPassword(env("MAIL_HOST"), env("MAIL_USERNAME"), env("MAIL_PASSWORD"))->getClient();
     }
 
-    public function creating(Maintenance $maintenance)
-    {
-        if ($maintenance->type != Maintenance::TYPE[0]) return;
-        $this->createCalendarItem($maintenance);
-    }
-
     public function updating(Maintenance $maintenance)
     {
         if (isset($maintenance->exchangeid)) $this->updateCalendarItem($maintenance);
-        else $this->createCalendarItem($maintenance);
+        else if (isset($maintenance->maintenance_end)) $this->createCalendarItem($maintenance);
     }
 
     public function createCalendarItem(Maintenance $maintenance)
