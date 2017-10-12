@@ -61,8 +61,6 @@ class MaintenanceController extends Controller
         $comment->maintenance()->associate($maintenance);
         $comment->user()->associate(Auth::user());
         $comment->save();
-        //$maintenance->comments()->save($comment);
-        $maintainable->save();
 
         if ($maintenance->type != Maintenance::TYPE[0]) $this->transit($maintenance);
         else $this->dispatch(new SendNotification($maintenance));
