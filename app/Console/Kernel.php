@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\checkMailConfig;
+use App\Console\Commands\pullESXI;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        checkMailConfig::class
+        checkMailConfig::class,
+        pullESXI::class
     ];
 
     /**

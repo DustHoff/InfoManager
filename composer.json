@@ -14,7 +14,8 @@
     "guzzlehttp/guzzle": "6.*",
     "laravel/framework": "5.4.*",
     "laravel/tinker": "~1.0",
-    "wpb/string-blade-compiler": "3.4.*"
+    "wpb/string-blade-compiler": "3.4.*",
+    "vmwarephp/vmwarephp": "dev-master"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
