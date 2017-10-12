@@ -43,8 +43,8 @@ class MaintenanceController extends Controller
         $maintenance->maintenance_start = $request->input("maintenance_start");
         if ($maintenance->type == Maintenance::TYPE[0]) $maintenance->maintenance_end = $request->input("maintenance_end");
         $maintenance->user()->associate(Auth::user());
-        $maintenance->save();
         $maintenance->rootcause = $request->input("rootcause");
+        $maintenance->save();
 
         foreach ($request->input("maintainable") as $maintainableId) {
             $maintainable = Maintainable::find($maintainableId);
@@ -52,9 +52,9 @@ class MaintenanceController extends Controller
             if (request('infect') == 'on') {
                 foreach ($maintainable->infect() as $infect)
                     $maintenance->infected()->syncWithoutDetaching($infect->id);
-                $maintenance->save();
             }
         }
+        $maintenance->save();
 
         $comment = new Comment;
         $comment->body = $request->input("reason");
