@@ -8,7 +8,7 @@
                         <option value="">@lang("menu.select",["thing"=>__("maintainable.Application")])</option>
                         @foreach(\App\Maintainable::query()->where("maintainable_type","=","Application")->orderBy("name")->get() as $application)
                             @if($application->id == $maintainable->id) @continue @endif
-                            @can("view",$application->maintainable)
+                            @can("view",$application)
                                 <option value="{{$application->maintainable->id}}">{{$application->name}}
                                     ( @lang("maintainable.Host") {{$application->maintainable->host->maintainable->name}}
                                     )
