@@ -8,7 +8,11 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-
+window.moment = require("moment");
+require("bootstrap-tagsinput");
+require("eonasdan-bootstrap-datetimepicker");
+require("fullcalendar");
+require("html5shiv");
 require('bootstrap-sass');
 
 /**

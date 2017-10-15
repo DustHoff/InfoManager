@@ -14,6 +14,9 @@
 
     <script src="{{asset("js/app.js")}}"></script>
     <link type="text/css" href="{{asset("css/app.css")}}" rel="stylesheet">
+    <script>
+        moment.locale('{{App::getLocale()}}');
+    </script>
 </head>
 
 <body>
