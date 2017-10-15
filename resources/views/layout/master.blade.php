@@ -12,29 +12,8 @@
 
     <title>Infomanager</title>
 
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/jquery-3.1.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/bootstrap-tagsinput.js"></script>
-    <script src="/js/moment.js"></script>
-    <script src="/js/fullcalendar.min.js"></script>
-    <script src="/js/bootstrap-datetimepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <link type="text/css" href="/css/app.css" rel="stylesheet">
-    <link type="text/css" href="/css/bootstrap-tagsinput.css" rel="stylesheet">
-    <link type="text/css" href="/css/fullcalendar.min.css" rel="stylesheet">
-    <link type="text/css" href="/css/fullcalendar.print.min.css" rel="stylesheet">
-
-    <script>
-        moment.locale('{{App::getLocale()}}');
-    </script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="{{asset("js/app.js")}}"></script>
+    <link type="text/css" href="{{asset("css/app.css")}}" rel="stylesheet">
 </head>
 
 <body>
