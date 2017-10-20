@@ -7,3 +7,11 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// Bootstrap-tagsinput
+@import "node_modules/bootstrap-tagsinput/src/bootstrap-tagsinput";
+@import "node_modules/bootstrap-tagsinput/src/bootstrap-tagsinput-typeahead";
+// bootstrap datetimepicker
+@import "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker";
+// FullCalendar
+@import "node_modules/fullcalendar/dist/fullcalendar";
+@import "node_modules/fullcalendar/dist/fullcalendar.print";

@@ -19,7 +19,6 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
     "bootstrap-tagsinput": "git+https://github.com/bootstrap-tagsinput/bootstrap-tagsinput.git#0.8.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "fullcalendar": "^3.6.1",

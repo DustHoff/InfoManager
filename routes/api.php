@@ -14,3 +14,4 @@ Route::post("/maintainable/", "MaintainableApiController@showJSON")->name("apiMa
 Route::get("/maintainable/html/{maintainable?}", "MaintainableApiController@showHTML")->name("apiMaintainableHTML");
 Route::get("/option/get/{key}", "OptionController@get")->name("getOption");
 Route::get("/option/clearCache", "OptionController@clearCache")->name("clearCache");
+Route::get("/email", "EmailController@search")->name("emailAutocomplete");
