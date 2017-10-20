@@ -19,13 +19,13 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "bootstrap-3-typeahead": "^4.0.2",
     "bootstrap-tagsinput": "git+https://github.com/bootstrap-tagsinput/bootstrap-tagsinput.git#0.8.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "fullcalendar": "^3.6.1",
     "html5shiv": "^3.7.3",
     "loader-utils": "^1.1.0",
     "moment": "^2.19.1",
-    "respondjs": "^0.3.0",
-    "typeahead.js": "^0.11.1"
+    "respondjs": "^0.3.0"
   }
 }

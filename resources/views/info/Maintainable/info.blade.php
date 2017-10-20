@@ -19,7 +19,7 @@
         <div class="control-label col-sm-2">@lang("maintainable.contact")</div>
         <div class="col-sm-10">
             @component("html.error",["field"=>"emails"])
-                <select id="emails" data-role="tagsinput" name="emails[]" multiple>
+                <select id="emails" name="emails[]" multiple>
                     @if(isset($maintainable))
                         @foreach($maintainable->emails as $email)
                             <option value="{{$email->email}}">{{$email->email}}</option>

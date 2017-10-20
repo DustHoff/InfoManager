@@ -14,8 +14,7 @@ class EmailController extends Controller
 
     public function search(Request $request)
     {
-        if(!$request->isJson()) return redirect()->back();
-        return response()->json(Email::query()->where("email",'like',$request->input('email'))->get());
+        return response()->json(Email::query()->where("email", 'like', '%' . $request->get("email") . '%')->get()->pluck("email"));
     }
 
     public function store(Request $request)
