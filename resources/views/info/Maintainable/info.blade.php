@@ -77,8 +77,10 @@
                         @endforeach
                     </select>
                     <span class="input-group-btn">
-                        <button class="btn glyphicon glyphicon-refresh" type="button"
-                            onclick="$.get('{{route("clearCache")}}');location.reload()"></button>
+                        <button class="btn btn-default" type="button"
+                                onclick="$.get('{{route("clearCache")}}');location.reload()">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
                     </span>
                 @endcomponent
             </div>
