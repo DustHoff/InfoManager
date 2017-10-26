@@ -18,11 +18,6 @@ class EsxiHostImportJob extends HostImportJob
     private $username;
     private $password;
     private $params;
-    /**
-     * @var \SoapClient
-     */
-    private $client;
-    private $serviceContent;
 
     public function __construct(Host $host, $username, $password)
     {
@@ -49,20 +44,20 @@ class EsxiHostImportJob extends HostImportJob
     public function pullHosts()
     {
 
-        $this->client = new \SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", $this->params);
-        $this->client->__setLocation("https://" . $this->esxi->address . "/sdk/vimService");
+        $client = new \SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", $this->params);
+        $client->__setLocation("https://" . $this->esxi->address . "/sdk/vimService");
 
         $request = new \stdClass();
         $request->_this = ["_" => "ServiceInstance", "type" => "ServiceInstance"];
 
-        $serviceContent = $this->client->__soapCall("RetrieveServiceContent", [(array)$request])->returnval;
+        $serviceContent = $client->__soapCall("RetrieveServiceContent", [(array)$request])->returnval;
 
         $request = new \stdClass();
         $request->_this = $serviceContent->sessionManager;
         $request->userName = $this->username;
         $request->password = decrypt($this->password);
 
-        $this->client->__soapCall("Login", [(array)$request]);
+        $client->__soapCall("Login", [(array)$request]);
 
         $ss1 = new soapvar(array('name' => 'FolderTraversalSpec'), SOAP_ENC_OBJECT, null, null, 'selectSet', null);
         $ss2 = new soapvar(array('name' => 'DataCenterVMTraversalSpec'), SOAP_ENC_OBJECT, null, null, 'selectSet', null);
@@ -86,7 +81,7 @@ class EsxiHostImportJob extends HostImportJob
             )
         );
 
-        $result = $this->client->__soapCall("RetrieveProperties", [(array)$request])->returnval;
+        $result = $client->__soapCall("RetrieveProperties", [(array)$request])->returnval;
         $data = array();
         foreach ($result as $item) {
             $vm = array();
