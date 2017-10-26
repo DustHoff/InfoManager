@@ -25,8 +25,10 @@
                     <input type="text" name="search" class="form-control" aria-describedby="searchButton"
                            placeholder="@lang("menu.search")">
                     <span id="searchButton" class="input-group-btn">
-                    <button class="btn glyphicon glyphicon-search"
-                            type="submit"></button>
+                    <button class="btn"
+                            type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
                     </span>
                 </div>
             </form>

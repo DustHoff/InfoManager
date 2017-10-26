@@ -13,6 +13,8 @@ abstract class HostImportJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    const SPACE = "App\\Jobs\\impl\\";
+    const TYPES = ["Esxi" => "EsxiHostImportJob"];
     protected $esxi;
 
     /**
@@ -28,9 +30,9 @@ abstract class HostImportJob implements ShouldQueue
     /**
      * @return HostImportJob
      */
-    public static function getInstance(Host $host, $username, $password)
+    public static function getInstance($type, Host $host, $username, $password)
     {
-        $job = new \ReflectionClass("App\Jobs\impl\\" . env("importjob", "EsxiHostImportJob"));
+        $job = new \ReflectionClass(self::SPACE . $type);
         return $job->newinstance($host, $username, $password);
     }
 
@@ -59,6 +61,8 @@ abstract class HostImportJob implements ShouldQueue
                 $maintainable->save();
             }
             $host->save();
+            $this->esxi->job_id = 0;
+            $this->esxi->save();
         }
     }
 

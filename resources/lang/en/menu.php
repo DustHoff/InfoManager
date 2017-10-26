@@ -42,5 +42,8 @@ return [
     "start" => "Start",
     "close" => "Close",
 
-    "physical_machine" => "Physical Machine"
+    "physical_machine" => "Physical Machine",
+
+    "repeat" => "Repeat",
+    "start_job" => "Start Job"
 ];

@@ -29,5 +29,13 @@
 
 </div>
 @yield("footer")
+<script>
+    const app = new Vue({
+        el: '#app'
+    });
+    axios.get('{{route("i18n")}}').then(response => {
+        window.i18n = response.data
+    });
+</script>
 </body>
 </html>

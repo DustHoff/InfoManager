@@ -33,4 +33,23 @@ class OptionController extends Controller
     {
         Cache::flush();
     }
+
+    public function localization()
+    {
+        $localization = Cache::rememberForever('i18n', function () {
+            $lang = config('app.locale');
+
+            $files = glob(resource_path('lang/' . $lang . '/*.php'));
+
+            $i18n = [];
+
+            foreach ($files as $file) {
+                $name = basename($file, '.php');
+                $i18n[$name] = require $file;
+            }
+
+            return $i18n;
+        });
+        return json_encode($localization);
+    }
 }

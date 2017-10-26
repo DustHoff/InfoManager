@@ -40,5 +40,8 @@ return [
     "start" => "Beginne",
     "close" => "Beende",
 
-    "physical_machine" => "Phsikalische Maschine"
+    "physical_machine" => "Phsikalische Maschine",
+
+    "repeat" => "Wiederholen",
+    "start_job" => "Job Starten"
 ];

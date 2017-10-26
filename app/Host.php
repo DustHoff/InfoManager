@@ -50,4 +50,9 @@ class Host extends Model implements MaintainableInterface
         }
         return array_unique($results);
     }
+
+    public function task()
+    {
+        return $this->hasOne("Task", "id", "job_id");
+    }
 }
