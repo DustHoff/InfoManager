@@ -16,6 +16,7 @@ abstract class HostImportJob implements ShouldQueue
     const SPACE = "App\\Jobs\\impl\\";
     const TYPES = ["Esxi" => "EsxiHostImportJob"];
     protected $esxi;
+    public $tries = 2;
 
     /**
      * Create a new job instance.

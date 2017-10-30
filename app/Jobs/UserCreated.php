@@ -18,6 +18,7 @@ class UserCreated implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $user;
+    public $tries = 2;
 
     /**
      * Create a new job instance.
