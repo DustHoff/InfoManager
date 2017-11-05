@@ -14,7 +14,7 @@ class AddJobIdForHost extends Migration
     public function up()
     {
         Schema::table("hosts", function (Blueprint $table) {
-            $table->bigInteger("job_id");
+            $table->bigInteger("job_id")->nullable();
         });
     }
 
