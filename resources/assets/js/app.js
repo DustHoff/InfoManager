@@ -14,9 +14,20 @@ require('./bootstrap');
  */
 
 Vue.component('import-job', require('./components/triggerImportJob.vue'));
+Vue.component('job-list', require('./components/joblist.vue'));
+Vue.component('viewjob', require('./components/viewjob.vue'));
+Vue.component('date-timepicker', require('./components/date-timepicker.vue'));
+Vue.component('tags-input', require('./components/tags-input.vue'));
+Vue.component('calendar', require('./components/calendar.vue'));
 
 /**
  * localization function for vue js
  * @param string
  */
 Vue.prototype.i18n = string => _.get(window.i18n, string);
+Vue.prototype.$eventBus = new Vue();
+
+
+const app = new Vue({
+    el: '#app'
+});
