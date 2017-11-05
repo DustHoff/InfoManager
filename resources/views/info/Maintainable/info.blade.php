@@ -32,9 +32,9 @@
         <div class="col-sm-2 control-label">@lang("maintainable.group")</div>
         <div class="col-sm-10">
             @component("html.error",["field"=>"maintainablegroups"])
-                @if(isset($maintainable->emails))
+                @if(isset($maintainable->maintainablegroups))
                     <tags-input name="maintainablegroups[]"
-                                value='{{json_encode($maintainable->emails->pluck("email"))}}'/>
+                                value='{{json_encode($maintainable->maintainablegroups->pluck("name"))}}'/>
                 @else
                     <tags-input name="maintainablegroups[]" value='[]'/>
                 @endif
