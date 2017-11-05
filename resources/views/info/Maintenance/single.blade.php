@@ -27,15 +27,7 @@
                                 <div class="col-sm-12 col-lg-9">
                                     @if($maintenance->type==\App\Maintenance::TYPE[0])
                                         @component("html.error",["field"=>"maintenance_end"])
-                                            <input type="text" class="form-control" id="maintenance_end"
-                                                   name="maintenance_end"
-                                                   placeholder="End">
-                                            <script type="text/javascript">
-                                                $("#maintenance_end").datetimepicker({
-                                                    format: "YYYY-MM-DD HH:mm:ss",
-                                                    useCurrent: false
-                                                });
-                                            </script>
+                                            <date-timepicker name="maintenance_end" placeholder="End"/>
                                         @endcomponent
                                     @endif
                                 </div>

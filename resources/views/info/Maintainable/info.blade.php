@@ -19,13 +19,11 @@
         <div class="control-label col-sm-2">@lang("maintainable.contact")</div>
         <div class="col-sm-10">
             @component("html.error",["field"=>"emails"])
-                <select id="emails" name="emails[]" multiple>
-                    @if(isset($maintainable))
-                        @foreach($maintainable->emails as $email)
-                            <option value="{{$email->email}}">{{$email->email}}</option>
-                        @endforeach
-                    @endif
-                </select>
+                @if(isset($maintainable->emails))
+                    <tags-input name="emails[]" value='{{json_encode($maintainable->emails->pluck("email"))}}'/>
+                @else
+                    <tags-input name="emails[]" value='[]'/>
+                @endif
             @endcomponent
         </div>
     </div>
@@ -34,13 +32,12 @@
         <div class="col-sm-2 control-label">@lang("maintainable.group")</div>
         <div class="col-sm-10">
             @component("html.error",["field"=>"maintainablegroups"])
-                <select id="maintainablegroups" data-role="tagsinput" name="maintainablegroups[]" multiple>
-                    @if(isset($maintainable))
-                        @foreach($maintainable->maintainablegroups as $maintainablegroup)
-                            <option value="{{$maintainablegroup->name}}">{{$maintainablegroup->name}}</option>
-                        @endforeach
-                    @endif
-                </select>
+                @if(isset($maintainable->emails))
+                    <tags-input name="maintainablegroups[]"
+                                value='{{json_encode($maintainable->emails->pluck("email"))}}'/>
+                @else
+                    <tags-input name="maintainablegroups[]" value='[]'/>
+                @endif
             @endcomponent
         </div>
     </div>

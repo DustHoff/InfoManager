@@ -37,12 +37,3 @@
              id="components">@include("info.".$maintainable->maintainable_type.".components")</div>
     </div>
 @endsection
-@section('footer')
-    <script>
-        $('a[href="' + window.location.hash + '"]').tab('show');
-        if (window.location.hash.match("^#add")) {
-            $('a[href="#components"]').tab('show');
-            $(window.location.hash).modal('show');
-        }
-    </script>
-@endsection

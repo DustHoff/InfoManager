@@ -5,7 +5,4 @@
             {{$message}}
         @endforeach
     </span>
-    <script>
-        $('#{{$field}}').parent().addClass("has-error");
-    </script>
 @endif

@@ -18,6 +18,7 @@
                 @if(\Illuminate\Support\Facades\Auth::user())
                     @include("layout.user")
                 @endif
+                <job-list url="{{route("jobs")}}"/>
             </ul>
             <form class="navbar-form navbar-right" method="post" action="{{route("search")}}">
                 {{csrf_field()}}

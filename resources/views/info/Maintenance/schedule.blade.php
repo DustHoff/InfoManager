@@ -9,28 +9,13 @@
                         <div class="form-group">
                             <div class="col-lg-3">
                                 @component("html.error",["field"=>"maintenance_start"])
-                                    <input type="text" class="form-control" id="maintenance_start"
-                                           name="maintenance_start" placeholder="Start">
-                                    <script type="text/javascript">
-                                        $("#maintenance_start").datetimepicker({
-                                            format: "YYYY-MM-DD HH:mm:ss"
-                                        });
-                                    </script>
+                                    <date-timepicker name="maintenance_start" placeholder="Start"/>
                                 @endcomponent
                             </div>
                             <div class="col-lg-3">
                                 @component("html.error",["field"=>"maintenance_end"])
-                                    <input type="text" class="form-control" id="maintenance_end" name="maintenance_end"
-                                           placeholder="End">
-                                    <script type="text/javascript">
-                                        $("#maintenance_end").datetimepicker({
-                                            format: "YYYY-MM-DD HH:mm:ss",
-                                            useCurrent: false
-                                        });
-                                        $("#maintenance_start").on("dp.change", function (e) {
-                                            $('#maintenance_end').data("DateTimePicker").minDate(e.date);
-                                        });
-                                    </script>
+                                    <date-timepicker name="maintenance_end" min_picker="maintenance_start"
+                                                     placeholder="End"/>
                                 @endcomponent
                             </div>
                             <div class="col-lg-2">
@@ -115,53 +100,56 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </form>
-<script>
-    $.ajaxSetup({
-        contentType: "application/json; charset=utf-8"
-    });
+@section("scripts")
+    <script>
+        $.ajaxSetup({
+            contentType: "application/json; charset=utf-8"
+        });
 
-    $("#type").change(function () {
-        var type = this.value;
+        $("#type").change(function () {
+            var type = this.value;
 
-        if (type == '{{\App\Maintenance::TYPE[0]}}') {
-            $("#maintenance_end").removeAttr('disabled');
-        } else {
-            $("#maintenance_end").attr("disabled", "disabled");
-            $("#maintenance_start").val('{{\Carbon\Carbon::now()}}');
+            if (type == '{{\App\Maintenance::TYPE[0]}}') {
+                $("#maintenance_end").removeAttr('disabled');
+            } else {
+                $("#maintenance_end").attr("disabled", "disabled");
+                $("#maintenance_start").val('{{\Carbon\Carbon::now()}}');
 
-        }
+            }
 
-        $.get('{{route("getOption",["key"=>""])}}/message_' + type).done(function (data) {
+            $.get('{{route("getOption",["key"=>""])}}/message_' + type).done(function (data) {
+                $("#reason").val(data);
+            });
+        });
+        $.get('{{route("getOption",["key"=>""])}}/message_' + $("#type").val()).done(function (data) {
             $("#reason").val(data);
         });
-    });
-    $.get('{{route("getOption",["key"=>""])}}/message_' + $("#type").val()).done(function (data) {
-        $("#reason").val(data);
-    });
 
-    function updateInfection() {
-        $.post('{{route("apiMaintainables")}}',
-            '{"maintainables" : [' + $("#maintainables").val() + "]," +
-            '"infected" :' + $("#infect").is(":checked") + "}")
-            .done(function (data) {
-                $("#infected").empty();
-                $("#targets").empty();
-                $.each(data, function (index, element) {
-                    $.get('{{route("apiMaintainableHTML")}}/' + element.id).done(function (html) {
-                        $("#infected").append(html);
-                        $.each(element.emails, function (mailindex, mailelement) {
-                            if ($("#" + mailelement.id).length == 0)
-                                $('#targets').append("<span id='" + mailelement.id + "' class='tag label label-info'>" + mailelement.email + "</span>");
+        function updateInfection() {
+            $.post('{{route("apiMaintainables")}}',
+                '{"maintainables" : [' + $("#maintainables").val() + "]," +
+                '"infected" :' + $("#infect").is(":checked") + "}")
+                .done(function (data) {
+                    $("#infected").empty();
+                    $("#targets").empty();
+                    $.each(data, function (index, element) {
+                        $.get('{{route("apiMaintainableHTML")}}/' + element.id).done(function (html) {
+                            $("#infected").append(html);
+                            $.each(element.emails, function (mailindex, mailelement) {
+                                if ($("#" + mailelement.id).length == 0)
+                                    $('#targets').append("<span id='" + mailelement.id + "' class='tag label label-info'>" + mailelement.email + "</span>");
+                            })
                         })
                     })
                 })
-            })
-    }
-    $("#infect").change(function () {
+        }
+
+        $("#infect").change(function () {
+            updateInfection();
+        })
+        $("#maintainables").change(function () {
+            updateInfection();
+        })
         updateInfection();
-    })
-    $("#maintainables").change(function () {
-        updateInfection();
-    })
-    updateInfection();
-</script>
+    </script>
+@endsection
