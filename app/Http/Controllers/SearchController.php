@@ -17,4 +17,9 @@ class SearchController extends Controller
 
         return view("info.search.list", compact("maintainables"));
     }
+
+    public function email(Request $request)
+    {
+        return response()->json(Email::query()->where("email", 'like', '%' . $request->get("email") . '%')->get()->pluck("email"));
+    }
 }
