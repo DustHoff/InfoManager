@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Host;
-use App\Http\Requests\HostImportJobRequest;
 use App\Http\Requests\MaintainableRequest;
-use App\Jobs\HostImportJob;
 
 class HostController extends Controller
 {
@@ -44,15 +42,5 @@ class HostController extends Controller
         return $this->maintainableController->store($request, $host);
     }
 
-    public function importJob(Host $host, HostImportJobRequest $request)
-    {
-        $job = HostImportJob::getInstance($request->json("type"),
-            $host,
-            $request->json("username"),
-            $request->json("password"));
 
-        $host->job_id = $this->dispatch($job);
-        $host->save();
-        return $host;
-    }
 }
