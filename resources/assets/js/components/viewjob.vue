@@ -45,7 +45,7 @@ export default {
     methods: {
         openview: function (job) {
             this.job = job;
-            $('#jobview').modal('show');
+            $(this.$el).modal('show');
         }
     },
     mounted: function () {
