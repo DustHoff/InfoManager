@@ -20,7 +20,8 @@
         <div class="col-sm-10">
             @component("html.error",["field"=>"emails"])
                 @if(isset($maintainable->emails))
-                    <tags-input name="emails[]" value='{{json_encode($maintainable->emails->pluck("email"))}}'/>
+                    <tags-input name="emails[]" value='{{json_encode($maintainable->emails->pluck("email"))}}'
+                                url="{{route("emailAutocomplete")}}"/>
                 @else
                     <tags-input name="emails[]" value='[]'/>
                 @endif

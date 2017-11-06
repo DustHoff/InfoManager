@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Email;
 use App\Maintainable;
+use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
