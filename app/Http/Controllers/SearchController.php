@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Email;
 use App\Maintainable;
+use App\MaintainableGroup;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -23,5 +24,10 @@ class SearchController extends Controller
     public function email(Request $request)
     {
         return response()->json(Email::query()->where("email", 'like', '%' . $request->get("email") . '%')->get()->pluck("email"));
+    }
+
+    public function maintainablegroup(Request $request)
+    {
+        return response()->json(MaintainableGroup::query()->where("name", "like", '%' . $request->get("name") . '%')->get()->pluck("name"));
     }
 }

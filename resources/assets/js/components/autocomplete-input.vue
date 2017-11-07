@@ -1,11 +1,12 @@
 <template>
     <div>
         <input v-bind:name="name" v-bind:class="cssclass" v-bind:style="cssstyle" v-model="input" v-on:keyup="keyup"
-               v-on:focus="visible=true" v-on:blur="visible=false"/>
-        <div v-show="visible" class="list-group" style="position: absolute; z-index: 1000">
-            <a v-show="options.length!=0" v-for="option in options" class="list-group-item"
-               v-on:clicked="clicked(option)">{{option}}</a>
-        </div>
+               v-on:focus="toggle" v-on:blur="toggle"/>
+        <ul v-show="visible" class="list-group" style="position: absolute; z-index: 1000">
+            <li href="#" v-show="options.length!=0" v-for="option in options" class="list-group-item"
+                v-on:click="clicked(option)">{{option}}
+            </li>
+        </ul>
     </div>
 </template>
 <script>
@@ -14,8 +15,8 @@ export default {
         name: {required: true},
         cssclass: {required: false},
         cssstyle: {required: false},
-        url: {required: true},
-        field: {required: true},
+        url: {required: false},
+        field: {required: false},
         keys: {
             type: Array,
             required: true
@@ -25,8 +26,15 @@ export default {
         return {input: "", options: [], visible: false}
     },
     methods: {
+        toggle: function () {
+            self = this;
+            _.delay(function () {
+                self.visible = !self.visible;
+            }, 500);
+        },
         clicked: function (item) {
-            this.$emit('clicked', item);
+            this.input = "";
+            this.$emit('clicked', {input: item});
         },
         keyup: function (event) {
             if (this.keys.indexOf(event.keyCode) !== -1) {
@@ -37,6 +45,7 @@ export default {
     },
     watch: {
         input: _.debounce(function (input) {
+            if (this.url == null) return;
             self = this;
             axios.get(this.url + '?' + this.field + '=' + encodeURI(this.input)).then(function (response) {
                 self.options = response.data;

@@ -15,7 +15,8 @@ Route::get("/maintainable/html/{maintainable?}", "MaintainableApiController@show
 Route::get("/option/get/{key}", "OptionController@get")->name("getOption");
 Route::get("/option/clearCache", "OptionController@clearCache")->name("clearCache");
 Route::get("/option/i18n", "OptionController@localization")->name("i18n");
-Route::get("/email", "SearchController@email")->name("emailAutocomplete");
+Route::get("/complete/email", "SearchController@email")->name("emailAutocomplete");
+Route::get("/complete/maintainablegroup", "SearchController@maintainablegroup")->name("maintainablegroupAutocomplete");
 Route::get("/jobs", "JobController@index")->name("jobs");
 Route::post("/jobs/import/{host?}", "JobController@importJob")->name("HostImportJob");
 Route::post("/jobs/{job}", "JobController@restart");
