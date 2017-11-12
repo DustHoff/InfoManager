@@ -23,7 +23,7 @@
             </div>
             <div class="col-sm-offset-2 col-sm-10">
                 <div class="col-sm-offset-6 col-sm-3">
-                    <button class="btn btn-default" data-toggle="button" aria-pressed="true" autocomplete="off">
+                    <button class="btn btn-default" data-toggle="button" v-on:click="toggleRepeat" autocomplete="off">
                         {{ i18n("menu.repeat") }}
                     </button>
                 </div>
@@ -40,7 +40,7 @@
 export default {
     props: ["url", "address"],
     data() {
-        return {view: false, username: "", password: "", type: "EsxiHostImportJob"};
+        return {view: false, username: "", password: "", type: "EsxiHostImportJob", repeat: false};
     },
     methods: {
         openView: function (event) {
@@ -51,10 +51,14 @@ export default {
                 {
                     username: this.username,
                     password: this.password,
-                    type: this.type
+                    type: this.type,
+                    repeat: this.repeat
                 })).then(response => {
                 this.view = false;
             })
+        },
+        toggleRepeat: function (event) {
+            this.repeat = !this.repeat;
         }
     }
 }

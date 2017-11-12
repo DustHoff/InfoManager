@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Host;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -17,24 +18,26 @@ abstract class HostImportJob implements ShouldQueue
     const TYPES = ["Esxi" => "EsxiHostImportJob"];
     public $esxi;
     public $tries = 2;
+    public $repeat;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Host $host)
+    public function __construct(Host $host, $repeat)
     {
         $this->esxi = $host;
+        $this->repeat = $repeat;
     }
 
     /**
      * @return HostImportJob
      */
-    public static function getInstance($type, Host $host, $username, $password)
+    public static function getInstance($type, Host $host, $username, $password, $repeat = false)
     {
         $job = new \ReflectionClass(self::SPACE . $type);
-        return $job->newinstance($host, $username, $password);
+        return $job->newinstance($host, $username, $password, $repeat);
     }
 
     /**
@@ -62,6 +65,10 @@ abstract class HostImportJob implements ShouldQueue
                 $maintainable->save();
             }
             $host->save();
+        }
+        if ($this->repeat) {
+            $this->dispatch($this)->delay(Carbon::now()->addHour(1));
+        } else {
             $this->esxi->job_id = 0;
             $this->esxi->save();
         }

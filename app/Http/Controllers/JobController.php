@@ -29,7 +29,8 @@ class JobController extends Controller
         $job = HostImportJob::getInstance($request->json("type"),
             $host,
             $request->json("username"),
-            $request->json("password"));
+            $request->json("password"),
+            $request->json("repeat"));
 
         $host->job_id = $this->dispatch($job);
         $host->save();

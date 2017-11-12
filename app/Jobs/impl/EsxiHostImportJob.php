@@ -19,9 +19,9 @@ class EsxiHostImportJob extends HostImportJob
     private $password;
     private $params;
 
-    public function __construct(Host $host, $username, $password)
+    public function __construct(Host $host, $username, $password, $repeat)
     {
-        parent::__construct($host);
+        parent::__construct($host, $repeat);
         $this->username = $username;
         $this->password = encrypt($password);
         $opts = array(
