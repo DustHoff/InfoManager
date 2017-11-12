@@ -23,11 +23,16 @@ class SearchController extends Controller
 
     public function email(Request $request)
     {
-        return response()->json(Email::query()->where("email", 'like', '%' . $request->get("email") . '%')->get()->pluck("email"));
+        return response()->json(Email::query()->where("email", 'like', '%' . $request->get("email") . '%')->get());
+    }
+
+    public function maintainable(Request $request)
+    {
+        return response()->json(Maintainable::search($request->get("name"))->get());
     }
 
     public function maintainablegroup(Request $request)
     {
-        return response()->json(MaintainableGroup::query()->where("name", "like", '%' . $request->get("name") . '%')->get()->pluck("name"));
+        return response()->json(MaintainableGroup::query()->where("name", "like", '%' . $request->get("name") . '%')->get());
     }
 }

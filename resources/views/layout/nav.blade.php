@@ -22,16 +22,8 @@
             </ul>
             <form class="navbar-form navbar-right" method="post" action="{{route("search")}}">
                 {{csrf_field()}}
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" aria-describedby="searchButton"
-                           placeholder="@lang("menu.search")">
-                    <span id="searchButton" class="input-group-btn">
-                    <button class="btn"
-                            type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                    </span>
-                </div>
+                <autocomplete-search searchurl="{{route("maintainableAutocomplete")}}"
+                                     refurl="{{route("allMaintainables")}}"></autocomplete-search>
             </form>
         </div><!--/.nav-collapse -->
     </div>

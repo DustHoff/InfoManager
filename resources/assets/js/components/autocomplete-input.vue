@@ -1,10 +1,14 @@
 <template>
     <div>
-        <input v-bind:name="name" v-bind:class="cssclass" v-bind:style="cssstyle" v-model="input" v-on:keyup="keyup"
-               v-on:focus="toggle" v-on:blur="toggle"/>
+        <div class="input-group">
+            <input v-bind:name="name" v-bind:class="cssclass" v-bind:style="cssstyle" v-bind:aria-descriptedby="aria"
+                   v-model.trim="input" v-on:keyup="keyup"
+                   v-on:focus="toggle" v-on:blur="toggle" autocomplete="off"/>
+            <slot></slot>
+        </div>
         <ul v-show="visible" class="list-group" style="position: absolute; z-index: 1000">
             <li href="#" v-show="options.length!=0" v-for="option in options" class="list-group-item"
-                v-on:click="clicked(option)">{{option}}
+                v-on:click="clicked(option)">{{option[objfield]}}
             </li>
         </ul>
     </div>
@@ -16,11 +20,13 @@ export default {
         cssclass: {required: false},
         cssstyle: {required: false},
         url: {required: false},
+        objfield: {required: true},
         field: {required: false},
         keys: {
             type: Array,
-            required: true
-        }
+            required: false
+        },
+        aria: {required: false}
     },
     data: function () {
         return {input: "", options: [], visible: false}
@@ -37,6 +43,7 @@ export default {
             this.$emit('clicked', {input: item});
         },
         keyup: function (event) {
+            if (this.keys == null) return;
             if (this.keys.indexOf(event.keyCode) !== -1) {
                 this.$emit('keyup', {input: this.input});
                 this.input = "";

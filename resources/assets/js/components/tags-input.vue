@@ -4,7 +4,7 @@
                 v-on:click="remove(tag)"><span class="glyphicon glyphicon-remove"></span></a></span>
         <autocomplete-input v-bind:url="url" v-bind:field="field" v-bind:keys="keys" name=""
                             cssstyle="border: none; box-shadow: none; outline: none; width: auto" v-on:keyup="add"
-                            v-on:clicked="add"/>
+                            v-on:clicked="add" v-bind:objfield="objfield"/>
         <select style="display: none" v-bind:id="name" v-bind:name="name" multiple="multiple">
             <option v-for="tag in tags" selected="selected">{{tag}}</option>
         </select>
@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-    props: ["name", "value", "url", "field"],
+    props: ["name", "value", "url", "field", "objfield"],
     data: function () {
         return {tags: [], keys: [188, 32]};
     },
@@ -24,7 +24,7 @@ export default {
             this.tags = this.tags.filter(item => item !== tag);
         },
         add: function (event) {
-            if (event.input != '') this.tags.push(event.input.replace(",", "").replace(" ", ""));
+            if (event.input[this.objfield] != '') this.tags.push(event.input[this.objfield].replace(",", ""));
         }
     }
 }

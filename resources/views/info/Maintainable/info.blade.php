@@ -21,9 +21,10 @@
             @component("html.error",["field"=>"emails"])
                 @if(isset($maintainable->emails))
                     <tags-input name="emails[]" value='{{json_encode($maintainable->emails->pluck("email"))}}'
-                                url="{{route("emailAutocomplete")}}" field="email"/>
+                                url="{{route("emailAutocomplete")}}" field="email" objfield="email"/>
                 @else
-                    <tags-input name="emails[]" value='[]' url="{{route("emailAutocomplete")}}" field="email"/>
+                    <tags-input name="emails[]" value='[]' url="{{route("emailAutocomplete")}}" field="email"
+                                objfield="email"/>
                 @endif
             @endcomponent
         </div>
@@ -36,10 +37,10 @@
                 @if(isset($maintainable->maintainablegroups))
                     <tags-input name="maintainablegroups[]"
                                 value='{{json_encode($maintainable->maintainablegroups->pluck("name"))}}'
-                                url="{{route("maintainablegroupAutocomplete")}}" field="name"/>
+                                url="{{route("maintainablegroupAutocomplete")}}" field="name" objfield="name"/>
                 @else
                     <tags-input name="maintainablegroups[]" value='[]' url="{{route("maintainablegroupAutocomplete")}}"
-                                field="name"/>
+                                field="name" objfield="name"/>
                 @endif
             @endcomponent
         </div>

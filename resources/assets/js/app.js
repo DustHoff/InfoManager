@@ -20,6 +20,7 @@ Vue.component('date-timepicker', require('./components/date-timepicker.vue'));
 Vue.component('tags-input', require('./components/tags-input.vue'));
 Vue.component('calendar', require('./components/calendar.vue'));
 Vue.component('autocomplete-input', require('./components/autocomplete-input.vue'));
+Vue.component('autocomplete-search', require('./components/autocomplete-search.vue'));
 
 /**
  * localization function for vue js
