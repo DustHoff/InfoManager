@@ -16,6 +16,7 @@ class Job extends Model
     protected $table = "jobs";
     protected $appends = ["task", "type"];
     protected $hidden = ["payload"];
+    protected $dates = ["available_at", "failed_at"];
 
     public function getTaskAttribute()
     {
