@@ -17,7 +17,7 @@ class UserCreated implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $user;
+    public $user;
     public $tries = 2;
 
     /**

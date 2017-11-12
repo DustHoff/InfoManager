@@ -19,7 +19,7 @@ class SendNotification implements ShouldQueue
     /**
      * @var Maintenance
      */
-    private $maintenance;
+    public $maintenance;
     public $tries = 2;
 
     /**
