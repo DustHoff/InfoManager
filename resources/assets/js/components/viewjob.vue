@@ -7,7 +7,7 @@
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">{{job.type}}</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="overflow-y: auto; overflow-x:hidden;height: 400px">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="control-label row">Created at</div>
@@ -17,12 +17,18 @@
                             <div class="control-label row">Available at</div>
                             <div class="row form-control">{{ job.available_at }}</div>
                         </div>
-                        <div class="col-sm-4">
+                        <div v-show="job.exception" class="col-sm-4">
                             <div class="control-label row">Failed at</div>
                             <div class="row form-control">{{ job.failed_at }}</div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row form-horizontal">
+                        <div v-for="(value, key) in job.task.data.command" class="form-group">
+                            <div class="control-label col-sm-3">{{key}}</div>
+                            <div class="col-sm-9">{{value}}</div>
+                        </div>
+                    </div>
+                    <div v-show="job.exception" class="row">
                         <div class="col-sm-12">
                             <div class="control-label row">Exception</div>
                             <div class="row">
@@ -32,6 +38,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+
+                </div>
             </div>
         </div>
     </div>
@@ -40,7 +49,7 @@
 <script>
 export default {
     data() {
-        return {job: {}, modalshown: false};
+        return {job: {task: {data: {command: {}}}}};
     },
     methods: {
         openview: function (job) {
