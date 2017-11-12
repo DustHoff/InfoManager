@@ -30,7 +30,8 @@ class HostController extends Controller
         $host->fill([
             "stage"=>$request->input("stage"),
             "owner"=>$request->input("owner"),
-            "host_id"=>$request->input("host_id")
+            "host_id" => $request->input("host_id"),
+            "address" => $request->input("address")
         ]);
         $host->save();
         return $host;

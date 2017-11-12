@@ -9,7 +9,7 @@ class Host extends Model implements MaintainableInterface
     const STAGE = ["TEST", "QS", "PROD"];
     public $timestamps = false;
     protected $table="hosts";
-    protected $fillable=["zabbix_id","stage","owner","host_id"];
+    protected $fillable = ["zabbix_id", "stage", "owner", "host_id", "address"];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|Application

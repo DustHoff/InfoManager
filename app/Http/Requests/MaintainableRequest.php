@@ -26,6 +26,7 @@ class MaintainableRequest extends FormRequest
             'emails.*' => 'nullable|email',
             'stage' => 'required_if:maintainable_type,Host',
             'owner' => 'required_if:maintainable_type,Host',
+            'address' => 'required_if:maintainable_type,Host|ip',
             'monitoring' => 'sometimes',
         ];
     }
