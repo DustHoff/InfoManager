@@ -28,6 +28,9 @@ class EsxiHostImportJob extends HostImportJob
             'ssl' => array(
                 'verify_peer' => false,
                 'verify_peer_name' => false
+            ),
+            'http' => array(
+                'user_agent' => 'Infomanager'
             )
         );
 
