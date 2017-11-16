@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Host;
+use App\Jobs\HostImportJob;
 use Illuminate\Console\Command;
-use Vmwarephp\Vhost;
 
 class pullESXI extends Command
 {
@@ -12,7 +13,7 @@ class pullESXI extends Command
      *
      * @var string
      */
-    protected $signature = 'infomanager:pullEsxi {host} {user} {password}';
+    protected $signature = 'infomanager:pullHosts {type} {host} {user} {password}';
 
     /**
      * The console command description.
@@ -38,8 +39,8 @@ class pullESXI extends Command
      */
     public function handle()
     {
-        $vhost = new Vhost($this->argument("host"), $this->argument("user"), $this->argument("password"));
-        $virtualMachines = $vhost->findAllManagedObjects('VirtualMachine', 'all');
-        dd($virtualMachines);
+        $host = Host::query()->findOrFail($this->argument("host"));
+        HostImportJob::getInstance($this->argument("type"), $host,
+            $this->argument("user"), $this->argument("password"), false)->handle();
     }
 }

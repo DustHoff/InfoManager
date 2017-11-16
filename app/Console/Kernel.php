@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\checkMailConfig;
+use App\Console\Commands\installhelper;
 use App\Console\Commands\pullESXI;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         checkMailConfig::class,
+        installhelper::class,
         pullESXI::class
     ];
 
