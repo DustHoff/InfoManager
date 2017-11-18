@@ -9,6 +9,7 @@
 namespace App\Jobs\impl;
 
 
+use App\Helper\SoapClient;
 use App\Host;
 use App\Jobs\HostImportJob;
 use SoapVar;
@@ -17,38 +18,19 @@ class EsxiHostImportJob extends HostImportJob
 {
     private $username;
     private $password;
-    private $params;
 
     public function __construct(Host $host, $username, $password, $repeat)
     {
         parent::__construct($host, $repeat);
         $this->username = $username;
         $this->password = encrypt($password);
-        $opts = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false
-            ),
-            'http' => array(
-                'user_agent' => 'Infomanager'
-            )
-        );
 
-        $this->params = array(
-            'cache_wsdl' => WSDL_CACHE_NONE,
-            'encoding' => 'UTF-8',
-            'verifypeer' => false,
-            'verifyhost' => false,
-            'trace' => 1,
-            'connection_timeout' => 180,
-            'stream_context' => stream_context_create($opts));
     }
 
     public function pullHosts()
     {
-
-        $client = new \SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", $this->params);
-        $client->__setLocation("https://" . $this->esxi->address . "/sdk/vimService");
+        $client = new SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", true);
+        $client->__setlocation("https://" . $this->esxi->address . "/sdk/vimService");
 
         $request = new \stdClass();
         $request->_this = ["_" => "ServiceInstance", "type" => "ServiceInstance"];
