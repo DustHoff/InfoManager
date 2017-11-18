@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Host;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -67,7 +66,7 @@ abstract class HostImportJob implements ShouldQueue
             $host->save();
         }
         if ($this->repeat) {
-            $this->dispatch($this)->delay(Carbon::now()->addHour(1));
+            $this->release(3600);
         } else {
             $this->esxi->job_id = 0;
             $this->esxi->save();
