@@ -29,7 +29,7 @@ class EsxiHostImportJob extends HostImportJob
 
     public function pullHosts()
     {
-        $client = new SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", true);
+        $client = new SoapClient("https://" . $this->esxi->address . "/sdk/vimService.wsdl", env("APP_DEBUG"));
         $client->__setlocation("https://" . $this->esxi->address . "/sdk/vimService");
 
         $request = new \stdClass();
