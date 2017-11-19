@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateGroupsTable extends Migration
@@ -19,7 +18,6 @@ class CreateGroupsTable extends Migration
             $table->char("name",32);
             $table->timestamps();
         });
-        DB::table('groups')->insert(["name"=>"Admin"]);
     }
 
     /**

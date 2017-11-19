@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserGroupTable extends Migration
 {
@@ -18,7 +18,6 @@ class CreateUserGroupTable extends Migration
             $table->bigInteger("user_id");
             $table->bigInteger("group_id");
         });
-        DB::table('user_group')->insert(["user_id"=>1,"group_id"=>1]);
     }
 
     /**

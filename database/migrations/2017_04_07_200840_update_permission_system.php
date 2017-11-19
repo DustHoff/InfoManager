@@ -21,7 +21,6 @@ class UpdatePermissionSystem extends Migration
             $table->boolean("schedule")->default(false);
             $table->unique("name");
         });
-        DB::table("groups")->where("id", 1)->update(["admin" => 1, "editor" => 1, "schedule" => 1]);
     }
 
     /**

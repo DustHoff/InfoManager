@@ -237,12 +237,6 @@ return [
     |
     */
 
-    'sync_attributes' => [
-
-        'name' => 'cn',
-        'username' => env("ADLDAP_USERATTRIBUTE",""),
-        'email' => 'mail',
-
-    ],
+    'sync_attributes' => [\App\Helper\LDAPAttribteSync::class],
 
 ];

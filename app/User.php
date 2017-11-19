@@ -6,12 +6,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements Permissiable
 {
+
     protected $fillable = [
         'name', 'password',
     ];
     protected $hidden = [
         'password', 'remember_token', 'pivot',
     ];
+
+    public function email()
+    {
+        return $this->belongsTo("Email");
+    }
 
     public function maintenances(){
         return $this->hasMany('Maintenance');
