@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Email;
+use App\Group;
+use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class installhelper extends Command
 {
@@ -11,7 +15,7 @@ class installhelper extends Command
      *
      * @var string
      */
-    protected $signature = 'infomanager:install';
+    protected $signature = 'infomanager:install {{--clean}}';
 
     /**
      * The console command description.
@@ -37,19 +41,45 @@ class installhelper extends Command
      */
     public function handle()
     {
-        $this->callSilent("view:clear");
-        $this->callSilent("cache:clear");
-        $this->callSilent("migrate");
+        $this->info("Run some Optimizations");
+        $this->callSilent("key:generate");
+        $this->callSilent("route:cache");
+        $this->callSilent("config:cache");
+        $this->call("optimize");
+        if ($this->option("clean")) {
+            $this->callSilent("migrate:refresh");
+        } else {
+            $this->callSilent("migrate");
+        }
+        $user = User::query()->where("username", "=", "admin")->first();
+        if ($user == null) {
+            $this->info("Create Administrator User");
+            $email = new Email;
+            $email->email = $this->ask("Administrator E-Mail Address?");
+            $email->save();
 
+            $group = new Group;
+            $group->name = "Administrator";
+            $group->admin = true;
+            $group->save();
+
+            $user = new User;
+            $user->name = "Administrator";
+            $user->username = "admin";
+            $user->email()->associate($email);
+            $user->password = Hash::make($this->secret("Administrator Password?"));
+            $user->save();
+            $user->groups()->attach($group->id);
+        }
     }
 
-    private function changeEnvironmentVariable($key, $value)
+    private function setenv($key, $value)
     {
         $path = base_path('.env');
 
         if (is_bool(env($key))) {
             $old = env($key) ? 'true' : 'false';
-        }
+        } else $old = env($key);
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
