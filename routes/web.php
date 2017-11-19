@@ -11,15 +11,11 @@
 |
 */
 
-Route::get("/",function (){
-    return redirect()->route("login");
-});
+Route::get("/", 'AuthController@login');
 Route::match(["get","post"],'/login', 'AuthController@login')->name("login");
 Route::get("/logout","AuthController@logout")->name("logout");
 // Admin stuff
-Route::get("/admin",function (){
-    return view("admin.master");
-})->name("admin")->middleware('auth');
+Route::get("/admin", "AuthController@admin")->name("admin")->middleware('auth');
 Route::post("/admin/group","GroupController@store")->name("storeGroup");
 Route::get("/admin/group/{group}","GroupController@detail")->name("group");
 Route::post("/admin/group/{group}","GroupController@update")->name("updateGroup");

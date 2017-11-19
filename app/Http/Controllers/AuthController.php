@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -27,5 +26,11 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->back();
 
+    }
+
+    public function admin()
+    {
+        $this->middleware("auth");
+        return view("admin.master");
     }
 }
