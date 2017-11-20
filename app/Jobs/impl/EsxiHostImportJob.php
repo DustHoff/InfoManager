@@ -16,8 +16,8 @@ use SoapVar;
 
 class EsxiHostImportJob extends HostImportJob
 {
-    private $username;
-    private $password;
+    protected $username;
+    protected $password;
 
     public function __construct(Host $host, $username, $password, $repeat)
     {

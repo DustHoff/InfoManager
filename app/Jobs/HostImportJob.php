@@ -3,11 +3,14 @@
 namespace App\Jobs;
 
 use App\Host;
+use App\Traits\RepeatingJobTrait;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use ReflectionClass;
 
 abstract class HostImportJob implements ShouldQueue
 {
@@ -66,12 +69,19 @@ abstract class HostImportJob implements ShouldQueue
             $host->save();
         }
         if ($this->repeat) {
-            $this->release(3600);
+            $this->esxi->job_id = $this->reschedule();
         } else {
             $this->esxi->job_id = 0;
-            $this->esxi->save();
         }
+        $this->esxi->save();
     }
 
     public abstract function pullHosts();
+
+    function reschedule()
+    {
+        $c = new ReflectionClass($this);
+        $job = static::getInstance($c->getShortName(), $this->esxi, $this->username, $this->password, true)->delay(Carbon::now()->addHour(1));
+        return dispatch($job);
+    }
 }
