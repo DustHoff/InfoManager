@@ -11,6 +11,7 @@ namespace App\Helper;
 
 use App\Email;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class LDAPAttribteSync
 {
@@ -18,8 +19,9 @@ class LDAPAttribteSync
     {
         $user->name = $ldapUser->getFirstAttribute("cn");
         $user->username = $ldapUser->getFirstAttribute(env("ADLDAP_USERATTRIBUTE", ""));
-        $user->save();
-        $email = Email::query()->forceCreate(["email" => $ldapUser->getFirstAttribute("mail")]);
+        $user->password = Hash::make(str_random(16));
+        $email = Email::firstOrCreate(["email" => $ldapUser->getFirstAttribute("mail")]);
         $user->email()->associate($email);
+        $user->save();
     }
 }

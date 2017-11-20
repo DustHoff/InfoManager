@@ -34,7 +34,7 @@
                             <div class="col-sm-8">
                                 @component("html.error",["field"=>"email"])
                                     <input class="form-control" type="text" id="email" name="email"
-                                           value="{{$user->email}}">
+                                           value="{{$user->email->email}}">
                                 @endcomponent
                             </div>
                         </div>
