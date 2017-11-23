@@ -45,7 +45,9 @@ export default {
         keyup: function (event) {
             if (this.keys == null) return;
             if (this.keys.indexOf(event.keyCode) !== -1) {
-                this.$emit('keyup', {input: this.input});
+                var item = {};
+                item[this.objfield] = this.input;
+                this.$emit('keyup', {input: item});
                 this.input = "";
             }
         }
