@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -13,6 +15,13 @@ class AuthController extends Controller
             "name" => "required",
             "password" => "required"
         ]);
+        try {
+            Adldap::connect();
+        } catch (\Exception $e) {
+            Log::error("Connection failed to LDAP");
+
+        }
+
         if(Auth::attempt([
             "username" => request("name"),
             "password"=> request("password")
