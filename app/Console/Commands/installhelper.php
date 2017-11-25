@@ -41,15 +41,16 @@ class installhelper extends Command
      */
     public function handle()
     {
+        $this->info("Enable Maintenance Mode");
+        $this->callSilent("down");
         $this->info("Run some Optimizations");
         $this->callSilent("key:generate");
-        $this->callSilent("route:cache");
-        $this->callSilent("config:cache");
         $this->call("optimize");
+        $this->info("Update Database Schema");
         if ($this->option("clean")) {
-            $this->callSilent("migrate:refresh");
+            $this->call("migrate:refresh");
         } else {
-            $this->callSilent("migrate");
+            $this->call("migrate");
         }
         $user = User::query()->where("username", "=", "admin")->first();
         if ($user == null) {
@@ -71,6 +72,8 @@ class installhelper extends Command
             $user->save();
             $user->groups()->attach($group->id);
         }
+        $this->info("Disable Maintenance Mode");
+        $this->callSilent("up");
     }
 
     private function setenv($key, $value)
