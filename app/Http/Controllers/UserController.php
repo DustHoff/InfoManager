@@ -29,7 +29,7 @@ class UserController extends Controller
         if(!$user) $user = new User;
         $user->name = $request->input("name");
         $user->username = $request->input("username");
-        $user->email()->associate(Email::firstOrCreate(["email" => $request->input("email")]));
+        if ($request->has("email")) $user->email()->associate(Email::firstOrCreate(["email" => $request->input("email")]));
         if ($request->input("password")) $user->password = Hash::make($request->input("password"));
         $user->save();
         if (Auth::user()->can("administrate", User::class)) {
