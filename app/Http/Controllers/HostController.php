@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Host;
-use App\Http\Requests\MaintainableRequest;
+use App\Http\Requests\HostRequest;
 
 class HostController extends Controller
 {
@@ -17,7 +17,7 @@ class HostController extends Controller
         $this->middleware("auth");
     }
 
-    public function update(MaintainableRequest $request, Host $host)
+    public function update(HostRequest $request, Host $host)
     {
         $this->authorize("edit", $host->maintainable);
         $host = $this->save($request,$host);
@@ -25,7 +25,8 @@ class HostController extends Controller
         return $this->maintainableController->update($request,$host->maintainable);
     }
 
-    private function save(MaintainableRequest $request, Host $host = null){
+    private function save(HostRequest $request, Host $host = null)
+    {
         if($host == null) $host=new Host;
         $host->fill([
             "stage"=>$request->input("stage"),
@@ -37,7 +38,7 @@ class HostController extends Controller
         return $host;
     }
 
-    public function store(MaintainableRequest $request)
+    public function store(HostRequest $request)
     {
         $host = $this->save($request);
         return $this->maintainableController->store($request, $host);

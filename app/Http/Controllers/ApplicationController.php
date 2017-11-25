@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
-use App\Http\Requests\MaintainableRequest;
+use App\Http\Requests\ApplicationRequest;
 
 class ApplicationController extends Controller
 {
@@ -14,13 +14,13 @@ class ApplicationController extends Controller
         $this->middleware("auth");
     }
 
-    public function store(MaintainableRequest $request)
+    public function store(ApplicationRequest $request)
     {
         $application = $this->save($request);
         return $this->maintainableController->store($request,$application);
     }
 
-    private function save(MaintainableRequest $request, Application $application = null)
+    private function save(ApplicationRequest $request, Application $application = null)
     {
         if ($application == null) $application = new Application;
         $application->host_id=$request->input("host_id");
@@ -28,7 +28,7 @@ class ApplicationController extends Controller
         return $application;
     }
 
-    public function update(MaintainableRequest $request, Application $application)
+    public function update(ApplicationRequest $request, Application $application)
     {
         $application = $this->save($request, $application);
         return $this->maintainableController->update($request,$application->maintainable);
