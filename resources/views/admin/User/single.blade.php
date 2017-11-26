@@ -34,7 +34,7 @@
                             <div class="col-sm-8">
                                 @component("html.error",["field"=>"email"])
                                     <input class="form-control" type="text" id="email" name="email"
-                                           value="{{$user->email->email}}">
+                                           value="{{$user->email->email or ''}}">
                                 @endcomponent
                             </div>
                         </div>
@@ -72,7 +72,8 @@
                     <div class="col-sm-offset-8 col-sm-4">
                         {{ csrf_field() }}
                         <input type="submit" name="action" value="@lang("menu.save")" class="btn btn-success">
-                        <input type="submit" name="action" value="@lang("menu.delete")" class="btn btn-danger">
+                        <a href="{{route("deleteUser",compact("user"))}}"
+                           class="btn btn-danger">@lang("menu.delete")</a>
                     </div>
                 </div>
             </form>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OptionsRequest;
+use App\Maintainable;
+use App\Maintenance;
 use App\Option;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class OptionController extends Controller
@@ -51,5 +54,21 @@ class OptionController extends Controller
             return $i18n;
         });
         return json_encode($localization);
+    }
+
+    public function bladeTranslator()
+    {
+        $maintainable = new Maintainable;
+        $maintainable->name = "Maintainable Name";
+        $maintainable->maintainable_type = "MaintainableType";
+        $maintenance = new Maintenance;
+        $maintenance->maintenance_start = Carbon::now();
+        $maintenance->maintenance_end = Carbon::now()->addDay(1);
+        $maintenance->maintenance_type = "MaintenanceType";
+        $maintenance->reason = "Reason";
+        $view = view(["secondsTemplateCacheExpires" => 0,
+            "template" => request()->json("template")], compact("maintainable", "maintenance"));
+
+        return response()->json(compact("view"));
     }
 }

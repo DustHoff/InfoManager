@@ -41,9 +41,12 @@ class UserCreated implements ShouldQueue
             Mail::to($this->user->email)->send(new ChangePassword($this->user));
         }
         //todo: notify Administrators
-        $admins = Group::find(1)->members;
-        foreach ($admins as $admin) {
-            if (isset($admin->email)) Mail::to($admin->email)->send(new AdministrateUser($this->user));
+        $group = Group::query()->where("name", "=", "Administrator")->first();
+        if (isset($group)) {
+            $admins = $group->members;
+            foreach ($admins as $admin) {
+                if (isset($admin->email)) Mail::to($admin->email)->send(new AdministrateUser($this->user));
+            }
         }
     }
 }

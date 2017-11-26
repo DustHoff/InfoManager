@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Email;
 use App\Http\Requests\UserRequest;
 use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,8 +33,10 @@ class UserController extends Controller
         if ($request->has("email")) $user->email()->associate(Email::firstOrCreate(["email" => $request->input("email")]));
         if ($request->input("password")) $user->password = Hash::make($request->input("password"));
         $user->save();
-        if (Auth::user()->can("administrate", User::class)) {
+        try {
+            $this->authorize("administrate", User::class);
             if ($request->input("group")) $user->groups()->sync($request->input("group"));
+        } catch (AuthorizationException $e) {
         }
         return $user;
     }
@@ -50,5 +53,11 @@ class UserController extends Controller
             return redirect()->route("admin");
         }
 
+    }
+
+    public function delete(User $user)
+    {
+        $user->delete();
+        return redirect()->route("admin");
     }
 }

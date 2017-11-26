@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
@@ -25,8 +23,7 @@ class UserRequest extends FormRequest
             "username" => "required",
             "email" => "nullable|email",
             "password" => "sometimes|confirmed",
-            "group.*" => "sometimes|exists:groups,id",
-            "action" => "required|in:" . __("menu.save") . "," . __("menu.delete")
+            "group.*" => "sometimes|exists:groups,id"
         ];
     }
 }

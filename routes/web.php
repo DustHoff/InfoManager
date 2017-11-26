@@ -21,6 +21,7 @@ Route::get("/admin/group/{group}","GroupController@detail")->name("group");
 Route::post("/admin/group/{group}","GroupController@update")->name("updateGroup");
 Route::get("/admin/user/{user}","UserController@show")->name("profile");
 Route::post("/admin/user/{user}","UserController@update")->name("updateUser");
+Route::get("/admin/user/{user}/delete", "UserController@delete")->name("deleteUser");
 Route::post("/user","UserController@store")->name("storeUser");
 Route::get('/maintainable','MaintainableController@showAll')->name("allMaintainables");;
 Route::get('/maintainable/{maintainable}','MaintainableController@show')->name("maintainable");

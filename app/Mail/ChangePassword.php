@@ -31,6 +31,7 @@ class ChangePassword extends Mailable
     public function build()
     {
         $this->subject(__("mail.changePassword"));
-        return view(["template" => Option::query()->where("name", "=", "message_changePassword")->get(["value"])], ["user" => $this->user]);
+        $template = Option::query()->where("name", "=", "message_changePassword")->first()->value;
+        return $this->view(["secondsTemplateCacheExpires" => 0, "template" => $template], ["user" => $this->user]);
     }
 }
