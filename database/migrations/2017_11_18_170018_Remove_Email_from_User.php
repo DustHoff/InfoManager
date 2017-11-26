@@ -14,8 +14,8 @@ class RemoveEmailFromUser extends Migration
     public function up()
     {
         Schema::table("users", function (Blueprint $table) {
-            $table->renameColumn("email", "email_bck");
-            $table->bigInteger("email_id");
+            $table->renameColumn("email", "email_bck")->nullable();
+            $table->bigInteger("email_id")->nullable();
         });
         $users = \App\User::all();
         foreach ($users as $user) {
@@ -36,7 +36,7 @@ class RemoveEmailFromUser extends Migration
     public function down()
     {
         Schema::table("users", function (Blueprint $table) {
-            $table->char("email_bck");
+            $table->char("email_bck")->nullable();
         });
         $users = \App\User::all();
         foreach ($users as $user) {
@@ -45,7 +45,7 @@ class RemoveEmailFromUser extends Migration
         }
         Schema::table("users", function (Blueprint $table) {
             $table->renameColumn("email_bck", "email");
-            $table->dropColumn("email_id");
+            if (Schema::hasColumn("users", "email_id")) $table->dropColumn("email_id");
         });
     }
 }
