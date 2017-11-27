@@ -16,22 +16,25 @@ class UserController extends Controller
         $this->middleware("auth");
     }
 
-    public function show(User $user){
-        return view("admin.User.single",compact("user"));
+    public function show(User $user)
+    {
+        return view("admin.User.single", compact("user"));
     }
 
-    public function store(UserRequest $request){
-        $user=$this->save($request);
-        return redirect()->route("profile",compact("user"));
+    public function store(UserRequest $request)
+    {
+        $user = $this->save($request);
+        return redirect()->route("profile", compact("user"));
     }
 
-    private function save(UserRequest $request, User $user = null){
+    private function save(UserRequest $request, User $user = null)
+    {
         if (Auth::user() != $user) $this->authorize("administrate", User::class);
         if(!$user) $user = new User;
         $user->name = $request->input("name");
         $user->username = $request->input("username");
         if ($request->has("email")) $user->email()->associate(Email::firstOrCreate(["email" => $request->input("email")]));
-        if ($request->input("password")) $user->password = Hash::make($request->input("password"));
+        if ($request->input("password") != "") $user->password = Hash::make($request->input("password"));
         $user->save();
         try {
             $this->authorize("administrate", User::class);
@@ -43,16 +46,8 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        if ($request->input("action") == __("menu.save")) {
-            $user = $this->save($request, $user);
-            return redirect()->route("profile", compact("user"));
-        }
-        if ($request->input("action") == __("menu.delete")) {
-            $this->authorize("administrate", User::class);
-            $user->delete();
-            return redirect()->route("admin");
-        }
-
+        $user = $this->save($request, $user);
+        return redirect()->route("profile", compact("user"));
     }
 
     public function delete(User $user)

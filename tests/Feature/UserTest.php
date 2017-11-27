@@ -3,10 +3,15 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+
+    use DatabaseMigrations;
+    use WithoutMiddleware;
     /**
      * A basic test example.
      *
@@ -41,6 +46,11 @@ class UserTest extends TestCase
 
         $this->assertNotNull($user);
         $response->assertRedirect(route("profile", compact("user")));
+
+        $response = $this->get(route("deleteUser", compact("user")));
+
+        $response->assertRedirect(route("admin"));
+
     }
 
     protected function setUp()
