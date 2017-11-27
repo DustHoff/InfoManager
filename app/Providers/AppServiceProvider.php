@@ -10,6 +10,7 @@ use App\Observer\UserObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
         User::observe(new UserObserver());
         Maintenance::observe(new MaintenanceObserver());
+        if (env("FORCE_SSL", false)) URL::forceScheme("https");
     }
 
     /**
